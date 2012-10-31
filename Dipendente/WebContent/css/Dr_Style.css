@@ -1,0 +1,105 @@
+/*stili per il layout fisso*/
+html,body{margin: 0;padding:0}
+body{font: 14px arial,sans-serif;color: #000;text-align:center}
+
+
+div#container{width: 1152px;margin: 20px auto ;text-align: left; background:#fff;border:1px solid #bbb}
+
+h1,h2{margin: 0;padding:0}
+h1{padding-left:0.5em;font: bold 2.3em/80px arial,serif;color: #000;}
+h2{color: #000;font-size: 1.5em}
+h3{color: #000;font-size: 1.2em}
+a{text-decoration: none;}
+a:hover{    color: #fff;    background:#bbb;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
+img{margin: 0 auto;display:block;width:95%}
+/*stili generici, su header e footer*/
+div#header{width: 1152px;margin: 0px auto; color: #000;height:55px}
+
+/*stili specifici per il layout*/
+div#extra{float:left;width: 200px;margin:0 0 0 10px;}
+
+.newsbox{border: 1px solid #ccc;text-align:left; margin:15px 0px; width:200px;padding:0px 5px;background:#eee;-moz-border-radius: 20px;-webkit-border-radius: 20px;border-radius: 20px ; font: bold 14px;}
+.newsbox ul{list-style-type:none;}
+.newsbox li{list-style-type:none; padding: 5px 0px;}
+.subtitle {font: bold 15px Verdana, Arial, Helvetica, sans-serif;	padding: 5px; text-align : center !important; border-bottom:1px solid #bbb}
+#on{  color: #fff;    background:#bbb;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
+
+div#content{position:relative;float:left;width:1152px;margin:0px; padding:0px;font : 12px Verdana, Arial, Helvetica, sans-serif;}
+div#content_right{float:left;width:900px;padding:5px;margin:10; /*border: 1px solid black;*/}
+
+div#footer{clear:both; text-align:center; padding: 0.5em; background:#eee; color: #000;border-top:1px solid #666 !important;}
+div#footer li{display:inline; list-style-type:none;padding:0 10px}
+.space {clear : both; margin: 0px}
+.blank {height: 20px;}
+
+/* shadow */
+.shadow {-moz-box-shadow: 0 0 10px 1px #CCC; -webkit-box-shadow: 0 0 10px 1px #CCC;box-shadow: 0 0 10px 1px #CCC;}
+
+/*CSS principale per il menu*/
+.logo {position:relative;float:left;}
+.logo img{text-align:center;margin: 0 auto;}
+nav {	position:relative;text-align:right;background:#eee;color: #000;border-top:1px solid #ccc !important;border-bottom:1px solid #ccc !important;height:40px; padding:0px; margin: 0px;}
+.menu ul{    margin: 0;    float: right}
+.menu ul li{    display: inline;}
+.menu ul li a{    float: left; text-decoration: none;    color: #a1a1a1;    padding: 10.5px 11px;  height:18px;}
+.menu ul li a:hover, .menu ul li .current{    color: #fff;    background:#a1a1a1;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
+
+.creaCvVoci{visible:hidden;display: none;}
+
+.accordion {float:left;	list-style:none;	margin:0px;padding:0 0 0 10px;text-align:left!important;	background:#eee;-moz-border-radius: 20px;-webkit-border-radius: 20px;border-radius: 20px ; }
+.accordion li {	cursor:pointer;	padding:0;	color:#000;vertical-align:middle;list-style-type:none;	}
+.accordion ul {	list-style-type:none;	display:none;	margin:0;	padding:5px 0;	}
+.accordion ul>li {	background:none;padding-left:5px;	border:0; color:#000	}
+.accordion li, a {	text-decoration:none;	 font:normal 12px verdana, arial, sans-serif; color:#666;}
+.accordion ul>li a:hover {	color:#000;	}
+
+
+img.help{text-align:left; float:left;width:16px ; height:16px; border:none;}
+img.help:hover{cursor:pointer}
+
+/*-------------------------------------- Menu Login ----------------------------------------- */
+
+.login{border-right: 1px solid #000;}
+
+#login{margin: 0px; padding: 0px; width: 1152px; height: 20px; }
+
+#nav img{padding: 0 0 0 5px;}
+
+ul#nav div.mega{position: absolute; top: -9999px; width: 80px; padding: 0.7em; border: 1px solid #a1a1a1; background: #FFF; overflow:hidden; line-height:1.5}
+
+ul#nav li:hover div.mega,ul#nav li div.mega.open{top: 20px;z-index: 100; left: 23px;}
+
+ul#nav,ul#nav li,ul#nav ul{margin: 0px;padding: 0px;list-style:none;}
+
+ul#nav{width:250px; height:20px; background: #FFF; float: right; /*border: 1px solid black;*/}
+ul#nav a{text-decoration:none;}
+ul#nav h2{font-size:110%; margin:0;}
+ul#nav h2 a{line-height:20px;padding: 0 20px;color:#a1a1a1 }
+ul#nav>li:hover,ul#nav h2 a:hover{background: #ebebeb}
+ul#nav li{position: relative; float: right;}
+
+ul#nav ul li a{background: #ebebeb;}
+
+ul#nav li li{float: none;display: block !important;display: inline; IE6}
+
+/*regole aggiuntive per i link dei sottomenu*/
+
+ul#nav div.mega li a{padding:0 7px;color: #a1a1a1;
+    background: #FFF url(bullet.png) no-repeat left center; margin: 0px}
+ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
+
+#benvenuto{float:right; color: bbb; margin: 0px; padding: 5px 11px;}
+#scrittaBenvenuto {color: 000;}
+
+#link {float: right; margin-bottom: 20px;}
+#link ul li{display: inline; padding: 5px;}
+
+/* gestione dei giorni lavorativi nella sezione Time Report */
+
+.report{float: left;}
+.reportdestro{float: right;}
+.giorniLavorativi{background: #FFF; border: none;}
+.giorniFestivi{background: #d8d8d8; padding: 3px 0px;}
+#visualizzaReport{width: 880px;}
+
+.spazio{margin-top: 70px;}
