@@ -66,7 +66,7 @@ public class GestioneRisorsa extends HttpServlet {
 		sessione.setAttribute("connessione", conn);
 		
 		//creo l'istanza della classe 
-		RisorsaDAO rDAO = new RisorsaDAO();
+		RisorsaDAO rDAO = new RisorsaDAO(conn);
 		
 		RequestDispatcher rd = null;
 		
@@ -80,7 +80,7 @@ public class GestioneRisorsa extends HttpServlet {
 			
 			System.out.println(idRisorsa);
 			
-			RisorsaDTO risorsa = rDAO.loginRisorsa(idRisorsa, conn);
+			RisorsaDTO risorsa = rDAO.loginRisorsa(idRisorsa);
 			sessione.setAttribute("utenteLoggato",risorsa);
 			response.sendRedirect("./index.jsp?azione=benvenuto");
 			
@@ -89,7 +89,7 @@ public class GestioneRisorsa extends HttpServlet {
 			if(azione.equals("visualizzaProfilo") || azione.equals("aggiornaProfilo")){
 				
 				
-				RisorsaDTO risorsa = rDAO.visualizzaProfilo(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				RisorsaDTO risorsa = rDAO.visualizzaProfilo(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				request.setAttribute("risorsa", risorsa);
 				if(azione.equals("visualizzaProfilo")){
 					rd = getServletContext().getRequestDispatcher("/index.jsp?azione=visualizzaProfilo&dispositiva=areaPrivata");
@@ -134,7 +134,7 @@ public class GestioneRisorsa extends HttpServlet {
 				
 				risorsa.setIdRisorsa(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
-				String messaggio = rDAO.modificaRisorsa(risorsa, conn);
+				String messaggio = rDAO.modificaRisorsa(risorsa);
 				if(messaggio.equals("ok")){
 					request.setAttribute("messaggio", "La modifica del profilo è avvenuta correttamente");
 					rd = getServletContext().getRequestDispatcher("/index.jsp?azione=messaggio&dispositiva=areaPrivata");
@@ -147,7 +147,7 @@ public class GestioneRisorsa extends HttpServlet {
 				
 			}else if(azione.equals("modificaPassword")){
 				
-				String messaggio = rDAO.modificaPassword(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(),request.getParameter("nuovaPassword") , conn);
+				String messaggio = rDAO.modificaPassword(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(),request.getParameter("nuovaPassword"));
 				if(messaggio.equals("ok")){
 					request.setAttribute("messaggio", "La modifica della password è avvenuta correttamente");
 					rd = getServletContext().getRequestDispatcher("/index.jsp?azione=messaggio&dispositiva=areaPrivata");
@@ -180,7 +180,7 @@ public class GestioneRisorsa extends HttpServlet {
 			}
 		}else{
 			response.setContentType("text/html");
-	        PrintWriter out = response.getWriter();
+			PrintWriter out = response.getWriter();
 			try {
 				out = response.getWriter();
 				out.print("<html>" +

@@ -58,7 +58,7 @@ public class GestioneCurriculum extends HttpServlet {
 		Connection conn = (Connection) sessione.getAttribute("connessione");
 		
 		//creo l'istanza della classe 
-		CurriculumDAO curriculum = new CurriculumDAO();
+		CurriculumDAO curriculum = new CurriculumDAO(conn);
 		
 		RequestDispatcher rd = null;
 		
@@ -68,7 +68,7 @@ public class GestioneCurriculum extends HttpServlet {
 		if(sessione.getAttribute("utenteLoggato") != null){
 			if(azione.equals("verificaCreazioneCurriculum")){
 				//verifico con questo metodo che la risorsa non abbia creato il curriculum
-				boolean verificaCreazioneCurriculum = curriculum.verificaCreazioneCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				boolean verificaCreazioneCurriculum = curriculum.verificaCreazioneCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				sessione.setAttribute("verificaCreazioneCurriculum", verificaCreazioneCurriculum);
 				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=cv&dispositiva=cv");
@@ -78,7 +78,7 @@ public class GestioneCurriculum extends HttpServlet {
 			}else if(azione.equals("creazioneCurriculum") || azione.equals("aggiornaCurriculum")){
 				
 				
-				curriculum.creazioneFlagCreazioneCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				curriculum.creazioneFlagCreazioneCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				boolean flag_dettaglio_cv = false;
 				if(request.getParameter("dettaglio") != null){
@@ -99,7 +99,7 @@ public class GestioneCurriculum extends HttpServlet {
 					esperienze.setId_risorsa(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 					
 					//effettuo l'inserimento dell'Esperienza
-					curriculum.inserimentoEsperienze(esperienze, conn);
+					curriculum.inserimentoEsperienze(esperienze);
 					
 					//valorizzo la variabile Esperienze a "TRUE" per l'avvenuto inserimento
 					request.setAttribute("esperienze", "true");
@@ -119,7 +119,7 @@ public class GestioneCurriculum extends HttpServlet {
 					dettaglio.setInteressi(request.getParameter("interessi"));
 					dettaglio.setId_risorsa(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 					
-					curriculum.inserimentoDettaglio(dettaglio, conn);
+					curriculum.inserimentoDettaglio(dettaglio);
 					
 					if(azione.equals("creazioneCurriculum")){
 						request.setAttribute("dettaglioCv", "true");
@@ -136,7 +136,7 @@ public class GestioneCurriculum extends HttpServlet {
 				 */
 				
 				if(azione.equals("aggiornaCurriculum")){
-					ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+					ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 					//inserisco il curriculum caricato in sessione 
 					sessione.setAttribute("curriculumVitae", curriculumVitae);
@@ -166,7 +166,7 @@ public class GestioneCurriculum extends HttpServlet {
 			}else if(azione.equals("caricamentoCv")){
 				//effettuo il caricamento del curriculum della singola risorsa
 				
-				ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				/*
 				 * recupero questa tipo di parametro per differenziare la visualizzazione curriculum
@@ -196,9 +196,9 @@ public class GestioneCurriculum extends HttpServlet {
 					
 					int idEsperienze = Integer.parseInt(request.getParameter("idEsperienze"));
 					
-					curriculum.eliminazioneEsperienza(idEsperienze, conn);
+					curriculum.eliminazioneEsperienza(idEsperienze);
 					
-					ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+					ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 					//inserisco il curriculum caricato in sessione
 					sessione.setAttribute("curriculumVitae", curriculumVitae);
 					
@@ -226,10 +226,10 @@ public class GestioneCurriculum extends HttpServlet {
 					esperienze.setIdEsperienze(Integer.parseInt(request.getParameter("idEsperienze")));
 					
 					//effettuo la modifica concreta dell'Esperienza
-					String messaggio = curriculum.aggiornamentoEsperienza(esperienze, conn);
+					String messaggio = curriculum.aggiornamentoEsperienza(esperienze);
 					
 					if(messaggio.equals("ok")){
-						ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+						ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 						//inserisco il curriculum caricato in sessione
 						sessione.setAttribute("curriculumVitae", curriculumVitae);
 						request.setAttribute("esperienzeModificata", "true");
@@ -253,9 +253,9 @@ public class GestioneCurriculum extends HttpServlet {
 					dettaglio.setId_risorsa(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 					dettaglio.setId_dettaglio(Integer.parseInt(request.getParameter("id_dettaglio")));
 					
-					String messaggio = curriculum.aggiornamentoDettaglio(dettaglio, conn);
+					String messaggio = curriculum.aggiornamentoDettaglio(dettaglio);
 					if(messaggio.equals("ok")){
-						ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+						ArrayList curriculumVitae = curriculum.caricamentoCurriculum(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 						//inserisco il curriculum caricato in sessione
 						sessione.setAttribute("curriculumVitae", curriculumVitae);
 						request.setAttribute("dettaglioModificato", "true");

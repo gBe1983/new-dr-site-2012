@@ -11,15 +11,38 @@ public class Associaz_Risors_Comm_DTO {
 	private String al;
 	private boolean attiva;
 	private String descrizioneCommessa;
+	private String descrizioneCliente;
+
 	
+	public Associaz_Risors_Comm_DTO(int id_commessa,
+									String descrizioneCommessa) {
+		super();
+		this.id_commessa = id_commessa;
+		this.descrizioneCommessa = descrizioneCommessa;
+	}
+
 	
+	public Associaz_Risors_Comm_DTO(int id_associazione,
+									int id_risorsa,
+									int id_commessa,
+									boolean attiva,
+									String descrizioneCommessa) {
+		super();
+		this.id_associazione = id_associazione;
+		this.id_risorsa = id_risorsa;
+		this.id_commessa = id_commessa;
+		this.attiva = attiva;
+		this.descrizioneCommessa = descrizioneCommessa;
+	}
+	
+
 	public String getDescrizioneCommessa() {
 		return descrizioneCommessa;
 	}
+
 	public void setDescrizioneCommessa(String descrizioneCommessa) {
 		this.descrizioneCommessa = descrizioneCommessa;
 	}
-	private String descrizioneCliente;
 	
 	public String getDescrizioneCliente() {
 		return descrizioneCliente;
