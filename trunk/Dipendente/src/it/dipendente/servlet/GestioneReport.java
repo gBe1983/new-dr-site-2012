@@ -83,12 +83,12 @@ public class GestioneReport extends HttpServlet {
 				 * nella variabile meseScelto effettuo il caricamento del mese corrente
 				 * per la risorsa
 				 */
-				//ArrayList meseScelto = rDAO.caricamentoCalendario(mese, anno,conn);
+				//ArrayList meseScelto = rDAO.caricamentoCalendario(mese, anno);
 				
 				/*
 				 * nella variabile commesseRisorse troviamo tutte le commesse associate alla risorsa
 				 */
-				ArrayList commesseRisorse = rDAO.caricamentoCommesseAssociateRisorse(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList commesseRisorse = rDAO.caricamentoCommesseAssociateRisorse(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				System.out.println(mese + " " + anno);
 				
@@ -194,11 +194,11 @@ public class GestioneReport extends HttpServlet {
 				/*
 				 * qua mi carico le commesse di tipologia "Altro" per veficare quali sono legate alla risorsa
 				 */
-				ArrayList commesseRisorse = rDAO.caricamentoCommesseAssociateRisorse(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList commesseRisorse = rDAO.caricamentoCommesseAssociateRisorse(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				/*
 				for(int i = 0; i < listaCommesse.size(); i++){
 					Associaz_Risors_Comm_DTO asscommessa = (Associaz_Risors_Comm_DTO)listaCommesse.get(i);
-					asscommessa.setDescrizioneCliente(rDAO.caricamentoDescrizioneCommessa(asscommessa.getId_commessa(), conn));
+					asscommessa.setDescrizioneCliente(rDAO.caricamentoDescrizioneCommessa(asscommessa.getId_commessa()));
 					listaCommesse.set(i, asscommessa);
 				}*/
 				
