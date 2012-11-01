@@ -11,59 +11,63 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CurriculumDAO {
+public class CurriculumDAO extends BaseDao{
 	
-	PreparedStatement ps = null;
-	
-	public boolean verificaCreazioneCurriculum(int idRisorsa,Connection conn){
-		
-		String sql = "select flag_creazione_cv from tbl_risorse where id_risorsa = ?";
-		
+	public CurriculumDAO(Connection connessione) {
+		super(connessione);
+		// TODO add log4j
+	}
+
+	public boolean verificaCreazioneCurriculum(int idRisorsa){
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql = "select flag_creazione_cv from tbl_risorse where id_risorsa=?";
 		boolean controlloCreazioneCurriculum = false;
-		
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setInt(1, idRisorsa);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			if(rs.next()){
 				controlloCreazioneCurriculum = rs.getBoolean(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps,rs);
 		}
-		
 		return controlloCreazioneCurriculum;
 	}	
-	
-	
-	//tramite questo metodo effettuiamo l'abilitazione del flag curriculum 
-	//tramite questo metodo effettuiamo l'abilitazione del flag curriculum 
-	public void creazioneFlagCreazioneCurriculum(int idRisorsa, Connection conn){
-		
-		String sql = "update tbl_risorse set flag_creazione_cv = ? where id_risorsa = ?";
-		
-		int esitoCreazioneCurriculum = 0;
-		
+
+	/**
+	 * abilitazione del flag curriculum
+	 * @param idRisorsa
+	 */
+	public void creazioneFlagCreazioneCurriculum(int idRisorsa){
+		PreparedStatement ps=null;
+		String sql = "update tbl_risorse set flag_creazione_cv=? where id_risorsa=?";
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setBoolean(1, true);
 			ps.setInt(2, idRisorsa);
-			esitoCreazioneCurriculum = ps.executeUpdate();			
+			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps);
 		}
-
 	}
-	
-	//effettuiamo l'inserimento delle esperienza nella tabella "Tbl_Esperienze_Professionali_Cv"
-	public void inserimentoEsperienze(EsperienzeDTO esperienze, Connection conn){
-		
-		String sql = "insert into tbl_esperienze_professionali_cv(periodo,azienda,luogo,descrizione,id_risorsa) values (?,?,?,?,?)";
-		
+
+	/**
+	 * inserimento delle esperienza nella tabella "Tbl_Esperienze_Professionali_Cv"
+	 * @param esperienze
+	 */
+	public void inserimentoEsperienze(EsperienzeDTO esperienze){
+		PreparedStatement ps=null;
+		String sql = "insert into tbl_esperienze_professionali_cv(periodo,azienda,luogo,descrizione,id_risorsa)values(?,?,?,?,?)";
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setString(1, esperienze.getPeriodo());
 			ps.setString(2, esperienze.getAzienda());
 			ps.setString(3, esperienze.getLuogo());
@@ -71,19 +75,18 @@ public class CurriculumDAO {
 			ps.setInt(5, esperienze.getId_risorsa());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps);
 		}
 	}
-	
-	public void inserimentoDettaglio(Dettaglio_Cv_DTO dettaglio, Connection conn){
-		
-		String sql = "insert into tbl_dettaglio_cv(capacita_professionali,competenze_tecniche,lingue_straniere,istruzione,formazione,interessi,id_risorsa) values (?,?,?,?,?,?,?)";
-		
-		int esitoInserimentoDettaglio = 0; 
-		
+
+	public void inserimentoDettaglio(Dettaglio_Cv_DTO dettaglio){
+		PreparedStatement ps=null;
+		String sql = "insert into tbl_dettaglio_cv(capacita_professionali,competenze_tecniche,lingue_straniere,istruzione,formazione,interessi,id_risorsa)values(?,?,?,?,?,?,?)";
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setString(1, dettaglio.getCapacita_professionali());
 			ps.setString(2, dettaglio.getCompetenze_tecniche());
 			ps.setString(3, dettaglio.getLingue_Straniere());
@@ -91,37 +94,38 @@ public class CurriculumDAO {
 			ps.setString(5, dettaglio.getFormazione());
 			ps.setString(6, dettaglio.getInteressi());
 			ps.setInt(7, dettaglio.getId_risorsa());
-			esitoInserimentoDettaglio = ps.executeUpdate();
+			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps);
 		}
-			
 	}
-	
-	//caricamento dei dati del curriculum
-	public ArrayList caricamentoCurriculum(int idRisorsa,Connection conn) throws IOException{
-		
+
+	/**
+	 * caricamento dei dati del curriculum
+	 * @param idRisorsa
+	 * @return
+	 * @throws IOException
+	 */
+	public ArrayList caricamentoCurriculum(int idRisorsa) throws IOException{
 		ArrayList curriculum = new ArrayList();
-		RisorsaDAO uDAO = new RisorsaDAO();
-		
-		curriculum.add(caricamentoProfiloRisorsa(idRisorsa, conn));
-		curriculum = caricamentoEsperienze(idRisorsa, curriculum, conn);
-		curriculum = caricamentoDettaglio(idRisorsa, curriculum, conn);
-		
+		curriculum.add(caricamentoProfiloRisorsa(idRisorsa));
+		curriculum = caricamentoEsperienze(idRisorsa, curriculum);
+		curriculum = caricamentoDettaglio(idRisorsa, curriculum);
 		return curriculum;
 	}
-	
-	public RisorsaDTO caricamentoProfiloRisorsa(int idRisorsa, Connection conn){
-		
+
+	public RisorsaDTO caricamentoProfiloRisorsa(int idRisorsa){
+		PreparedStatement ps=null;
+		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
-		
-		String sql = "select * from tbl_risorse where id_risorsa = ?";
-		
+		String sql = "select * from tbl_risorse where id_risorsa=?";
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setInt(1, idRisorsa);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while(rs.next()){
 				risorsa = new RisorsaDTO();
 				risorsa.setIdRisorsa(rs.getInt(1));
@@ -150,22 +154,24 @@ public class CurriculumDAO {
 				risorsa.setVisible(rs.getBoolean(24));
 				risorsa.setFlaCreazioneCurriculum(rs.getBoolean(25));
 				risorsa.setCv_visibile(rs.getBoolean(26));
-			}	
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps,rs);
 		}
 		return risorsa;
 	}
-	
-public ArrayList caricamentoEsperienze(int idRisorsa, ArrayList curriculum, Connection conn) throws IOException{
-		
+
+	public ArrayList caricamentoEsperienze(int idRisorsa, ArrayList curriculum) throws IOException{
+		PreparedStatement ps=null;
+		ResultSet rs=null;
 		String sql = "select * from tbl_esperienze_professionali_cv where id_risorsa = ? and visibile = true";
-		
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setInt(1, idRisorsa);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while(rs.next()){
 				EsperienzeDTO esperienze = new EsperienzeDTO();
 				esperienze.setIdEsperienze(rs.getInt(1));
@@ -179,21 +185,23 @@ public ArrayList caricamentoEsperienze(int idRisorsa, ArrayList curriculum, Conn
 				curriculum.add(esperienze);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps,rs);
 		}
-		
 		return curriculum;
 	}
-	
-	public ArrayList caricamentoDettaglio(int idRisorsa, ArrayList curriculum, Connection conn) throws IOException{
-		
+
+	public ArrayList caricamentoDettaglio(int idRisorsa, ArrayList curriculum) throws IOException{
+		PreparedStatement ps=null;
+		ResultSet rs=null;
 		String sql = "select * from tbl_dettaglio_cv where id_risorsa = ? and visible = true";
 		
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
 			ps.setInt(1, idRisorsa);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while(rs.next()){
 				Dettaglio_Cv_DTO dettaglio = new Dettaglio_Cv_DTO();
 				dettaglio.setId_dettaglio(rs.getInt(1));
@@ -208,93 +216,93 @@ public ArrayList caricamentoEsperienze(int idRisorsa, ArrayList curriculum, Conn
 				curriculum.add(dettaglio);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO add log4j
 			e.printStackTrace();
+		}finally{
+			close(ps,rs);
 		}
-		
 		return curriculum;
 	}
-	
-	//tramite questo messaggio effettuo l'aggiornamento della singola Esperinza
-	public String aggiornamentoEsperienza(EsperienzeDTO esperienza, Connection conn) throws IOException{
-			
-			String sql = "update tbl_esperienze_professionali_cv set periodo = ?, azienda = ?, luogo = ?, descrizione = ?, id_risorsa = ? where id_esperienza_professionale = ?";
-			int esitoModificaEsperienza = 0;	
-			try {
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, esperienza.getPeriodo());
-				ps.setString(2, esperienza.getAzienda());
-				ps.setString(3, esperienza.getLuogo());
-				ps.setString(4, esperienza.getDescrizione());
-				ps.setInt(5, esperienza.getId_risorsa());
-				ps.setInt(6, esperienza.getIdEsperienze());
-				esitoModificaEsperienza = ps.executeUpdate();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "Siamo spiacenti la modifica della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
-			}
-			
-			if(esitoModificaEsperienza == 1){
-				return "ok";
-			}else{
-				return "Siamo spiacenti la modifica della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
-			}
-			
-	}
-	
-	//tramite questo messaggio effettuo l'aggiornamento della singola Esperinza
-	public String aggiornamentoDettaglio(Dettaglio_Cv_DTO dettaglio, Connection conn) throws IOException{
-			
-			String sql = "update tbl_dettaglio_cv set capacita_professionali = ?, competenze_tecniche = ?, lingue_straniere = ?, istruzione = ?, formazione = ?, interessi = ? where id_risorsa = ? and id_dettaglio = ?";
-			int esitoModificaDettaglio = 0;	
-			try {
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, dettaglio.getCapacita_professionali());
-				ps.setString(2, dettaglio.getCompetenze_tecniche());
-				ps.setString(3, dettaglio.getLingue_Straniere());
-				ps.setString(4, dettaglio.getIstruzione());
-				ps.setString(5, dettaglio.getFormazione());
-				ps.setString(6, dettaglio.getInteressi());
-				ps.setInt(7, dettaglio.getId_risorsa());
-				ps.setInt(8, dettaglio.getId_dettaglio());
-				esitoModificaDettaglio = ps.executeUpdate();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return "Siamo spiacenti la modifica del dettaglio curriculum non è avvenuta con successo. Contattare l'amministrazione.";
-			}
-			
-			if(esitoModificaDettaglio == 1){
-				return "ok";
-			}else{
-				return "Siamo spiacenti la modifica del dettaglio curriculum non è avvenuta con successo. Contattare l'amministrazione.";
-			}
-			
-	}
-	
-	//tramite questo metodo effettuo l'eliminazione dell'esperienza
-	public String eliminazioneEsperienza(int idEsperienza, Connection conn) throws IOException{
-		
-		String sql = "update tbl_esperienze_professionali_cv set visibile = ? where id_esperienza_professionale = ?";
-		int esitoEliminazioneEsperienza = 0;
-		
+
+	/**
+	 * aggiornamento della singola Esperinza
+	 * @param esperienza
+	 * @return messaggio per salvataggio avvenuto o meno
+	 * @throws IOException
+	 */
+	public String aggiornamentoEsperienza(EsperienzeDTO esperienza) throws IOException{
+		PreparedStatement ps=null;
+		String sql = "update tbl_esperienze_professionali_cv set periodo=?,azienda=?,luogo=?,descrizione=?,id_risorsa=? where id_esperienza_professionale=?";
+		int esitoModificaEsperienza = 0;
 		try {
-			ps = conn.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql);
+			ps.setString(1, esperienza.getPeriodo());
+			ps.setString(2, esperienza.getAzienda());
+			ps.setString(3, esperienza.getLuogo());
+			ps.setString(4, esperienza.getDescrizione());
+			ps.setInt(5, esperienza.getId_risorsa());
+			ps.setInt(6, esperienza.getIdEsperienze());
+			esitoModificaEsperienza = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO log4j
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		return (esitoModificaEsperienza == 1)? "ok":"Siamo spiacenti la modifica della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
+	}
+
+	/**
+	 * aggiornamento della singola Esperinza
+	 * @param dettaglio
+	 * @return messaggio per salvataggio avvenuto o meno
+	 * @throws IOException
+	 */
+	public String aggiornamentoDettaglio(Dettaglio_Cv_DTO dettaglio) throws IOException{
+		PreparedStatement ps=null;
+		String sql = "update tbl_dettaglio_cv set capacita_professionali=?,competenze_tecniche=?,lingue_straniere=?,istruzione=?,formazione=?,interessi=? where id_risorsa=? and id_dettaglio=?";
+		int esitoModificaDettaglio = 0;
+		try {
+			ps = connessione.prepareStatement(sql);
+			ps.setString(1, dettaglio.getCapacita_professionali());
+			ps.setString(2, dettaglio.getCompetenze_tecniche());
+			ps.setString(3, dettaglio.getLingue_Straniere());
+			ps.setString(4, dettaglio.getIstruzione());
+			ps.setString(5, dettaglio.getFormazione());
+			ps.setString(6, dettaglio.getInteressi());
+			ps.setInt(7, dettaglio.getId_risorsa());
+			ps.setInt(8, dettaglio.getId_dettaglio());
+			esitoModificaDettaglio = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO log4j
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		return (esitoModificaDettaglio == 1)? "ok":"Siamo spiacenti la modifica del dettaglio curriculum non è avvenuta con successo. Contattare l'amministrazione.";
+	}
+
+	/**
+	 * eliminazione dell'esperienza
+	 * @param idEsperienza
+	 * @return messaggio per salvataggio avvenuto o meno
+	 * @throws IOException
+	 */
+	public String eliminazioneEsperienza(int idEsperienza) throws IOException{
+		PreparedStatement ps=null;
+		String sql = "update tbl_esperienze_professionali_cv set visibile=? where id_esperienza_professionale=?";
+		int esitoEliminazioneEsperienza = 0;
+		try {
+			ps = connessione.prepareStatement(sql);
 			ps.setBoolean(1, false);
 			ps.setInt(2, idEsperienza);
 			esitoEliminazioneEsperienza = ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// TODO log4j
 			e.printStackTrace();
-			return "Siamo spiacenti l'eliminazione della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
+		}finally{
+			close(ps);
 		}
-		
-		if(esitoEliminazioneEsperienza == 1){
-			return "ok";
-		}else{
-			return "Siamo spiacenti l'eliminazione della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
-		}
-		
+		return (esitoEliminazioneEsperienza == 1)? "ok":"Siamo spiacenti l'eliminazione della singola esperienza non è avvenuta con successo. Contattare l'amministrazione.";
 	}
 }

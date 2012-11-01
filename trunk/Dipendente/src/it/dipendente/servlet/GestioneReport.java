@@ -56,11 +56,11 @@ public class GestioneReport extends HttpServlet {
 		
 		Connection conn = (Connection) sessione.getAttribute("connessione");
 
-		Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO();
+		Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO(conn);
 		
 		RequestDispatcher rd = null;
 		
-		PlanningDAO planningDAO = new PlanningDAO();
+		PlanningDAO planningDAO = new PlanningDAO(conn);
 		
 		String azione = request.getParameter("azione");
 		
@@ -74,9 +74,9 @@ public class GestioneReport extends HttpServlet {
 				
 				ArrayList listaGiornate = new ArrayList();
 				if(mese < 10){
-					listaGiornate = planningDAO.caricamentoGiornate("0"+mese, anno, id_associazione, conn);
+					listaGiornate = planningDAO.caricamentoGiornate("0"+mese, anno, id_associazione);
 				}else{
-					listaGiornate = planningDAO.caricamentoGiornate(String.valueOf(mese), anno, id_associazione, conn);
+					listaGiornate = planningDAO.caricamentoGiornate(String.valueOf(mese), anno, id_associazione);
 				}
 				
 				/*
@@ -93,8 +93,8 @@ public class GestioneReport extends HttpServlet {
 				System.out.println(mese + " " + anno);
 				
 				//request.setAttribute("listaGiorni", meseScelto);
-				ArrayList listaCommesseAttive = rDAO.caricamentoCommesseAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
-				ArrayList listaCommesseNonAttive = rDAO.caricamentoCommesseNonAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList listaCommesseAttive = rDAO.caricamentoCommesseAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
+				ArrayList listaCommesseNonAttive = rDAO.caricamentoCommesseNonAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				
 				request.setAttribute("listaCommesseAttive", listaCommesseAttive);
@@ -172,7 +172,7 @@ public class GestioneReport extends HttpServlet {
 						}
 					}
 					planning.setId_associazione(id_associazione);
-					rDAO.aggiornamentoGiorniMensili(planning, conn);
+					rDAO.aggiornamentoGiorniMensili(planning);
 				}
 				
 				request.setAttribute("messaggio", "L'aggiornamento delle ore è avvenuto correttamente.");
@@ -184,12 +184,12 @@ public class GestioneReport extends HttpServlet {
 				/*
 				 * qua mi carico le commesse attive legate alla risorsa
 				 */
-				ArrayList listaCommesseAttive = rDAO.caricamentoCommesseAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList listaCommesseAttive = rDAO.caricamentoCommesseAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				/*
 				 * qua mi carico le commesse non attive legate alla risorsa
 				 */
-				ArrayList listaCommesseNonAttive = rDAO.caricamentoCommesseNonAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(), conn);
+				ArrayList listaCommesseNonAttive = rDAO.caricamentoCommesseNonAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
 				
 				/*
 				 * qua mi carico le commesse di tipologia "Altro" per veficare quali sono legate alla risorsa
