@@ -48,7 +48,11 @@ public class Associaz_Risors_Comm_DAO extends BaseDao{
 			System.out.println("modifica non effettuata con successo");
 		}
 	}
-	
+
+	/**
+	 * @param idRisorsa
+	 * @return commesse attive legata alla risorsa solo con tipologia "Altro"
+	 */
 	public ArrayList<Associaz_Risors_Comm_DTO> caricamentoCommesseAssociateRisorse(int id_risorsa){
 		String sql = "select asscommessa.id_commessa,commessa.descrizione from tbl_associaz_risor_comm as asscommessa, tbl_commesse as commessa where asscommessa.id_commessa=commessa.id_commessa and asscommessa.id_risorsa=? and commessa.id_tipologia_commessa=4 order by commessa.descrizione";
 		ArrayList<Associaz_Risors_Comm_DTO> listaCommesse = new ArrayList<Associaz_Risors_Comm_DTO>();
