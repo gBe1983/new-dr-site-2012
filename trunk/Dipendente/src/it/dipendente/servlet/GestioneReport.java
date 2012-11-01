@@ -23,14 +23,14 @@ import javax.servlet.http.HttpSession;
  */
 public class GestioneReport extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestioneReport() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GestioneReport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -211,7 +211,7 @@ public class GestioneReport extends HttpServlet {
 			}
 		}else{
 			response.setContentType("text/html");
-	        PrintWriter out = response.getWriter();
+			PrintWriter out = response.getWriter();
 			try {
 				out = response.getWriter();
 				out.print("<html>" +
@@ -247,7 +247,6 @@ public class GestioneReport extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-			
 	}
 	
 }
