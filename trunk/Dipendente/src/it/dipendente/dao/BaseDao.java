@@ -1,5 +1,7 @@
 package it.dipendente.dao;
 
+import it.dipendente.util.MyLogger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,27 +9,31 @@ import java.sql.SQLException;
 
 public class BaseDao {
 	protected Connection connessione=null;
+	private MyLogger log;
 
 	public BaseDao(Connection connessione) {
-		super();
+		log=new MyLogger(this.getClass());
 		this.connessione = connessione;
 	}
-	
+
 	public void close(PreparedStatement ps,ResultSet rs){
+		final String metodo="close";
+		log.start(metodo);
 		if(rs!=null){
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				//TODO INSERIRE LOG4J
+				log.error(metodo, "rs.close", e);
 			}
 		}
 		if(ps!=null){
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				//TODO INSERIRE LOG4J
+				log.error(metodo, "ps.close", e);
 			}
 		}
+		log.end(metodo);
 	}
 
 	public void close(PreparedStatement ps){
