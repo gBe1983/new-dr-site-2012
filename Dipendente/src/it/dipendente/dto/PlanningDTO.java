@@ -82,5 +82,14 @@ public class PlanningDTO {
 	public void setAttivo(boolean attivo) {
 		this.attivo = attivo;
 	}
-	
+
+	public String toString(){
+		return new StringBuilder("id_associazione[")
+						.append(id_associazione)
+						.append("]data[")
+						.append(data)
+						.append("]numeroOre[")
+						.append(numeroOre)
+						.append("]").toString();
+	}
 }
