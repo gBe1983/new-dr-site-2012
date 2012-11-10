@@ -1,0 +1,40 @@
+table.timeReport{
+	border: 1;
+	width:95%;
+	border-color:#A1A1A1;
+}
+
+th.weekHeader{
+	color:#A1A1A1;
+	background-color:#CCC;
+}
+
+th.commesseHeader{
+	font:normal 12px verdana, arial, sans-serif;
+	color:#A1A1A1;
+}
+
+th.commesse{
+	
+}
+
+th.holiday{
+	color:red;
+	background-color:#CCD;
+	text-align:center;
+	vertical-align:top;
+}
+
+th.workDay{
+	color:black;
+	background-color:white;
+	text-align:center;
+	vertical-align:top;
+}
+
+th.disabledDay{
+	color:#A1A1A1;
+	background-color:#DDD;
+	text-align:center;
+	vertical-align:top;
+}
