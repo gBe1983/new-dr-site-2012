@@ -3,6 +3,7 @@ package it.dipendente.dao;
 import it.dipendente.dto.Dettaglio_Cv_DTO;
 import it.dipendente.dto.EsperienzeDTO;
 import it.dipendente.dto.RisorsaDTO;
+import it.dipendente.util.MyLogger;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,10 +13,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CurriculumDAO extends BaseDao{
-	
+	private MyLogger log;
+
 	public CurriculumDAO(Connection connessione) {
 		super(connessione);
-		// TODO add log4j
+		log =new MyLogger(this.getClass());
 	}
 
 	public boolean verificaCreazioneCurriculum(int idRisorsa){
