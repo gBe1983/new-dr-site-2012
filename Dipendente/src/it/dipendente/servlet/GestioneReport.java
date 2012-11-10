@@ -1,13 +1,13 @@
 package it.dipendente.servlet;
 
+import it.dipendente.bo.Month;
 import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
 import it.dipendente.dto.PlanningDTO;
 import it.dipendente.dto.RisorsaDTO;
+import it.dipendente.util.MyLogger;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -18,96 +18,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class Report
- */
-public class GestioneReport extends HttpServlet {
+public class GestioneReport extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private MyLogger log;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public GestioneReport() {
 		super();
-		// TODO Auto-generated constructor stub
+		log =new MyLogger(this.getClass());
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
+		final String metodo="doGet";
+		log.start(metodo);
+		processRequest(request,response);
+		log.end(metodo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
+		final String metodo="doPost";
+		log.start(metodo);
+		processRequest(request,response);
+		log.end(metodo);
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		//recupero l'oggetto sessione
+		final String metodo="processRequest";
+		log.start(metodo);
 		HttpSession sessione = request.getSession();
 		
-		Connection conn = (Connection) sessione.getAttribute("connessione");
-
-		Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO(conn);
+		
 		
 		RequestDispatcher rd = null;
 		
-		PlanningDAO planningDAO = new PlanningDAO(conn);
+		
 		
 		String azione = request.getParameter("azione");
 		
-		if(sessione.getAttribute("utenteLoggato") != null){
+		//if(sessione.getAttribute("utenteLoggato") != null){
 			
-			if(azione.equals("visualizzaMese")){
-				
-				int mese = Integer.parseInt(request.getParameter("mese"));
-				int anno = Integer.parseInt(request.getParameter("anno"));
-				int id_associazione = Integer.parseInt(request.getParameter("parametro"));
-				
-				ArrayList listaGiornate = new ArrayList();
-				if(mese < 10){
-					listaGiornate = planningDAO.caricamentoGiornate("0"+mese, anno, id_associazione);
-				}else{
-					listaGiornate = planningDAO.caricamentoGiornate(String.valueOf(mese), anno, id_associazione);
-				}
-				
-				/*
-				 * nella variabile meseScelto effettuo il caricamento del mese corrente
-				 * per la risorsa
-				 */
-				//ArrayList meseScelto = rDAO.caricamentoCalendario(mese, anno);
-				
-				/*
-				 * nella variabile commesseRisorse troviamo tutte le commesse associate alla risorsa
-				 */
-				ArrayList commesseRisorse = rDAO.caricamentoCommesseAssociateRisorse(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
-				
-				System.out.println(mese + " " + anno);
-				
-				//request.setAttribute("listaGiorni", meseScelto);
-				ArrayList listaCommesseAttive = rDAO.caricamentoCommesseAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
-				ArrayList listaCommesseNonAttive = rDAO.caricamentoCommesseNonAttive(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
-				
-				
-				request.setAttribute("listaCommesseAttive", listaCommesseAttive);
-				request.setAttribute("listaCommesseNonAttive", listaCommesseNonAttive);
-				request.setAttribute("commesseRisorse", commesseRisorse);
-				request.setAttribute("listaGiorni", listaGiornate);
-				
-				
-				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=visualizzaReport&mese="+mese+"&anno="+anno+"&parametro="+id_associazione+"&dispositiva=TimeReport");
-				rd.forward(request, response);
-				
-			}else if(azione.equals("inserisciMese")){
-				
+			if(azione.equals("compilaTimeReport")){
+				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
+				//request.setAttribute("month", planningDAO.getGiornate(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa()));
+				request.setAttribute("month", new Month());
+				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);
+			}else if(azione.equals("salvaTimeReport")){
+				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 				Calendar calendario = Calendar.getInstance();
 				
 				
@@ -127,7 +88,7 @@ public class GestioneReport extends HttpServlet {
 					
 					if(mese < 10){
 						if(x < 9){
-							planning.setData(anno+"-0"+mese+"-0"+(x+1));
+							//planning.setData(anno+"-0"+mese+"-0"+(x+1));
 							if(request.getParameter("numeroOre_"+x).indexOf(",") != -1){
 								planning.setNumeroOre(Double.parseDouble(request.getParameter("numeroOre_"+x).replace(",", ".")));
 							}else{
@@ -138,7 +99,7 @@ public class GestioneReport extends HttpServlet {
 							planning.setDescr_attivita(request.getParameter("descrizione_"+x));
 							planning.setNote(request.getParameter("note_"+x));
 						}else{
-							planning.setData(anno+"-0"+mese+"-"+(x+1));
+							//planning.setData(anno+"-0"+mese+"-"+(x+1));
 							if(request.getParameter("numeroOre_"+x).indexOf(",") != -1){
 								planning.setNumeroOre(Double.parseDouble(request.getParameter("numeroOre_"+x).replace(",", ".")));
 							}else{
@@ -150,7 +111,7 @@ public class GestioneReport extends HttpServlet {
 						}
 					}else{
 						if(x < 9){
-							planning.setData(anno+"-"+mese+"-0"+(x+1));
+							//planning.setData(anno+"-"+mese+"-0"+(x+1));
 							if(request.getParameter("numeroOre_"+x).indexOf(",") != -1){
 								planning.setNumeroOre(Double.parseDouble(request.getParameter("numeroOre_"+x).replace(",", ".")));
 							}else{
@@ -160,7 +121,7 @@ public class GestioneReport extends HttpServlet {
 							planning.setDescr_attivita(request.getParameter("descrizione_"+x));
 							planning.setNote(request.getParameter("note_"+x));
 						}else{
-							planning.setData(anno+"-0"+mese+"-"+(x+1));
+							//planning.setData(anno+"-0"+mese+"-"+(x+1));
 							if(request.getParameter("numeroOre_"+x).indexOf(",") != -1){
 								planning.setNumeroOre(Double.parseDouble(request.getParameter("numeroOre_"+x).replace(",", ".")));
 							}else{
@@ -172,7 +133,7 @@ public class GestioneReport extends HttpServlet {
 						}
 					}
 					planning.setId_associazione(id_associazione);
-					rDAO.aggiornamentoGiorniMensili(planning);
+					planningDAO.aggiornamentoPlanning(planning);
 				}
 				
 				request.setAttribute("messaggio", "L'aggiornamento delle ore è avvenuto correttamente.");
@@ -180,7 +141,7 @@ public class GestioneReport extends HttpServlet {
 				rd.forward(request, response);
 				
 			}else if(azione.equals("caricamentoCommesse")){
-				
+				Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO(conn.getConnection());
 				/*
 				 * qua mi carico le commesse attive legate alla risorsa
 				 */
@@ -209,44 +170,8 @@ public class GestioneReport extends HttpServlet {
 				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=TimeReport&dispositiva=TimeReport");
 				rd.forward(request, response);
 			}
-		}else{
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			try {
-				out = response.getWriter();
-				out.print("<html>" +
-						"<head>" +
-						"</head>" +
-						"<body>" +
-						"<script type=\"text/javascript\">" +
-						"alert(\"La sessione è scaduta. Rieffettuare la login\");" +
-						"url = window.location.href;" +
-						"var variabiliUrl = url.split(\"/\");" +
-						"for(a=0; a < variabiliUrl.length; a++){" +
-						"		if(a == 2){" +
-						"			var localVariabili = variabiliUrl[a].split(\":\");" +
-						"			for(x=0; x < localVariabili.length; x++){" +
-						"				if(localVariabili[x] == \"localhost\"){" +
-						"					window.location = \"http://localhost/dr\";" +
-						"				}if(localVariabili[x] == \"cvonline\"){" +
-						"					window.location.href = \"http://cvonline.tv\";" +
-						"				}if(localVariabili[x] == \"drconsulting\"){" +
-						"					window.location.href= \"http://drconsulting.tv\";" +
-						"				}" +
-						"			}" +
-						"		}else{" +
-						"			continue;" +
-						"		}" +
-						"}" +
-						"</script>" +
-						"</body>" +
-						"</html>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		//}else{
+		//	sessioneScaduta(response);
+		//}
 	}
-	
 }
