@@ -1,81 +1,96 @@
 package it.dipendente.dao;
 
+import it.dipendente.bo.Month;
 import it.dipendente.dto.PlanningDTO;
+import it.dipendente.util.MyLogger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PlanningDAO extends BaseDao{
-	private SimpleDateFormat formatDate = null;
+	private MyLogger log;
 
 	public PlanningDAO(Connection connessione) {
 		super(connessione);
-		formatDate = new SimpleDateFormat("dd-MM-yyyy");
-		// TODO add log4j
+		log=new MyLogger(this.getClass());
 	}
 
-	public ArrayList caricamentoGiornate(String mese,int anno,int id_associazione){
+	/**
+	 * tramite questo metodo effettuo l'aggiornamento del planning
+	 * @param planning
+	 */
+	public int aggiornamentoPlanning(PlanningDTO planning){
+		final String metodo="aggiornamentoPlanning";
+		log.start(metodo);
+		String sql = "update tbl_planning set num_ore=?,straordinari=?orario=?,note=? where id_planning=?";
+		log.debug(metodo,"sql:"+sql);
 		PreparedStatement ps=null;
-		ResultSet rs=null;
-		String sql = "select planning.*,asscommessa.attiva from tbl_planning as planning, tbl_associaz_risor_comm asscommessa where planning.id_associazione = asscommessa.id_associazione and planning.data like ? and planning.id_associazione = ?";
-		ArrayList caricamentoGiornate = new ArrayList();
 		try {
 			ps = connessione.prepareStatement(sql);
-			ps.setString(1, anno+"-"+mese+"-%");
-			ps.setInt(2, id_associazione);
-			rs = ps.executeQuery();
-			while (rs.next()){
-				PlanningDTO planning = new PlanningDTO();
-				planning.setId_associazione(rs.getInt(1));
-				planning.setData(formatDate.format(rs.getDate(2)));
-				planning.setNumeroOre(rs.getDouble(3));
-				planning.setStraordinari(rs.getInt(4));
-				planning.setDescr_attivita(rs.getString(5));
-				planning.setOrario(rs.getString(6));
-				planning.setId_associazione(rs.getInt(7));
-				planning.setNote(rs.getString(8));
-				planning.setAttivo(rs.getBoolean(9));
-				planning.setGiorno(calculateDay(formatDate.parse(formatDate.format(rs.getDate(2)))));
-				planning.setCommessaAttiva(rs.getBoolean(10));
-				caricamentoGiornate.add(planning);
-			}
+			ps.setDouble(1, planning.getNumeroOre());
+			ps.setDouble(2, planning.getStraordinari());
+			ps.setString(3, planning.getOrario());
+			ps.setString(4, planning.getNote());
+			ps.setInt(5, planning.getId_planning());
+			return ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO  add log4j
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO  add log4j
-			e.printStackTrace();
+			log.error(metodo, "update tbl_planning for planning:"+planning.toString(), e);
 		}finally{
-			close(ps,rs);
+			close(ps);
+			log.end(metodo);
 		}
-		return caricamentoGiornate;
+		return 0;
 	}
 
-	private static String calculateDay(java.util.Date data) {
-		String res = "nessuna";
-		Calendar c = Calendar.getInstance();
-		c.setTime(data);
-		int day = c.get(Calendar.DAY_OF_WEEK);
-		if (day == Calendar.MONDAY)
-			res = "lun";
-		if (day == Calendar.TUESDAY)
-			res = "mar";
-		if (day == Calendar.WEDNESDAY)
-			res = "mer";
-		if (day == Calendar.THURSDAY)
-			res = "gio";
-		if (day == Calendar.FRIDAY)
-			res = "ven";
-		if (day == Calendar.SATURDAY)
-			res = "sab";
-		if (day == Calendar.SUNDAY)
-			res = "dom";
-		return res;
+	public Month getGiornate(int id_risorsa){
+		final String metodo="getGiornate";
+		log.start(metodo);
+		Month m = new Month();
+		String now = new SimpleDateFormat("YYYY-mm-%").format(Calendar.getInstance());
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		StringBuilder sql = new StringBuilder("select planning.id_planning,");
+		sql	.append("planning.data,")
+			.append("planning.num_ore,")
+			.append("planning.straordinari,")
+			.append("planning.orario,")
+			.append("planning.note,")
+			.append("asscommessa.id_associazione,")
+			.append("commessa.descrizione")
+			.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
+			.append(" where planning.id_associazione=asscommessa.id_associazione")
+			.append(" and asscommessa.id_commessa=commessa.id_commessa")
+			.append(" and planning.data like? and asscommessa.id_risorsa=?")
+			.append("order by data");
+		log.debug(metodo,"sql:"+sql.toString());
+		ArrayList<PlanningDTO>caricamentoGiornate = new ArrayList<PlanningDTO>();
+		try {
+			ps = connessione.prepareStatement(sql.toString());
+			ps.setString(1,now);
+			ps.setInt(2,id_risorsa);
+			rs = ps.executeQuery();
+			while (rs.next()){
+				m.addPlanningDTO(
+					new PlanningDTO(rs.getInt("id_planning"),
+									rs.getDate("data"),
+									rs.getDouble("num_ore"),
+									rs.getDouble("straordinari"),
+									rs.getString("orario"),
+									rs.getString("note"),
+									rs.getInt("id_associazione"),
+									rs.getString("descrizione")));
+			}
+		} catch (SQLException e) {
+			log.error(metodo, "select tbl_planning,tbl_associaz_risor_comm,tbl_commesse for risorsa:"+id_risorsa, e);
+		}finally{
+			close(ps,rs);
+			log.end(metodo);
+		}
+		return m;
 	}
 }

@@ -1,6 +1,7 @@
 package it.dipendente.dao;
 
 import it.dipendente.dto.RisorsaDTO;
+import it.dipendente.util.MyLogger;
 
 import java.security.MessageDigest;
 import java.sql.Connection;
@@ -9,9 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RisorsaDAO extends BaseDao{
+	private MyLogger log;
+
 	public RisorsaDAO(Connection connessione) {
 		super(connessione);
-		// TODO Add logj4
+		log =new MyLogger(this.getClass());
 	}
 
 	public RisorsaDTO loginRisorsa(int idRisorsa){

@@ -1,7 +1,6 @@
 package it.dipendente.dao;
 
 import it.dipendente.dto.Associaz_Risors_Comm_DTO;
-import it.dipendente.dto.PlanningDTO;
 import it.dipendente.util.MyLogger;
 
 import java.sql.Connection;
@@ -18,40 +17,6 @@ public class Associaz_Risors_Comm_DAO extends BaseDao{
 	public Associaz_Risors_Comm_DAO(Connection connessione) {
 		super(connessione);
 		log=new MyLogger(this.getClass());
-	}
-
-	/**
-	 * tramite questo metodo effettuo l'aggiornamento delle date
-	 * @param planning
-	 */
-	public void aggiornamentoGiorniMensili(PlanningDTO planning){
-		final String metodo="aggiornamentoGiorniMensili";
-		log.start(metodo);
-		String sql = "update tbl_planning set num_ore=?,orario=?,descr_attivita=?,note=? where data=? and id_associazione=?";
-		log.debug(metodo,"sql:"+sql);
-		int esitoInserimentoReport = 0;
-		PreparedStatement ps=null;
-		try {
-			ps = connessione.prepareStatement(sql);
-			ps.setDouble(1, planning.getNumeroOre());
-			ps.setString(2, planning.getOrario());
-			ps.setString(3, planning.getDescr_attivita());
-			ps.setString(4, planning.getNote());
-			ps.setString(5, planning.getData());
-			ps.setInt(6, planning.getId_associazione());
-			esitoInserimentoReport = ps.executeUpdate();
-		} catch (SQLException e) {
-			log.error(metodo, "update tbl_planning for planning:"+planning.toString(), e);
-		}
-		finally{
-			close(ps);
-		}
-		if(esitoInserimentoReport == 1){
-			log.info(metodo,"modifica effettuata con successo");
-		}else{
-			log.warn(metodo,"modifica fallita for planning:"+planning.toString());
-		}
-		log.end(metodo);
 	}
 
 	/**
