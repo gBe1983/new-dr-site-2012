@@ -5,10 +5,9 @@ import it.dipendente.dao.CurriculumDAO;
 import it.dipendente.dto.Dettaglio_Cv_DTO;
 import it.dipendente.dto.EsperienzeDTO;
 import it.dipendente.dto.RisorsaDTO;
+import it.dipendente.util.MyLogger;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -18,51 +17,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class GestioneCurriculum
- */
-public class GestioneCurriculum extends HttpServlet {
+public class GestioneCurriculum extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestioneCurriculum() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private MyLogger log;
+
+	public GestioneCurriculum() {
+		super();
+		log =new MyLogger(this.getClass());
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		final String metodo="doGet";
+		log.start(metodo);
 		processRequest(request,response);
+		log.end(metodo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		final String metodo="doPost";
+		log.start(metodo);
 		processRequest(request,response);
+		log.end(metodo);
 	}
-	
+
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		//recupero l'oggetto sessione
+		final String metodo="processRequest";
+		log.start(metodo);
 		HttpSession sessione = request.getSession();
 		
-		//recupero la connessione dalla sessione
-		Connection conn = (Connection) sessione.getAttribute("connessione");
-		
-		//creo l'istanza della classe 
-		CurriculumDAO curriculum = new CurriculumDAO(conn);
+		CurriculumDAO curriculum = new CurriculumDAO(conn.getConnection());
 		
 		RequestDispatcher rd = null;
-		
-		
+
 		//recupero il parametro azione
 		String azione = request.getParameter("azione");
 		if(sessione.getAttribute("utenteLoggato") != null){
@@ -270,42 +262,7 @@ public class GestioneCurriculum extends HttpServlet {
 				}
 			}
 		}else {
-			response.setContentType("text/html");
-	        PrintWriter out = response.getWriter();
-			try {
-				out = response.getWriter();
-				out.print("<html>" +
-						"<head>" +
-						"</head>" +
-						"<body>" +
-						"<script type=\"text/javascript\">" +
-						"alert(\"La sessione è scaduta. Rieffettuare la login\");" +
-						"url = window.location.href;" +
-						"var variabiliUrl = url.split(\"/\");" +
-						"for(a=0; a < variabiliUrl.length; a++){" +
-						"		if(a == 2){" +
-						"			var localVariabili = variabiliUrl[a].split(\":\");" +
-						"			for(x=0; x < localVariabili.length; x++){" +
-						"				if(localVariabili[x] == \"localhost\"){" +
-						"					window.location = \"http://localhost/dr\";" +
-						"				}if(localVariabili[x] == \"cvonline\"){" +
-						"					window.location.href = \"http://cvonline.tv\";" +
-						"				}if(localVariabili[x] == \"drconsulting\"){" +
-						"					window.location.href= \"http://drconsulting.tv\";" +
-						"				}" +
-						"			}" +
-						"		}else{" +
-						"			continue;" +
-						"		}" +
-						"}" +
-						"</script>" +
-						"</body>" +
-						"</html>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sessioneScaduta(response);
 		}
 	}
 }
