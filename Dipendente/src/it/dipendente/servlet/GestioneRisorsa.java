@@ -1,12 +1,10 @@
 package it.dipendente.servlet;
 
-import it.dipendente.connessione.Connessione;
 import it.dipendente.dao.RisorsaDAO;
 import it.dipendente.dto.RisorsaDTO;
+import it.dipendente.util.MyLogger;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
@@ -16,61 +14,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class ServletUtente
- */
-public class GestioneRisorsa extends HttpServlet {
+public class GestioneRisorsa extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private MyLogger log;
 
-    /**
-     * Default constructor. 
-     */
-    public GestioneRisorsa() {
-        // TODO Auto-generated constructor stub
-    }
+	public GestioneRisorsa() {
+		super();
+		log =new MyLogger(this.getClass());
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
+		final String metodo="doGet";
+		log.start(metodo);
+		processRequest(request,response);
+		log.end(metodo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request, response);
+		final String metodo="doPost";
+		log.start(metodo);
+		processRequest(request,response);
+		log.end(metodo);
 	}
-	
+
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		//recupero l'oggetto sessione
+		final String metodo="processRequest";
+		log.start(metodo);
 		HttpSession sessione = request.getSession();
-		
-		//creo l'istanza della classe Connessione
-		Connessione connessione = new Connessione();
-		
-		Connection conn = null;
-		//recupero l'oggetto Connection dal metodo connessione presente nella classe Connessione
-		if(request.getParameter("connessione") != null){
-			conn = connessione.connessione(request.getParameter("connessione"));
-			sessione.setAttribute("modalitaDiConnessione", request.getParameter("connessione"));
-		}else{
-			conn = (Connection) sessione.getAttribute("connessione");
-		}
-		
-		sessione.setAttribute("connessione", conn);
-		
-		//creo l'istanza della classe 
-		RisorsaDAO rDAO = new RisorsaDAO(conn);
-		
+		RisorsaDAO rDAO = new RisorsaDAO(conn.getConnection());
 		RequestDispatcher rd = null;
-		
-		
 		//recupero il parametro azione
 		String azione = request.getParameter("azione");
 		
@@ -78,7 +56,7 @@ public class GestioneRisorsa extends HttpServlet {
 			
 			int idRisorsa = Integer.parseInt(request.getParameter("parametro"));
 			
-			System.out.println(idRisorsa);
+			log.debug(metodo, "login idRisorsa" + idRisorsa);
 			
 			RisorsaDTO risorsa = rDAO.loginRisorsa(idRisorsa);
 			sessione.setAttribute("utenteLoggato",risorsa);
@@ -167,7 +145,7 @@ public class GestioneRisorsa extends HttpServlet {
 						continue;
 					}else{
 						sessione.removeAttribute(valoriSessione);
-						System.out.println(valoriSessione);
+						log.debug(metodo, "logout " + valoriSessione);
 					}
 				}
 				
@@ -179,42 +157,7 @@ public class GestioneRisorsa extends HttpServlet {
 			
 			}
 		}else{
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			try {
-				out = response.getWriter();
-				out.print("<html>" +
-						"<head>" +
-						"</head>" +
-						"<body>" +
-						"<script type=\"text/javascript\">" +
-						"alert(\"La sessione è scaduta. Rieffettuare la login\");" +
-						"url = window.location.href;" +
-						"var variabiliUrl = url.split(\"/\");" +
-						"for(a=0; a < variabiliUrl.length; a++){" +
-						"		if(a == 2){" +
-						"			var localVariabili = variabiliUrl[a].split(\":\");" +
-						"			for(x=0; x < localVariabili.length; x++){" +
-						"				if(localVariabili[x] == \"localhost\"){" +
-						"					window.location = \"http://localhost/dr\";" +
-						"				}if(localVariabili[x] == \"cvonline\"){" +
-						"					window.location.href = \"http://cvonline.tv\";" +
-						"				}if(localVariabili[x] == \"drconsulting\"){" +
-						"					window.location.href= \"http://drconsulting.tv\";" +
-						"				}" +
-						"			}" +
-						"		}else{" +
-						"			continue;" +
-						"		}" +
-						"}" +
-						"</script>" +
-						"</body>" +
-						"</html>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sessioneScaduta(response);
 		}
 	}
 }
