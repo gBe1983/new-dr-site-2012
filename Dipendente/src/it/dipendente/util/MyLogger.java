@@ -3,8 +3,8 @@ package it.dipendente.util;
 import org.apache.log4j.Logger;
 
 public class MyLogger {
-	private static Logger log;
-	private final static String START="STRAT";
+	private Logger log;
+	private final static String START="START";
 	private final static String END="END";
 
 	public MyLogger(Class clazz) {
