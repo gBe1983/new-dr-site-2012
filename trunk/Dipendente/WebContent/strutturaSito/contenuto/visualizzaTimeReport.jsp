@@ -154,10 +154,10 @@ if(listaGiorni.size() > 0){
 				}*/
 				
 				
-				if(planning.getGiorno().equals("sab") || planning.getGiorno().equals("dom")){ 
+				if(planning.getData().get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY || planning.getData().get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){ 
 	%>		
 					<tr>
-						<td><input type="text" name="giorni" value="<%=planning.getGiorno() + " " + planning.getData() %>" size="15" class="giorniFestivi" readonly="readonly"></td>
+						<td><input type="text" name="giorni" value="<%=planning.getData() %>" size="15" class="giorniFestivi" readonly="readonly"></td>
 						<td><input type="text" name="numeroOre_<%=x %>" value="<%=planning.getNumeroOre() %>" size="3" class="giorniFestivi" <%if(!planning.isAttivo()){ %>readonly="readonly" <%}%>></td>
 						<td>
 							<%
@@ -217,7 +217,7 @@ if(listaGiorni.size() > 0){
 				}else{
 %>
 					<tr>
-						<td><input type="text" name="giorni" value="<%=planning.getGiorno() + " " + planning.getData() %>" size="15" readonly="readonly"></td>
+						<td><input type="text" name="giorni" value="<%=planning.getData() %>" size="15" readonly="readonly"></td>
 						<td><input type="text" name="numeroOre_<%=x %>" value="<%=planning.getNumeroOre() %>" size="3" <%if(!planning.isAttivo()){ %>readonly="readonly" <%}%>></td>
 						<td>
 							<%
