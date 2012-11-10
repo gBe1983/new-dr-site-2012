@@ -5,11 +5,11 @@
 <%
 HttpSession controlloUtenteLoggato = request.getSession();
 if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
-	RisorsaDTO risorsa = (RisorsaDTO) controlloUtenteLoggato.getAttribute("utenteLoggato");
+	RisorsaDTO r = (RisorsaDTO) controlloUtenteLoggato.getAttribute("utenteLoggato");
 %>
 
 <div class="subtitle ">
-	<h2>Benvenuto <%=risorsa.getNome() %> <%=risorsa.getCognome() %></h2>
+	<h2>Benvenuto <%=r.getNome() %> <%=r.getCognome() %></h2>
 </div>
 <p>
 	In questa area, dedicata a tutti i dipendenti, 
