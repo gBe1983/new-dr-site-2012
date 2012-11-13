@@ -9,16 +9,30 @@ th.weekHeader{
 	background-color:#CCC;
 }
 
+th.noCommesse{
+	font:bold 12px verdana, arial, sans-serif;
+	color:red;
+	background-color:#CCC;
+}
+
 th.commesseHeader{
 	font:normal 12px verdana, arial, sans-serif;
 	color:#A1A1A1;
 }
 
 th.commesse{
-	
+	font:normal 12px verdana, arial, sans-serif;
+	color:#A5B5C5;
 }
 
 th.holiday{
+	color:red;
+	background-color:#CCD;
+	text-align:center;
+	vertical-align:top;
+}
+
+td.holiday{
 	color:red;
 	background-color:#CCD;
 	text-align:center;
@@ -32,7 +46,21 @@ th.workDay{
 	vertical-align:top;
 }
 
+td.workDay{
+	color:black;
+	background-color:white;
+	text-align:center;
+	vertical-align:top;
+}
+
 th.disabledDay{
+	color:#A1A1A1;
+	background-color:#DDD;
+	text-align:center;
+	vertical-align:top;
+}
+
+td.disabledDay{
 	color:#A1A1A1;
 	background-color:#DDD;
 	text-align:center;
