@@ -1,6 +1,6 @@
 package it.dipendente.dao;
 
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

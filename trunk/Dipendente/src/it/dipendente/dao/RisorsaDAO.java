@@ -1,7 +1,7 @@
 package it.dipendente.dao;
 
 import it.dipendente.dto.RisorsaDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.security.MessageDigest;
 import java.sql.Connection;

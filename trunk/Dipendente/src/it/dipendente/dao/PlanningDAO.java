@@ -2,7 +2,7 @@ package it.dipendente.dao;
 
 import it.dipendente.bo.Month;
 import it.dipendente.dto.PlanningDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,28 +47,27 @@ public class PlanningDAO extends BaseDao{
 		return 0;
 	}
 
-	public Month getGiornate(int id_risorsa){
+	public Month getGiornate(int id_risorsa, Calendar day){
 		final String metodo="getGiornate";
 		log.start(metodo);
-		Month m = new Month();
-		String now = new SimpleDateFormat("YYYY-mm-%").format(Calendar.getInstance());
+		Month m = new Month(day);
+		String now = new SimpleDateFormat("YYYY-mm-%").format(day);
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		StringBuilder sql = new StringBuilder("select planning.id_planning,");
 		sql	.append("planning.data,")
-			.append("planning.num_ore,")
-			.append("planning.straordinari,")
-			.append("planning.orario,")
-			.append("planning.note,")
-			.append("asscommessa.id_associazione,")
-			.append("commessa.descrizione")
-			.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
-			.append(" where planning.id_associazione=asscommessa.id_associazione")
-			.append(" and asscommessa.id_commessa=commessa.id_commessa")
-			.append(" and planning.data like? and asscommessa.id_risorsa=?")
-			.append("order by data");
+				.append("planning.num_ore,")
+				.append("planning.straordinari,")
+				.append("planning.orario,")
+				.append("planning.note,")
+				.append("asscommessa.id_associazione,")
+				.append("commessa.descrizione")
+				.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
+				.append(" where planning.id_associazione=asscommessa.id_associazione")
+				.append(" and asscommessa.id_commessa=commessa.id_commessa")
+				.append(" and planning.data like? and asscommessa.id_risorsa=?")
+				.append("order by data");
 		log.debug(metodo,"sql:"+sql.toString());
-		ArrayList<PlanningDTO>caricamentoGiornate = new ArrayList<PlanningDTO>();
 		try {
 			ps = connessione.prepareStatement(sql.toString());
 			ps.setString(1,now);
@@ -76,14 +75,14 @@ public class PlanningDAO extends BaseDao{
 			rs = ps.executeQuery();
 			while (rs.next()){
 				m.addPlanningDTO(
-					new PlanningDTO(rs.getInt("id_planning"),
-									rs.getDate("data"),
-									rs.getDouble("num_ore"),
-									rs.getDouble("straordinari"),
-									rs.getString("orario"),
-									rs.getString("note"),
-									rs.getInt("id_associazione"),
-									rs.getString("descrizione")));
+					new PlanningDTO(	rs.getInt("id_planning"),
+												rs.getDate("data"),
+												rs.getDouble("num_ore"),
+												rs.getDouble("straordinari"),
+												rs.getString("orario"),
+												rs.getString("note"),
+												rs.getInt("id_associazione"),
+												rs.getString("descrizione")));
 			}
 		} catch (SQLException e) {
 			log.error(metodo, "select tbl_planning,tbl_associaz_risor_comm,tbl_commesse for risorsa:"+id_risorsa, e);

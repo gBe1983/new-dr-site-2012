@@ -3,7 +3,7 @@ package it.dipendente.dao;
 import it.dipendente.dto.Dettaglio_Cv_DTO;
 import it.dipendente.dto.EsperienzeDTO;
 import it.dipendente.dto.RisorsaDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.sql.Connection;
