@@ -1,30 +1,30 @@
 package it.dipendente.servlet;
 
 import it.dipendente.connessione.Connessione;
-import it.exception.config.Config;
-import it.util.config.MyProperties;
 import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
 public class BaseServlet extends HttpServlet {
-	private static final long serialVersionUID = 8858509577712782374L;
+	private static final long serialVersionUID = -5802799487512842108L;
 	protected Connessione conn;
 	private MyLogger log;
 
 	public BaseServlet() {
 		log =new MyLogger(this.getClass());
-		final String metodo="sessioneScaduta";
+	}
+
+	public void init(ServletConfig config) throws ServletException {
+		final String metodo="init";
 		log.start(metodo);
-		try {
-			conn = new Connessione(new MyProperties("DbConf.xml"));
-		} catch (Config e) {
-			log.fatal(metodo, "fallito reperimento DbConf.xml", e);
-		}
+		super.init(config);
+		conn = new Connessione(getServletContext());
 		log.end(metodo);
 	}
 
