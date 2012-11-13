@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PlanningDAO extends BaseDao{
@@ -51,7 +50,7 @@ public class PlanningDAO extends BaseDao{
 		final String metodo="getGiornate";
 		log.start(metodo);
 		Month m = new Month(day);
-		String now = new SimpleDateFormat("YYYY-mm-%").format(day.getTime());
+		String now = new SimpleDateFormat("YYYY-MM-%").format(day.getTime());
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		StringBuilder sql = new StringBuilder("select planning.id_planning,");
@@ -71,7 +70,9 @@ public class PlanningDAO extends BaseDao{
 		try {
 			ps = connessione.prepareStatement(sql.toString());
 			ps.setString(1,now);
+			log.debug(metodo,"now:"+now);
 			ps.setInt(2,id_risorsa);
+			log.debug(metodo,"id_risorsa:"+id_risorsa);
 			rs = ps.executeQuery();
 			while (rs.next()){
 				m.addPlanningDTO(

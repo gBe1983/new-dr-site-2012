@@ -55,12 +55,15 @@ public class Month {
 	 * @param p
 	 */
 	public void addPlanningDTO(PlanningDTO p){
+		final String metodo="addPlanningDTO";
+		log.start(metodo);
 		for (Week w : getWeeks()) {
 			if(p.getData().get(Calendar.WEEK_OF_YEAR)==w.getWeekOfYear()){
 				w.addPlanningDTO(p);
 				break;
 			}
 		}
+		log.end(metodo);
 	}
 
 	/**
