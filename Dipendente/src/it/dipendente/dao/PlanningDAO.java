@@ -51,7 +51,7 @@ public class PlanningDAO extends BaseDao{
 		final String metodo="getGiornate";
 		log.start(metodo);
 		Month m = new Month(day);
-		String now = new SimpleDateFormat("YYYY-mm-%").format(day);
+		String now = new SimpleDateFormat("YYYY-mm-%").format(day.getTime());
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		StringBuilder sql = new StringBuilder("select planning.id_planning,");
@@ -66,7 +66,7 @@ public class PlanningDAO extends BaseDao{
 				.append(" where planning.id_associazione=asscommessa.id_associazione")
 				.append(" and asscommessa.id_commessa=commessa.id_commessa")
 				.append(" and planning.data like? and asscommessa.id_risorsa=?")
-				.append("order by data");
+				.append(" order by data");
 		log.debug(metodo,"sql:"+sql.toString());
 		try {
 			ps = connessione.prepareStatement(sql.toString());

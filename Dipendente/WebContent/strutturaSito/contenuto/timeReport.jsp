@@ -18,41 +18,51 @@ SimpleDateFormat sdf=new SimpleDateFormat("d");
 %>
 
 <div class="subtitle"><h2>Consuntivazione<%=m.getMonthLabel()%></h2></div>
-<%for(Week w:m.getWeeks()){%>
+<%
+for(Week w:m.getWeeks()){%>
 <table class="timeReport"><tr><th class="weekHeader" colspan="8">Settimana <%=w.getWeekOfYear()%></th></tr><tr><th class="commesseHeader">Commesse Abilitate</th>
-<%for(Day d:w.getDays()){%>
+<%
+	for(Day d:w.getDays()){%>
 <th class="<%=d.getCssStyle()%>">
-<%=d.getDayLabel()%>
-<%if(d.getDay()!=null){%>
+		<%=d.getDayLabel()%>
+<%
+		if(d.getDay()!=null){%>
 <br>
-<%=sdf.format(d.getDay().getTime())%>
-<%}%>
+			<%=sdf.format(d.getDay().getTime())%>
+<%
+		}%>
 </th>
-<%}%>
+<%
+	}%>
 </tr>
-<%if(w.getCommesse().isEmpty()){%>
+<%
+	if(w.getCommesse().isEmpty()){%>
 <tr><th class="noCommesse" colspan="8">ATTENZIONE, PER TALE SETTIMANA NON RISULTA ALCUNA COMMESSA ASSOCIATA</th></tr>
-<%}else{%>
-<%for(String commessaKey:w.getCommesse().keySet()){%>
+<%
+	}else{
+		for(String commessaKey:w.getCommesse().keySet()){%>
 <tr><th class="commesse"><%=commessaKey%></th>
-<%for(Day d:w.getDays()){%>
+<%
+			for(Day d:w.getDays()){%>
 <td class="<%=d.getCssStyle()%>">
-<%if(d.getDay()!=null){
-	for(PlanningDTO p:(List<PlanningDTO>)w.getCommesse().get(commessaKey)){
-		if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){%>
+<%
+				if(d.getDay()!=null){
+					for(PlanningDTO p:(List<PlanningDTO>)w.getCommesse().get(commessaKey)){
+						if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){%>
 <input type="text" name="<%=d.getDayKey()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore ordinarie" >
-			<%
-			break;
-		}
-	}
-%>
-<br>
-<%=sdf.format(d.getDay().getTime())%>
-<%}%>
+<%
+							break;
+						}
+					}
+				}%>
 </td>
-<%}%>
+<%
+			}%>
 </tr>
-<%}%>
-<%}%>
+<%
+		}
+	}%>
 </table>
-<%}%>
+<%
+}
+%>
