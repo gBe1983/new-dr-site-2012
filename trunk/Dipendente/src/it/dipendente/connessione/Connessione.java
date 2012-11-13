@@ -1,6 +1,8 @@
 package it.dipendente.connessione;
 
-import it.dipendente.util.MyLogger;
+import it.exception.config.Config;
+import it.util.config.MyProperties;
+import it.util.log.MyLogger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,19 +11,35 @@ import java.sql.SQLException;
 public class Connessione {
 	private MyLogger log;
 	private Connection connection;
+	private String url = null;
+	private String dbName = null;
+	private String driver = null;
+	private String userName = null; 
+	private String password = null;
 
-	public Connessione() {
+	public Connessione(MyProperties properties) throws Config {
 		log =new MyLogger(this.getClass());
 		final String metodo="costruttore";
 		log.start(metodo);
+
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			url =				properties.getPropertyValue("url");
+			dbName =		properties.getPropertyValue("dbName");
+			driver =			properties.getPropertyValue("driver");
+			userName =	properties.getPropertyValue("userName");
+			password =	properties.getPropertyValue("password");
+		} catch (Config e) {
+			log.fatal(metodo,"tentativo recupero dati di configurazione da properties",e);
+			throw e;
+		}
+
+		try {
+			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
 			log.fatal(metodo, "driver non caricati", e);
 		}
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://151.1.159.238:3306/drcon860_curriculum","drcon860_DiErre","DiErre2012");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/drcon860_curriculum","root","root");
+			connection = DriverManager.getConnection(url+dbName,userName,password);
 		} catch (SQLException e) {
 			log.fatal(metodo, "connessione fallita", e);
 		}

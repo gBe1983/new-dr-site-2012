@@ -1,15 +1,19 @@
 package it.dipendente.bo;
 
-import it.dipendente.util.MyLogger;
+import it.dipendente.dto.PlanningDTO;
+import it.util.log.MyLogger;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 public class Week {
 	private MyLogger log;
 	private int weekOfYear;
 	private List<Day>days;
+
+	private HashMap<String,List<PlanningDTO>>commesse;
 
 	public Week(int weekOfYear){
 		log =new MyLogger(this.getClass());
@@ -24,6 +28,7 @@ public class Week {
 		days.add(new Day(Calendar.FRIDAY,"Venerdì"));
 		days.add(new Day(Calendar.SATURDAY,"Sabato"));
 		days.add(new Day(Calendar.SUNDAY,"Domenica"));
+		commesse=new HashMap<String,List<PlanningDTO>>();
 		log.end(metodo);
 	}
 
@@ -39,5 +44,24 @@ public class Week {
 	 */
 	public List<Day> getDays() {
 		return days;
+	}
+
+	/**
+	 * @return the commesse
+	 */
+	public HashMap<String, List<PlanningDTO>> getCommesse() {
+		return commesse;
+	}
+
+	/**
+	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
+	 * 2.aggiungo la commessa nella lista associata
+	 * @param p
+	 */
+	public void addPlanningDTO(PlanningDTO p){
+		if(!commesse.containsKey(p.getDescr_attivita())){
+			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
+		}
+		commesse.get(p.getDescr_attivita()).add(p);
 	}
 }

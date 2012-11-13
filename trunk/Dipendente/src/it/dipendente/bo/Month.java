@@ -1,7 +1,7 @@
 package it.dipendente.bo;
 
 import it.dipendente.dto.PlanningDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,13 +17,12 @@ public class Month {
 	private int weeksCnt=0;
 	private List<Week>weeks;
 
-	public Month(){
+	public Month(Calendar day){
 		log =new MyLogger(this.getClass());
 		final String metodo="costruttore";
 		log.start(metodo);
-		Calendar day=Calendar.getInstance();
-		year = day.get(Calendar.YEAR);//???
-		month = day.get(Calendar.MONTH);//???
+		year = day.get(Calendar.YEAR);
+		month = day.get(Calendar.MONTH);
 		monthLabel=new SimpleDateFormat(" MMMMMMMMM YYYY",Locale.ITALIAN).format(day.getTime());
 		while(day.get(Calendar.DAY_OF_MONTH)!=1){
 			day.add(Calendar.DAY_OF_MONTH,-1);
@@ -50,10 +49,18 @@ public class Month {
 		}
 		log.end(metodo);
 	}
-	
-	
+
+	/**
+	 * cerco la settimana a cui aggiungere la commessa, una volta trovata la gli passo la commessa da aggiungere
+	 * @param p
+	 */
 	public void addPlanningDTO(PlanningDTO p){
-		//TODO
+		for (Week w : getWeeks()) {
+			if(p.getData().get(Calendar.WEEK_OF_YEAR)==w.getWeekOfYear()){
+				w.addPlanningDTO(p);
+				break;
+			}
+		}
 	}
 
 	/**
@@ -68,6 +75,20 @@ public class Month {
 	 */
 	public List<Week> getWeeks() {
 		return weeks;
+	}
+
+	/**
+	 * @return the year
+	 */
+	public int getYear() {
+		return year;
+	}
+
+	/**
+	 * @return the month
+	 */
+	public int getMonth() {
+		return month;
 	}
 
 }
