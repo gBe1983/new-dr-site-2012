@@ -1,13 +1,13 @@
 /**
  * 
  */
-package it.configuration;
+package it.util.config;
 
-import it.dipendente.util.MyLogger;
 import it.exception.config.Config;
 import it.exception.config.ConfigFileCreateEx;
 import it.exception.config.ConfigFileNotFound;
 import it.exception.config.ConfigFileNotValid;
+import it.util.log.MyLogger;
 
 import java.io.File;
 import java.io.FileInputStream;

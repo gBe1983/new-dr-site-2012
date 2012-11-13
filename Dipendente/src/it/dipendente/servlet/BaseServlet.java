@@ -1,7 +1,9 @@
 package it.dipendente.servlet;
 
 import it.dipendente.connessione.Connessione;
-import it.dipendente.util.MyLogger;
+import it.exception.config.Config;
+import it.util.config.MyProperties;
+import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +18,14 @@ public class BaseServlet extends HttpServlet {
 
 	public BaseServlet() {
 		log =new MyLogger(this.getClass());
-		conn = new Connessione();
+		final String metodo="sessioneScaduta";
+		log.start(metodo);
+		try {
+			conn = new Connessione(new MyProperties("DbConf.xml"));
+		} catch (Config e) {
+			log.fatal(metodo, "fallito reperimento DbConf.xml", e);
+		}
+		log.end(metodo);
 	}
 
 	protected void sessioneScaduta(HttpServletResponse response){

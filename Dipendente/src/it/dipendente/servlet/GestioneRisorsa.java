@@ -2,7 +2,7 @@ package it.dipendente.servlet;
 
 import it.dipendente.dao.RisorsaDAO;
 import it.dipendente.dto.RisorsaDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.util.Enumeration;

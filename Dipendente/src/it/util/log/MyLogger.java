@@ -1,4 +1,6 @@
-package it.dipendente.util;
+package it.util.log;
+
+import it.util.format.StringFormat;
 
 import org.apache.log4j.Logger;
 

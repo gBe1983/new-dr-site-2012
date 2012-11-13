@@ -1,11 +1,10 @@
 package it.dipendente.servlet;
 
-import it.dipendente.bo.Month;
 import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
 import it.dipendente.dto.PlanningDTO;
 import it.dipendente.dto.RisorsaDTO;
-import it.dipendente.util.MyLogger;
+import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class GestioneReport extends BaseServlet {
 			if(azione.equals("compilaTimeReport")){
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 				//request.setAttribute("month", planningDAO.getGiornate(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa()));
-				request.setAttribute("month", new Month());
+				request.setAttribute("month", planningDAO.getGiornate(57,Calendar.getInstance()));
 				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);
 			}else if(azione.equals("salvaTimeReport")){
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());

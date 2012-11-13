@@ -1,4 +1,4 @@
-package it.dipendente.util;
+package it.util.format;
 
 public class StringFormat {
 	/**
