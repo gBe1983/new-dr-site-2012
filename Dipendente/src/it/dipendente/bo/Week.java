@@ -59,9 +59,12 @@ public class Week {
 	 * @param p
 	 */
 	public void addPlanningDTO(PlanningDTO p){
+		final String metodo="addPlanningDTO";
+		log.start(metodo);
 		if(!commesse.containsKey(p.getDescr_attivita())){
 			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
 		}
 		commesse.get(p.getDescr_attivita()).add(p);
+		log.end(metodo);
 	}
 }

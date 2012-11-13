@@ -62,9 +62,26 @@ public class GestioneReport extends BaseServlet {
 		//if(sessione.getAttribute("utenteLoggato") != null){
 			
 			if(azione.equals("compilaTimeReport")){
+
+				String mese = request.getParameter("mese");
+				String anno = request.getParameter("anno");
+				String risorsa = request.getParameter("risorsa");
+				
+				Calendar when = Calendar.getInstance();
+				if(mese!=null&&anno!=null){
+					when.set(Calendar.MONTH, Integer.parseInt(mese));
+					when.set(Calendar.YEAR, Integer.parseInt(anno));
+				}
+				
+				int idRis=57;
+				if(risorsa!=null){
+					idRis = Integer.parseInt(risorsa);
+				}
+				request.setAttribute("idRis", ""+idRis);
+
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 				//request.setAttribute("month", planningDAO.getGiornate(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa()));
-				request.setAttribute("month", planningDAO.getGiornate(57,Calendar.getInstance()));
+				request.setAttribute("month", planningDAO.getGiornate(idRis,when));
 				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);
 			}else if(azione.equals("salvaTimeReport")){
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
