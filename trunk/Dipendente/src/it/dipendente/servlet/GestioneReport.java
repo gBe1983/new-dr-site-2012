@@ -69,8 +69,8 @@ public class GestioneReport extends BaseServlet {
 				
 				Calendar when = Calendar.getInstance();
 				if(mese!=null&&anno!=null){
-					when.set(Calendar.MONTH, Integer.parseInt(mese));
-					when.set(Calendar.YEAR, Integer.parseInt(anno));
+					timeAdjust(when,Calendar.MONTH,Integer.parseInt(mese));
+					timeAdjust(when,Calendar.YEAR,Integer.parseInt(anno));
 				}
 				
 				int idRis=57;
@@ -78,7 +78,6 @@ public class GestioneReport extends BaseServlet {
 					idRis = Integer.parseInt(risorsa);
 				}
 				request.setAttribute("idRis", ""+idRis);
-
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 				//request.setAttribute("month", planningDAO.getGiornate(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa()));
 				request.setAttribute("month", planningDAO.getGiornate(idRis,when));
@@ -189,5 +188,17 @@ public class GestioneReport extends BaseServlet {
 		//}else{
 		//	sessioneScaduta(response);
 		//}
+	}
+
+/**
+ * 
+ * @param c
+ * @param field
+ * @param fieldValue
+ */
+	private void timeAdjust(Calendar c, int field, int fieldValue) {
+		while(c.get(field)!=fieldValue){
+			c.add(field,(c.get(field)<fieldValue)?1:-1);
+		}
 	}
 }

@@ -3,12 +3,14 @@ package it.dipendente.bo;
 import it.dipendente.dto.PlanningDTO;
 import it.util.log.MyLogger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Week {
+public class Week implements Serializable{
+	private static final long serialVersionUID = -626136607849376533L;
 	private MyLogger log;
 	private int weekOfYear;
 	private List<Day>days;
@@ -33,6 +35,13 @@ public class Week {
 	}
 
 	/**
+	 * @param commesse the commesse to set
+	 */
+	public void setCommesse(HashMap<String, List<PlanningDTO>> commesse) {
+		this.commesse = commesse;
+	}
+
+	/**
 	 * @return the weekOfYear
 	 */
 	public int getWeekOfYear() {
@@ -53,18 +62,19 @@ public class Week {
 		return commesse;
 	}
 
-	/**
-	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
-	 * 2.aggiungo la commessa nella lista associata
-	 * @param p
-	 */
-	public void addPlanningDTO(PlanningDTO p){
-		final String metodo="addPlanningDTO";
-		log.start(metodo);
-		if(!commesse.containsKey(p.getDescr_attivita())){
-			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
-		}
-		commesse.get(p.getDescr_attivita()).add(p);
-		log.end(metodo);
-	}
+//	/**
+//	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
+//	 * 2.aggiungo la commessa nella lista associata
+//	 * @param p
+//	 */
+//	public HashMap<String, List<PlanningDTO>> addPlanningDTO(HashMap<String, List<PlanningDTO>>commesse, PlanningDTO p){
+//		final String metodo="addPlanningDTO";
+//		log.start(metodo);
+//		if(!commesse.containsKey(p.getDescr_attivita())){
+//			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
+//		}
+//		commesse.get(p.getDescr_attivita()).add(p);
+//		log.end(metodo);
+//		return commesse;
+//	}
 }

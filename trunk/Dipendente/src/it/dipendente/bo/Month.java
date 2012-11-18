@@ -3,13 +3,16 @@ package it.dipendente.bo;
 import it.dipendente.dto.PlanningDTO;
 import it.util.log.MyLogger;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class Month {
+public class Month implements Serializable{
+	private static final long serialVersionUID = -3196180487587957038L;
 	private MyLogger log;
 	private int year;
 	private int month;
@@ -51,22 +54,6 @@ public class Month {
 	}
 
 	/**
-	 * cerco la settimana a cui aggiungere la commessa, una volta trovata la gli passo la commessa da aggiungere
-	 * @param p
-	 */
-	public void addPlanningDTO(PlanningDTO p){
-		final String metodo="addPlanningDTO";
-		log.start(metodo);
-		for (Week w : getWeeks()) {
-			if(p.getData().get(Calendar.WEEK_OF_YEAR)==w.getWeekOfYear()){
-				w.addPlanningDTO(p);
-				break;
-			}
-		}
-		log.end(metodo);
-	}
-
-	/**
 	 * @return the monthLabel
 	 */
 	public String getMonthLabel() {
@@ -94,4 +81,36 @@ public class Month {
 		return month;
 	}
 
+	/**
+	 * cerco la settimana a cui aggiungere la commessa, una volta trovata la gli passo la commessa da aggiungere
+	 * @param p
+	 */
+	public void addPlanningDTO(PlanningDTO p){
+		final String metodo="addPlanningDTO";
+		log.start(metodo);
+		for (int i=0;i<weeks.size();i++) {
+			if(p.getData().get(Calendar.WEEK_OF_YEAR)==weeks.get(i).getWeekOfYear()){
+				//weeks.get(i).addPlanningDTO(p);
+				//weeks.get(i).setCommesse(weeks.get(i).addPlanningDTO(weeks.get(i).getCommesse(),p));
+				addPlanningDTO(weeks.get(i).getCommesse(), p);
+				break;
+			}
+		}
+		log.end(metodo);
+	}
+
+	/**
+	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
+	 * 2.aggiungo la commessa nella lista associata
+	 * @param p
+	 */
+	public void addPlanningDTO(HashMap<String, List<PlanningDTO>>commesse, PlanningDTO p){
+		final String metodo="addPlanningDTO";
+		log.start(metodo);
+		if(!commesse.containsKey(p.getDescr_attivita())){
+			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
+		}
+		commesse.get(p.getDescr_attivita()).add(p);
+		log.end(metodo);
+	}
 }
