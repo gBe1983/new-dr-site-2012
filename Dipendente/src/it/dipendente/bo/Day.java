@@ -2,10 +2,12 @@ package it.dipendente.bo;
 
 import it.util.log.MyLogger;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Day {
+public class Day implements Serializable{
+	private static final long serialVersionUID = -2880392876925528519L;
 	private MyLogger log=null;
 	private int dayOfWeek;
 	private String dayLabel=null;
