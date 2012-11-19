@@ -19,13 +19,14 @@ public class Month implements Serializable{
 	private int weeksCnt=0;
 	private List<Week>weeks;
 
-	public Month(Calendar day){
+	public Month(Calendar c){
 		log =new MyLogger(this.getClass());
 		final String metodo="costruttore";
 		log.start(metodo);
+		Calendar day = (Calendar)c.clone();
 		year = day.get(Calendar.YEAR);
 		month = day.get(Calendar.MONTH);
-		monthLabel=new SimpleDateFormat(" MMMMMMMMM YYYY",Locale.ITALIAN).format(day.getTime());
+		monthLabel=new SimpleDateFormat(" MMMMMMMMM yyyy",Locale.ITALIAN).format(day.getTime());
 		while(day.get(Calendar.DAY_OF_MONTH)!=1){
 			day.add(Calendar.DAY_OF_MONTH,-1);
 		}
@@ -87,6 +88,7 @@ public class Month implements Serializable{
 	public void addPlanningDTO(PlanningDTO p){
 		final String metodo="addPlanningDTO";
 		log.start(metodo);
+		log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(p.getData().getTime()));
 		for (int i=0;i<weeks.size();i++) {
 			if(p.getData().get(Calendar.WEEK_OF_YEAR)==weeks.get(i).getWeekOfYear()){
 				weeks.get(i).addPlanningDTO(p);
