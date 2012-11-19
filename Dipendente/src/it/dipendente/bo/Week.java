@@ -62,19 +62,18 @@ public class Week implements Serializable{
 		return commesse;
 	}
 
-//	/**
-//	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
-//	 * 2.aggiungo la commessa nella lista associata
-//	 * @param p
-//	 */
-//	public HashMap<String, List<PlanningDTO>> addPlanningDTO(HashMap<String, List<PlanningDTO>>commesse, PlanningDTO p){
-//		final String metodo="addPlanningDTO";
-//		log.start(metodo);
-//		if(!commesse.containsKey(p.getDescr_attivita())){
-//			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
-//		}
-//		commesse.get(p.getDescr_attivita()).add(p);
-//		log.end(metodo);
-//		return commesse;
-//	}
+	/**
+	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
+	 * 2.aggiungo la commessa nella lista associata
+	 * @param p
+	 */
+	public void addPlanningDTO(PlanningDTO p){
+		final String metodo="addPlanningDTO";
+		log.start(metodo);
+		if(!commesse.containsKey(p.getDescr_attivita())){
+			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
+		}
+		commesse.get(p.getDescr_attivita()).add(p);
+		log.end(metodo);
+	}
 }

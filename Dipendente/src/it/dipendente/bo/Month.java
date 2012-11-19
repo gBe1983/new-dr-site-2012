@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -90,27 +89,11 @@ public class Month implements Serializable{
 		log.start(metodo);
 		for (int i=0;i<weeks.size();i++) {
 			if(p.getData().get(Calendar.WEEK_OF_YEAR)==weeks.get(i).getWeekOfYear()){
-				//weeks.get(i).addPlanningDTO(p);
-				//weeks.get(i).setCommesse(weeks.get(i).addPlanningDTO(weeks.get(i).getCommesse(),p));
-				addPlanningDTO(weeks.get(i).getCommesse(), p);
+				weeks.get(i).addPlanningDTO(p);
 				break;
 			}
 		}
 		log.end(metodo);
 	}
 
-	/**
-	 * 1.se la settimana non contiene la commessa passata, viene creata la lista associata.
-	 * 2.aggiungo la commessa nella lista associata
-	 * @param p
-	 */
-	public void addPlanningDTO(HashMap<String, List<PlanningDTO>>commesse, PlanningDTO p){
-		final String metodo="addPlanningDTO";
-		log.start(metodo);
-		if(!commesse.containsKey(p.getDescr_attivita())){
-			commesse.put(p.getDescr_attivita(),new ArrayList<PlanningDTO>());
-		}
-		commesse.get(p.getDescr_attivita()).add(p);
-		log.end(metodo);
-	}
 }
