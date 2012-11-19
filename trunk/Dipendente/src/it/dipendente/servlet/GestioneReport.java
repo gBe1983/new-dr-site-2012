@@ -7,6 +7,7 @@ import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -68,9 +69,12 @@ public class GestioneReport extends BaseServlet {
 				String risorsa = request.getParameter("risorsa");
 				
 				Calendar when = Calendar.getInstance();
+				log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(when.getTime()));
 				if(mese!=null&&anno!=null){
 					timeAdjust(when,Calendar.MONTH,Integer.parseInt(mese));
+					log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(when.getTime()));
 					timeAdjust(when,Calendar.YEAR,Integer.parseInt(anno));
+					log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(when.getTime()));
 				}
 				
 				int idRis=57;
@@ -79,6 +83,8 @@ public class GestioneReport extends BaseServlet {
 				}
 				request.setAttribute("idRis", ""+idRis);
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
+				log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(when.getTime()));
+				log.debug(metodo, new SimpleDateFormat("yyyy-MM-%").format(when.getTime()));
 				//request.setAttribute("month", planningDAO.getGiornate(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa()));
 				request.setAttribute("month", planningDAO.getGiornate(idRis,when));
 				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);

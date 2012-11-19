@@ -50,7 +50,7 @@ public class PlanningDAO extends BaseDao{
 		final String metodo="getGiornate";
 		log.start(metodo);
 		Month m = new Month(day);
-		String now = new SimpleDateFormat("YYYY-MM-%").format(day.getTime());
+		String now = new SimpleDateFormat("yyyy-MM-%").format(day.getTime());
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		StringBuilder sql = new StringBuilder("select planning.id_planning,");
