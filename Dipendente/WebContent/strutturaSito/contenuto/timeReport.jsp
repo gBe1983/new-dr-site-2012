@@ -101,7 +101,8 @@ for(Week w:m.getWeeks()){%>
 				if(d.getDay()!=null){
 					for(PlanningDTO p:(List<PlanningDTO>)w.getCommesse().get(commessaKey)){
 						if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){%>
-<input type="text" name="<%=d.getDayKey()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore ordinarie" >
+<input type="text" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore ordinarie">
+<input type="text" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore straordinarie">
 <%
 							break;
 						}
