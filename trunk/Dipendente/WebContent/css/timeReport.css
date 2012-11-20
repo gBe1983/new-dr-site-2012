@@ -5,6 +5,7 @@ table.timeReport{
 }
 
 th.weekHeader{
+	font:bold 12px verdana, arial, sans-serif;
 	color:#A1A1A1;
 	background-color:#CCC;
 }
