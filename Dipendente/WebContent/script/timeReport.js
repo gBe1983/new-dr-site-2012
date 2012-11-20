@@ -10,3 +10,18 @@ function validate(evt) {
 		}
 	}
 }
+function checkOrario(input) {
+	if (input.value.length>3) {
+		alert("Attenzione! Il numero di ore inserito:"+input.value+" non è valido.");
+		input.value="0,0";
+		input.focus();
+		return false;
+	}
+	if(input.value>24){
+		alert("Attenzione! Superato il numero massimo di ore per commessa.");
+		input.value="0,0";
+		input.focus();
+		return false;
+	}
+	return true;
+}
