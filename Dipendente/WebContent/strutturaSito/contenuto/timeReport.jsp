@@ -8,7 +8,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-
+<script type="text/javascript" src="script/timeReport.js"></script>
 
 <%
 Month m=(Month)request.getAttribute("month");
@@ -101,8 +101,9 @@ for(Week w:m.getWeeks()){%>
 				if(d.getDay()!=null){
 					for(PlanningDTO p:(List<PlanningDTO>)w.getCommesse().get(commessaKey)){
 						if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){%>
-<input type="text" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore ordinarie">
-<input type="text" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" maxlength="3" class="<%=d.getCssStyle()%>" alt="ore straordinarie">
+<input type="number" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore ordinarie">
+<br>
+<input type="number" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore straordinarie">
 <%
 							break;
 						}

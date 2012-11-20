@@ -49,7 +49,7 @@ input.holiday{
 	background-color:#CCD;
 	text-align:center;
 	vertical-align:top;
-	width: 30px;
+	width: 60px;
 }
 
 th.workDay{
@@ -75,7 +75,7 @@ input.workDay{
 	background-color:white;
 	text-align:center;
 	vertical-align:top;
-	width: 30px;
+	width: 60px;
 }
 
 th.disabledDay{
