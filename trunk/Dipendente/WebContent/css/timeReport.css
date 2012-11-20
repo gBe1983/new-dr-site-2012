@@ -22,47 +22,71 @@ th.commesseHeader{
 
 th.commesse{
 	font:normal 12px verdana, arial, sans-serif;
-	color:#A5B5C5;
+	color:blue;
+	background-color:#E7D6B6;
 }
 
 th.holiday{
+	font:normal 10px verdana, arial, sans-serif;
 	color:red;
 	background-color:#CCD;
 	text-align:center;
 	vertical-align:top;
+	width: 250px;
 }
 
 td.holiday{
+	font:normal 10px verdana, arial, sans-serif;
 	color:red;
 	background-color:#CCD;
 	text-align:center;
 	vertical-align:top;
 }
 
-th.workDay{
-	color:black;
-	background-color:white;
+input.holiday{
+	font:normal 10px verdana, arial, sans-serif;
+	color:red;
+	background-color:#CCD;
 	text-align:center;
 	vertical-align:top;
+	width: 30px;
+}
+
+th.workDay{
+	font:normal 10px verdana, arial, sans-serif;
+	color:black;
+	background-color:#E7D6B6;
+	text-align:center;
+	vertical-align:top;
+	width: 250px;
 }
 
 td.workDay{
+	font:normal 10px verdana, arial, sans-serif;
+	color:black;
+	background-color:#E7D6B6;
+	text-align:center;
+	vertical-align:top;
+}
+
+input.workDay{
+	font:normal 10px verdana, arial, sans-serif;
 	color:black;
 	background-color:white;
 	text-align:center;
 	vertical-align:top;
+	width: 30px;
 }
 
 th.disabledDay{
+	font:normal 10px verdana, arial, sans-serif;
 	color:#A1A1A1;
 	background-color:#DDD;
 	text-align:center;
 	vertical-align:top;
+	width: 250px;
 }
 
 td.disabledDay{
-	color:#A1A1A1;
 	background-color:#DDD;
-	text-align:center;
-	vertical-align:top;
 }
