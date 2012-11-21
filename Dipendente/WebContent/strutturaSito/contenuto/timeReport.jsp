@@ -1,3 +1,4 @@
+<%@page import="it.dipendente.dto.RisorsaDTO"%>
 <%@page import="it.dipendente.enums.Months"%>
 <%@page import="java.util.List"%>
 <%@page import="it.dipendente.dto.PlanningDTO"%>
@@ -11,6 +12,8 @@
 <script type="text/javascript" src="script/timeReport.js"></script>
 
 <%
+List<RisorsaDTO>risorse=(List<RisorsaDTO>)request.getAttribute("risorse");
+
 Month m=(Month)request.getAttribute("month");
 SimpleDateFormat sdf=new SimpleDateFormat("d");
 String idR=(String)request.getAttribute("idRis");
@@ -33,8 +36,8 @@ if(idR!=null){
 			<td>
 				<select name="risorsa">
 <%
-for(int r=0;r<70;r++){%>
-					<option value="<%=r%>"<%if(r==idRis){%> selected="selected"<%}%>><%=r%></option>
+for(int r=0;r<risorse.size();r++){%>
+					<option value="<%=risorse.get(r).getIdRisorsa()%>"<%if(risorse.get(r).getIdRisorsa()==idRis){%> selected="selected"<%}%>><%=risorse.get(r).getCognome()%> <%=risorse.get(r).getNome()%></option>
 <%	
 }
 %>

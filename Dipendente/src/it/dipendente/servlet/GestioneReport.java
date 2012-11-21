@@ -2,6 +2,7 @@ package it.dipendente.servlet;
 
 import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
+import it.dipendente.dao.RisorseDAO;
 import it.dipendente.dto.PlanningDTO;
 import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
@@ -63,6 +64,10 @@ public class GestioneReport extends BaseServlet {
 		//if(sessione.getAttribute("utenteLoggato") != null){
 			
 			if(azione.equals("compilaTimeReport")){
+
+				//TODO START DA RIMUOVERE...
+				request.setAttribute("risorse", new RisorseDAO(conn.getConnection()).getRisorse());
+				//TODO END DA RIMUOVERE...
 
 				String mese = request.getParameter("mese");
 				String anno = request.getParameter("anno");
