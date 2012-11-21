@@ -91,3 +91,45 @@ th.disabledDay{
 td.disabledDay{
 	background-color:#DDD;
 }
+
+td.save{
+	width:100%;
+	background-color:#DDD;
+	text-align: right;
+}
+
+input.save{
+	font:normal 12px verdana, arial, sans-serif;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #006;
+	background-color:#DDD;
+}
+
+input.save:hover {
+	font:normal 12px verdana, arial, sans-serif;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #f00;
+	background: #eef;
+}
+
+input.search{
+	font:normal 12px verdana, arial, sans-serif;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #006;
+	background-color:#DDD;
+}
+
+input.search:hover {
+	font:normal 12px verdana, arial, sans-serif;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border: 1px solid #f00;
+	background: #eef;
+}
