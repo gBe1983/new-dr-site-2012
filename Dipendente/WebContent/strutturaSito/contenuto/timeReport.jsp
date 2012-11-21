@@ -32,6 +32,7 @@ if(idR!=null){
 	<input type="hidden" name="azione" value="compilaTimeReport"/>
 	<table class="timeReportNavigator">
 		<tr>
+<!--TODO START DA RIMUOVERE...-->
 			<td>Risorsa:</td>
 			<td>
 				<select name="risorsa">
@@ -43,6 +44,7 @@ for(int r=0;r<risorse.size();r++){%>
 %>
 				</select>
 			</td>
+<!--TODO END DA RIMUOVERE...-->
 			<td>Mese:</td>
 			<td>
 				<select name="mese">
