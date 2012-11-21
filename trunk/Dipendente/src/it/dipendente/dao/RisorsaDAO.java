@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RisorsaDAO extends BaseDao{
+public class RisorsaDAO extends BaseDao{//TODO CENTRALIZZARE IN UN SOLO METODO IL REPERIMENTO DELLA SINGOLA RISORSA
 	private MyLogger log;
 
 	public RisorsaDAO(Connection connessione) {
@@ -18,48 +18,54 @@ public class RisorsaDAO extends BaseDao{
 	}
 
 	public RisorsaDTO loginRisorsa(int idRisorsa){
+		final String metodo="loginRisorsa";
+		log.start(metodo);
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
-		String sql = "select * from tbl_risorse where id_risorsa = ?";
+		StringBuilder sql = new StringBuilder("SELECT ");
+		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono")
+				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
+				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
+				.append("FROM tbl_risorse WHERE id_risorsa=?");
+		log.debug(metodo,"sql:"+sql.toString());
 		try {
-			ps = connessione.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql.toString());
 			ps.setInt(1, idRisorsa);
 			rs = ps.executeQuery();
 			if(rs.next()){
-				risorsa = new RisorsaDTO();
-				risorsa.setIdRisorsa(rs.getInt(1));
-				risorsa.setCognome(rs.getString(2));
-				risorsa.setNome(rs.getString(3));
-				risorsa.setDataNascita(rs.getString(4));
-				risorsa.setLuogoNascita(rs.getString(5));
-				risorsa.setSesso(rs.getString(6));
-				risorsa.setCodiceFiscale(rs.getString(7));
-				risorsa.setEmail(rs.getString(8));
-				risorsa.setTelefono(rs.getString(9));
-				risorsa.setCellulare(rs.getString(10));
-				risorsa.setFax(rs.getString(11));
-				risorsa.setIndirizzo(rs.getString(12));
-				risorsa.setCitta(rs.getString(13));
-				risorsa.setProvincia(rs.getString(14));
-				risorsa.setCap(rs.getString(15));
-				risorsa.setNazione(rs.getString(16));
-				risorsa.setServizioMilitare(rs.getString(17));
-				risorsa.setPatente(rs.getString(18));
-				risorsa.setCosto(rs.getString(19));
-				risorsa.setOccupato(rs.getBoolean(20));
-				risorsa.setTipoContratto(rs.getString(21));
-				risorsa.setFiguraProfessionale(rs.getString(22));
-				risorsa.setSeniority(rs.getString(23));
-				risorsa.setVisible(rs.getBoolean(24));
-				risorsa.setFlaCreazioneCurriculum(rs.getBoolean(25));
-				risorsa.setCv_visibile(rs.getBoolean(26));
+				risorsa = new RisorsaDTO(	rs.getInt("id_risorsa"),
+														rs.getString("cognome"),
+														rs.getString("nome"),
+														rs.getString("data_nascita"),
+														rs.getString("luogo_nascita"),
+														rs.getString("sesso"),
+														rs.getString("cod_fiscale"),
+														rs.getString("mail"),
+														rs.getString("telefono"),
+														rs.getString("cellulare"),
+														rs.getString("fax"),
+														rs.getString("indirizzo"),
+														rs.getString("citta"),
+														rs.getString("provincia"),
+														rs.getString("cap"),
+														rs.getString("nazione"),
+														rs.getString("servizio_militare"),
+														rs.getString("patente"),
+														rs.getString("costo"),
+														rs.getBoolean("occupato"),
+														rs.getString("tipo_contratto"),
+														rs.getString("figura_professionale"),
+														rs.getString("seniority"),
+														rs.getBoolean("visible"),
+														rs.getBoolean("flag_creazione_cv"),
+														rs.getBoolean("cv_visibile"));
 			}
 		} catch (SQLException e) {
-			// TODO add log4j
-			e.printStackTrace();
+			log.error(metodo, "select tbl_risorse for risorsa:"+idRisorsa, e);
 		}finally{
 			close(ps,rs);
+			log.end(metodo);
 		}
 		return risorsa;
 	}
@@ -69,45 +75,54 @@ public class RisorsaDAO extends BaseDao{
 	 * @return profilo della risorsa in parametro
 	 */
 	public RisorsaDTO visualizzaProfilo(int idRisorsa){
+		final String metodo="visualizzaProfilo";
+		log.start(metodo);
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
-		String sql = "select * from tbl_risorse where id_risorsa = ?";
+		StringBuilder sql = new StringBuilder("SELECT ");
+		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono")
+				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
+				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
+				.append("FROM tbl_risorse WHERE id_risorsa=?");
+		log.debug(metodo,"sql:"+sql.toString());
 		try {
-			ps = connessione.prepareStatement(sql);
+			ps = connessione.prepareStatement(sql.toString());
 			ps.setInt(1, idRisorsa);
 			rs = ps.executeQuery();
 			if(rs.next()){
-				risorsa = new RisorsaDTO();
-				risorsa.setIdRisorsa(rs.getInt(1));
-				risorsa.setCognome(rs.getString(2));
-				risorsa.setNome(rs.getString(3));
-				risorsa.setDataNascita(rs.getString(4));
-				risorsa.setLuogoNascita(rs.getString(5));
-				risorsa.setSesso(rs.getString(6));
-				risorsa.setCodiceFiscale(rs.getString(7));
-				risorsa.setEmail(rs.getString(8));
-				risorsa.setTelefono(rs.getString(9));
-				risorsa.setCellulare(rs.getString(10));
-				risorsa.setFax(rs.getString(11));
-				risorsa.setIndirizzo(rs.getString(12));
-				risorsa.setCitta(rs.getString(13));
-				risorsa.setProvincia(rs.getString(14));
-				risorsa.setCap(rs.getString(15));
-				risorsa.setNazione(rs.getString(16));
-				risorsa.setServizioMilitare(rs.getString(17));
-				risorsa.setPatente(rs.getString(18));
-				risorsa.setCosto(rs.getString(19));
-				risorsa.setOccupato(rs.getBoolean(20));
-				risorsa.setTipoContratto(rs.getString(21));
-				risorsa.setFiguraProfessionale(rs.getString(22));
-				risorsa.setSeniority(rs.getString(23));
+				 risorsa = new RisorsaDTO(	rs.getInt("id_risorsa"),
+														rs.getString("cognome"),
+														rs.getString("nome"),
+														rs.getString("data_nascita"),
+														rs.getString("luogo_nascita"),
+														rs.getString("sesso"),
+														rs.getString("cod_fiscale"),
+														rs.getString("mail"),
+														rs.getString("telefono"),
+														rs.getString("cellulare"),
+														rs.getString("fax"),
+														rs.getString("indirizzo"),
+														rs.getString("citta"),
+														rs.getString("provincia"),
+														rs.getString("cap"),
+														rs.getString("nazione"),
+														rs.getString("servizio_militare"),
+														rs.getString("patente"),
+														rs.getString("costo"),
+														rs.getBoolean("occupato"),
+														rs.getString("tipo_contratto"),
+														rs.getString("figura_professionale"),
+														rs.getString("seniority"),
+														rs.getBoolean("visible"),
+														rs.getBoolean("flag_creazione_cv"),
+														rs.getBoolean("cv_visibile"));
 			}
 		} catch (SQLException e) {
-			// TODO add log4j
-			e.printStackTrace();
+			log.error(metodo, "select tbl_risorse for risorsa:"+idRisorsa, e);
 		}finally{
 			close(ps,rs);
+			log.end(metodo);
 		}
 		return risorsa;
 	}
