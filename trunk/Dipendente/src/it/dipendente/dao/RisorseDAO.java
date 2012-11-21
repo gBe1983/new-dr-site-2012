@@ -43,4 +43,57 @@ public class RisorseDAO extends BaseDao{
 		}
 		return ris;
 	}
+
+	public RisorsaDTO getRisorsa(int idRisorsa){
+		final String metodo="getRisorsa";
+		log.start(metodo);
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		RisorsaDTO risorsa = null;
+		StringBuilder sql = new StringBuilder("SELECT ");
+		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono")
+				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
+				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
+				.append("FROM tbl_risorse WHERE id_risorsa=?");
+		log.debug(metodo,"sql:"+sql.toString());
+		try {
+			ps = connessione.prepareStatement(sql.toString());
+			ps.setInt(1, idRisorsa);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				risorsa = new RisorsaDTO(	rs.getInt("id_risorsa"),
+														rs.getString("cognome"),
+														rs.getString("nome"),
+														rs.getString("data_nascita"),
+														rs.getString("luogo_nascita"),
+														rs.getString("sesso"),
+														rs.getString("cod_fiscale"),
+														rs.getString("mail"),
+														rs.getString("telefono"),
+														rs.getString("cellulare"),
+														rs.getString("fax"),
+														rs.getString("indirizzo"),
+														rs.getString("citta"),
+														rs.getString("provincia"),
+														rs.getString("cap"),
+														rs.getString("nazione"),
+														rs.getString("servizio_militare"),
+														rs.getString("patente"),
+														rs.getString("costo"),
+														rs.getBoolean("occupato"),
+														rs.getString("tipo_contratto"),
+														rs.getString("figura_professionale"),
+														rs.getString("seniority"),
+														rs.getBoolean("visible"),
+														rs.getBoolean("flag_creazione_cv"),
+														rs.getBoolean("cv_visibile"));
+			}
+		} catch (SQLException e) {
+			log.error(metodo, "select tbl_risorse for risorsa:"+idRisorsa, e);
+		}finally{
+			close(ps,rs);
+			log.end(metodo);
+		}
+		return risorsa;
+	}
 }

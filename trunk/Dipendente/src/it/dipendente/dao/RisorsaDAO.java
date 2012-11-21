@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RisorsaDAO extends BaseDao{//TODO CENTRALIZZARE IN UN SOLO METODO IL REPERIMENTO DELLA SINGOLA RISORSA
+public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO per reperire la risorsa
 	private MyLogger log;
 
 	public RisorsaDAO(Connection connessione) {
