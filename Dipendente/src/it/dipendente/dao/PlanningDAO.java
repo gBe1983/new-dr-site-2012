@@ -26,7 +26,7 @@ public class PlanningDAO extends BaseDao{
 	public int aggiornamentoPlanning(PlanningDTO planning){
 		final String metodo="aggiornamentoPlanning";
 		log.start(metodo);
-		String sql = "update tbl_planning set num_ore=?,straordinari=?orario=?,note=? where id_planning=?";
+		String sql = "UPDATE tbl_planning SET num_ore=?,straordinari=?,orario=?,note=? WHERE id_planning=?";
 		log.debug(metodo,"sql:"+sql);
 		PreparedStatement ps=null;
 		try {
@@ -38,7 +38,7 @@ public class PlanningDAO extends BaseDao{
 			ps.setInt(5, planning.getId_planning());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error(metodo, "update tbl_planning for planning:"+planning.toString(), e);
+			log.error(metodo, "update tbl_planning for planning:"+planning.getId_planning(), e);
 		}finally{
 			close(ps);
 			log.end(metodo);

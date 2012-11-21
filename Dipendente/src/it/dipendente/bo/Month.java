@@ -88,7 +88,6 @@ public class Month implements Serializable{
 	public void addPlanningDTO(PlanningDTO p){
 		final String metodo="addPlanningDTO";
 		log.start(metodo);
-		log.debug(metodo, new SimpleDateFormat("yyyy-MM-dd").format(p.getData().getTime()));
 		for (int i=0;i<weeks.size();i++) {
 			if(p.getData().get(Calendar.WEEK_OF_YEAR)==weeks.get(i).getWeekOfYear()){
 				weeks.get(i).addPlanningDTO(p);
