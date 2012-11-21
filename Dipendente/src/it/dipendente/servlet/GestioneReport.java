@@ -4,11 +4,9 @@ import it.dipendente.bo.Month;
 import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
 import it.dipendente.dao.RisorseDAO;
-import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
