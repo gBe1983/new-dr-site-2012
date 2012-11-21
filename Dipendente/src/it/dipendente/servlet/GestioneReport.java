@@ -63,7 +63,7 @@ public class GestioneReport extends BaseServlet {
 		
 		//if(sessione.getAttribute("utenteLoggato") != null){
 			
-			if(azione.equals("compilaTimeReport")){
+			if(azione.equals("compilaTimeReport")||azione.equals("salvaTimeReport")){
 
 				//TODO START DA RIMUOVERE...
 				request.setAttribute("risorse", new RisorseDAO(conn.getConnection()).getRisorse());
