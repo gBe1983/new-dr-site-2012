@@ -13,7 +13,7 @@ public class Day implements Serializable{
 	private String dayLabel=null;
 	private Calendar day=null;
 
-	private static SimpleDateFormat sdf=new SimpleDateFormat("_yyyy_MM_dd");
+	public static SimpleDateFormat sdf=new SimpleDateFormat("_yyyy_MM_dd");
 
 	public Day(int dayOfWeek, String dayLabel) {
 		log =new MyLogger(this.getClass());
