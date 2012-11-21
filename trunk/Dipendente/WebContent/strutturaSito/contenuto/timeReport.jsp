@@ -68,11 +68,13 @@ for(int z=c.get(Calendar.YEAR)-5;z<=c.get(Calendar.YEAR)+5;z++){
 				</select>
 			</td>
 			<td>
-				<input type="submit" value="cerca"/>
+				<input type="submit" value="Cerca" class="search" title="Cerca la consuntivazione"/>
 			</td>
 		</tr>
 	</table>
 </form>
+<form name="timeDetail" action="./GestioneReport" method="post">
+<input type="hidden" name="azione" value="salvaTimeReport"/>
 <%
 for(Week w:m.getWeeks()){%>
 <table class="timeReport"><tr><th class="weekHeader" colspan="8">Settimana <%=w.getWeekOfYear()%></th></tr><tr><th class="commesseHeader">Commesse Abilitate</th>
@@ -123,3 +125,11 @@ for(Week w:m.getWeeks()){%>
 <%
 }
 %>
+<table class="timeReport">
+	<tr>
+		<td class="save">
+			<input type="submit" value="Salva" class="save" title="Salva la consuntivazione di<%=m.getMonthLabel()%>"/>
+		</td>
+	</tr>
+</table>
+</form>
