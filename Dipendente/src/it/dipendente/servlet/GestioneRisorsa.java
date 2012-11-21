@@ -78,39 +78,32 @@ public class GestioneRisorsa extends BaseServlet {
 				
 			}else if(azione.equals("modificaRisorsa")){
 				
-				RisorsaDTO risorsa = new RisorsaDTO();
-				
-				//parte anagrafica
-				risorsa.setCognome(request.getParameter("cognome"));
-				risorsa.setNome(request.getParameter("nome"));
-				risorsa.setDataNascita(request.getParameter("dataNascita"));
-				risorsa.setLuogoNascita(request.getParameter("luogoNascita"));
-				risorsa.setSesso(request.getParameter("sesso"));
-				risorsa.setCodiceFiscale(request.getParameter("codiceFiscale"));
-				risorsa.setEmail(request.getParameter("mail"));
-				risorsa.setTelefono(request.getParameter("telefono"));
-				risorsa.setCellulare(request.getParameter("cellulare"));
-				risorsa.setFax(request.getParameter("fax"));
-				
-				//parte residenza
-				risorsa.setIndirizzo(request.getParameter("indirizzo"));
-				risorsa.setCitta(request.getParameter("citta"));
-				risorsa.setProvincia(request.getParameter("provincia"));
-				risorsa.setCap(request.getParameter("cap"));
-				risorsa.setNazione(request.getParameter("nazione"));
-				risorsa.setServizioMilitare(request.getParameter("militare"));
-				
-				//parte altri dati
-				risorsa.setPatente(request.getParameter("patente"));
-				if(request.getParameter("occupato").equals("si")){
-					risorsa.setOccupato(true);
-				}else{
-					risorsa.setOccupato(false);
-				}
-				risorsa.setFiguraProfessionale(request.getParameter("figuraProfessionale"));
-				risorsa.setSeniority(request.getParameter("seniority"));
-				
-				risorsa.setIdRisorsa(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
+				RisorsaDTO risorsa = new RisorsaDTO(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa(),
+																		request.getParameter("cognome"),
+																		request.getParameter("nome"),
+																		request.getParameter("dataNascita"),
+																		request.getParameter("luogoNascita"),
+																		request.getParameter("sesso"),
+																		request.getParameter("codiceFiscale"),
+																		request.getParameter("mail"),
+																		request.getParameter("telefono"),
+																		request.getParameter("cellulare"),
+																		request.getParameter("fax"),
+																		request.getParameter("indirizzo"),
+																		request.getParameter("citta"),
+																		request.getParameter("provincia"),
+																		request.getParameter("cap"),
+																		request.getParameter("nazione"),
+																		request.getParameter("militare"),
+																		request.getParameter("patente"),
+																		request.getParameter("costo"),
+																		request.getParameter("occupato").equals("si"),
+																		request.getParameter("tipo_contratto"),
+																		request.getParameter("figuraProfessionale"),
+																		request.getParameter("seniority"),
+																		true,
+																		true,
+																		true);
 				
 				String messaggio = rDAO.modificaRisorsa(risorsa);
 				if(messaggio.equals("ok")){
