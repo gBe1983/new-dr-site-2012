@@ -97,4 +97,9 @@ public class Month implements Serializable{
 		log.end(metodo);
 	}
 
+	public boolean isSavable(){
+		Calendar today=Calendar.getInstance();
+		return (year>today.get(Calendar.YEAR)||
+					(year==today.get(Calendar.YEAR)&&month>=today.get(Calendar.MONTH)));
+	}
 }
