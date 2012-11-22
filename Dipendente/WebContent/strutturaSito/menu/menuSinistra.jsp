@@ -111,6 +111,30 @@
 <%
 		}
 		
+		if(request.getParameter("azione").equals("consulenzaOnline") || dispositiva.equals("consulenzaOnline")){
+		%>
+				<div class="newsbox">
+				    <div class="subtitle">Gestione Area</div><br/>
+				    	<li><a href="index.jsp?azione=inserisciEvento" >Inserisci Evento</a></li>
+					<div class="blank"></div>
+					<br><br><br><br><br>
+				</div>
+				<div class="blank"></div>
+		<%
+			}
+			
+		if(request.getParameter("azione").equals("inserisciEvento") || request.getParameter("azione").equals("visualizzaEvento") || request.getParameter("azione").equals("modificaEvento") || dispositiva.equals("inserisciEvento")){
+		%>
+				<div class="newsbox">
+				    <div class="subtitle">Gestione Area</div><br/>
+				    	<li><a href="index.jsp?azione=consulenzaOnline" >Visualizza Calendario</a></li>
+					<div class="blank"></div>
+					<br><br><br><br><br>
+				</div>
+				<div class="blank"></div>
+		<%
+			}
+		
 		if(request.getParameter("azione").equals("cv") || dispositiva.equals("cv")){
 %>
 			<div class="newsbox">

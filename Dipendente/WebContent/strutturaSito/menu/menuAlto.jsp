@@ -13,19 +13,22 @@
 		}
 	%>
 	<div class="logo">	
-		<img src="images/logo_DierreConsulting.bmp">
+		<!-- <img src="images/logo_DierreConsulting.bmp">  -->
 	</div>
 	<div class="space">&nbsp;</div>
 	<%
 	String azione=request.getParameter("azione");
 	%>
-	<div class="menu">
-		<ul>
-			<li><a href="index.jsp?azione=benvenuto"<%if("benvenuto".equals(azione)){out.print(" id='on'");}%>>Home</a></li>
-			<li><a href="./GestioneCurriculum?azione=verificaCreazioneCurriculum&dettaglio=false"<%if("cv".equals(azione)){out.print(" id='on'");}%>>Curriculum Vitae</a></li>
-			<li><a href="./GestioneReport?azione=compilaTimeReport"<%if("TimeReport".equals(azione)){out.print(" id='on'");}%>>Time Report</a></li>
-			<li><a href="index.jsp?azione=areaPrivata"<%if("areaPrivata".equals(azione)){out.print(" id='on'");}%>>Area Privata</a></li>
-			<li><a href="./GestioneRisorsa?azione=logout">Logout</a></li>
-		</ul>
-	</div>	
+	<nav>
+		<div class="menu">
+			<ul>
+				<li><a href="index.jsp?azione=benvenuto"<%if("benvenuto".equals(azione)){out.print(" id='on'");}%>>Home</a></li>
+				<li><a href="./GestioneCurriculum?azione=verificaCreazioneCurriculum&dettaglio=false"<%if("cv".equals(azione)){out.print(" id='on'");}%>>Curriculum Vitae</a></li>
+				<li><a href="./GestioneReport?azione=compilaTimeReport"<%if("TimeReport".equals(azione)){out.print(" id='on'");}%>>Time Report</a></li>
+				<li><a href="index.jsp?azione=areaPrivata"<%if("areaPrivata".equals(azione)){out.print(" id='on'");}%>>Area Privata</a></li>
+				<li><a href="index.jsp?azione=consulenzaOnline" <% if(request.getParameter("azione") != null && request.getParameter("azione").equals("consulenzaOnline")){ out.print("id='on'");} %>>Consulenza Online</a></li>
+				<li><a href="./GestioneRisorsa?azione=logout">Logout</a></li>
+			</ul>
+		</div>
+	</nav>	
 </div>
