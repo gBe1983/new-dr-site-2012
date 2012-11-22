@@ -36,13 +36,13 @@ div#footer li{display:inline; list-style-type:none;padding:0 10px}
 .shadow {-moz-box-shadow: 0 0 10px 1px #CCC; -webkit-box-shadow: 0 0 10px 1px #CCC;box-shadow: 0 0 10px 1px #CCC;}
 
 /*CSS principale per il menu*/
-.logo {position:relative;float:left;}
+.logo {position:relative;float:left; background-image: url(../images/logo_DierreConsulting.bmp); background-repeat: no-repeat; width: 1152px; height: 100px;}
 .logo img{text-align:center;margin: 0 auto;}
 nav {	position:relative;text-align:right;background:#eee;color: #000;border-top:1px solid #ccc !important;border-bottom:1px solid #ccc !important;height:40px; padding:0px; margin: 0px;}
 .menu ul{    margin: 0;    float: right}
 .menu ul li{    display: inline;}
 .menu ul li a{    float: left; text-decoration: none;    color: #a1a1a1;    padding: 10.5px 11px;  height:18px;}
-.menu ul li a:hover, .menu ul li .current{    color: #fff;    background:#a1a1a1;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
+.menu ul li a:hover, .menu ul li .current{    color: #fff;    background:#a1a1a1;-moz-border-radius: 10px;-webkit-border-radius: 10px; border-radius: 10px ;}
 
 .creaCvVoci{visible:hidden;display: none;}
 
@@ -103,3 +103,6 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 #visualizzaReport{width: 880px;}
 
 .spazio{margin-top: 70px;}
+
+/* calendario */
+#calendar { width: 800px; margin: 0 auto; }

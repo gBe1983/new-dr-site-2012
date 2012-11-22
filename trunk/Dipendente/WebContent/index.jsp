@@ -9,14 +9,23 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
+
+		<!-- fogli di stile -->
 		<link rel="stylesheet" type="text/css" href="css/Dr_Style.css">
 		<link rel="stylesheet" type="text/css" href="css/Dr_Demo.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css">
 		<link rel="stylesheet" type="text/css" href="css/menuRisorsa.css">
 		<link rel="stylesheet" type="text/css" href="css/visualizzaCurriculum.css">
 		<link rel="stylesheet" type="text/css" href="css/timeReport.css">
-		<script type="text/javascript" src="script/jquery-1.3.2.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/fullcalendar.css">
+
+		<!-- javascript -->
+		<script type="text/javascript" src="script/jquery-1.8.1.min.js"></script>
 		<script type="text/javascript" src="script/controlloForm.js"></script>
+		<script type="text/javascript" src="script/jquery-ui-1.8.23.custom.min.js"></script>
+		<script type="text/javascript" src="script/fullcalendar.min.js"></script>
+		<script type="text/javascript" src="script/caricamentoEventi.js"></script>
+
 	</head>
 	<body class="home">
 		<div id="container" class="shadow">
@@ -76,12 +85,20 @@
 			<%
 					}else if(azione.equals("modificaSingoliCampiCurriculum")){
 			%>
-					<%@include file="strutturaSito/contenuto/modificaSingoliCampiCurriculum.jsp" %>
+						<%@include file="strutturaSito/contenuto/modificaSingoliCampiCurriculum.jsp" %>
 			<%
 					}else if(azione.equals("visualizzaCurriculumRisorsa")){
 			%>	
-					
+						<%@include file="strutturaSito/contenuto/visualizzaCurriculumRisorsa.jsp" %>
 			<%
+					}else if(azione.equals("consulenzaOnline")){
+		    %>	
+						<%@include file="strutturaSito/contenuto/consulenzaOnline.jsp" %>
+			<%  
+					}else if(azione.equals("inserisciEvento") || azione.equals("visualizzaEvento") || azione.equals("modificaEvento")){
+		    %>	
+						<%@include file="strutturaSito/contenuto/inserisciEvento.jsp" %>
+			<%  
 					}else if(azione.equals("dettaglioSingoliCampiCurriculum")){
 			%>	
 					<%@include file="strutturaSito/contenuto/dettaglioSingoliCampiCurriculum.jsp" %>
