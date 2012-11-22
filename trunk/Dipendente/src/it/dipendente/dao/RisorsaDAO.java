@@ -81,7 +81,7 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
 		StringBuilder sql = new StringBuilder("SELECT ");
-		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono")
+		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,")
 				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
 				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
 				.append("FROM tbl_risorse WHERE id_risorsa=?");
