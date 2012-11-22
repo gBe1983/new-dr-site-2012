@@ -57,7 +57,12 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>DB.driver</param-name>
 		<param-value>com.mysql.jdbc.Driver</param-value>
