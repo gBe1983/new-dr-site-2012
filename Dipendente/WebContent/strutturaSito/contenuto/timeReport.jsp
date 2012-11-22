@@ -12,18 +12,9 @@
 <script type="text/javascript" src="script/timeReport.js"></script>
 
 <%
-List<RisorsaDTO>risorse=(List<RisorsaDTO>)request.getAttribute("risorse");
-
 Month m=(Month)request.getAttribute("month");
 SimpleDateFormat sdf=new SimpleDateFormat("d");
-String idR=(String)request.getAttribute("idRis");
-int idRis=57;
-if(idR!=null){
-	idRis=Integer.parseInt(idR);
-}
-//TODO RIPRISTINARE CONTROLLO UTENTE LOGGATO
-//HttpSession controlloUtenteLoggato = request.getSession();
-//if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
+if(request.getSession().getAttribute("utenteLoggato") != null){
 %>
 
 <div class="subtitle"><h2>Consuntivazione<%=m.getMonthLabel()%></h2></div>
@@ -32,19 +23,6 @@ if(idR!=null){
 	<input type="hidden" name="azione" value="compilaTimeReport"/>
 	<table class="timeReportNavigator">
 		<tr>
-<!--TODO START DA RIMUOVERE...-->
-			<td>Risorsa:</td>
-			<td>
-				<select name="risorsa">
-<%
-for(int r=0;r<risorse.size();r++){%>
-					<option value="<%=risorse.get(r).getIdRisorsa()%>"<%if(risorse.get(r).getIdRisorsa()==idRis){%> selected="selected"<%}%>><%=risorse.get(r).getCognome()%> <%=risorse.get(r).getNome()%></option>
-<%	
-}
-%>
-				</select>
-			</td>
-<!--TODO END DA RIMUOVERE...-->
 			<td>Mese:</td>
 			<td>
 				<select name="mese">
@@ -130,8 +108,23 @@ for(Week w:m.getWeeks()){%>
 <table class="timeReport">
 	<tr>
 		<td class="save">
+<%
+if(m.isSavable()){
+%>
 			<input type="submit" value="Salva" class="save" title="Salva la consuntivazione di<%=m.getMonthLabel()%>"/>
+<%
+}
+%>
 		</td>
 	</tr>
 </table>
 </form>
+<%
+}else{
+%>
+	<script type="text/javascript">
+		controlloSessioneAttiva();
+	</script>
+<%
+}
+%>
