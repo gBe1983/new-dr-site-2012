@@ -142,12 +142,7 @@ public class GestioneRisorsa extends BaseServlet {
 					}
 				}
 				
-				if(sessione.getAttribute("modalitaDiConnessione").equals("cvonline")){;
-					response.sendRedirect("http://cvonline.tv");
-				}else{
-					response.sendRedirect("http://drconsulting.tv");
-				}
-			
+				response.sendRedirect("http://drconsulting.tv");
 			}
 		}else{
 			sessioneScaduta(response);
