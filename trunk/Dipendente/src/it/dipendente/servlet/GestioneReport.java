@@ -4,7 +4,7 @@ import it.dipendente.bo.Day;
 import it.dipendente.bo.Month;
 import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
-import it.dipendente.dao.RisorseDAO;
+import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
 
 import java.io.IOException;
@@ -53,13 +53,9 @@ public class GestioneReport extends BaseServlet {
 		HttpSession sessione = request.getSession();
 		String azione = request.getParameter("azione");
 
-		//if(sessione.getAttribute("utenteLoggato") != null){//TODO RIPRISTINARE!
-			int idRis=57;//TODO RIPRISTINARE!((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa();
+		if(sessione.getAttribute("utenteLoggato") != null){
+			int idRis=((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa();
 			if(azione.equals("compilaTimeReport")||azione.equals("salvaTimeReport")){
-
-				//TODO START DA RIMUOVERE...
-				request.setAttribute("risorse", new RisorseDAO(conn.getConnection()).getRisorse());
-				//TODO END DA RIMUOVERE...
 
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 
@@ -102,14 +98,6 @@ public class GestioneReport extends BaseServlet {
 					timeAdjust(when,Calendar.YEAR,Integer.parseInt(anno));
 				}
 
-				//TODO START DA RIMUOVERE...
-				String risorsa = request.getParameter("risorsa");
-				if(risorsa!=null){
-					idRis = Integer.parseInt(risorsa);
-				}
-				request.setAttribute("idRis", ""+idRis);
-				//TODO END DA RIMUOVERE...
-
 				Month month =planningDAO.getGiornate(idRis,when);
 
 				request.setAttribute("month", month);//4 display
@@ -133,9 +121,9 @@ public class GestioneReport extends BaseServlet {
 						.forward(request,response);
 
 			}
-		//}else{//TODO RIPRISTINARE
-		//	sessioneScaduta(response);
-		//}
+		}else{
+			sessioneScaduta(response);
+		}
 	}
 
 /**
