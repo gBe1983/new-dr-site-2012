@@ -10,7 +10,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 	<h2>Visualizza Calendario</h2>
 </div>
 
-<p class="spazio" align="center"><a href="http://drconsulting.tv/Chat/index.php?azione=login&tipoUtenza=admin" />Entra in Chat</a></p>
+<p class="spazio" align="center"><a href="http://drconsulting.tv/Chat/index.php?azione=login&tipoUtenza=admin" target="_blank"/>Entra in Chat</a></p>
 
 <script type='text/javascript'>
 
