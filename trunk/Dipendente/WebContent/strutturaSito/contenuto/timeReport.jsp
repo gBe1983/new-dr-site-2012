@@ -21,7 +21,6 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 
 <form name="navigatore" action="./GestioneReport" method="post">
 	<input type="hidden" name="azione" value="compilaTimeReport"/>
-	<input type="hidden" name="<%=request.getRealPath("/")%>" value="<%=request.getRealPath("/")%>"/>
 	<table class="timeReportNavigator">
 		<tr>
 			<td>Mese:</td>
