@@ -109,11 +109,11 @@ for(Week w:m.getWeeks()){%>
 	<tr>
 		<td class="save">
 <%
-if(m.isSavable()){
+//if(m.isSavable()){
 %>
 			<input type="submit" value="Salva" class="save" title="Salva la consuntivazione di<%=m.getMonthLabel()%>"/>
 <%
-}
+//}
 %>
 		</td>
 	</tr>
