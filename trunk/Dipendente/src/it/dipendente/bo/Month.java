@@ -98,6 +98,7 @@ public class Month implements Serializable{
 	}
 
 	public boolean isSavable(){
+		//TODO IMPLEMENTARE LA MODIFICA CHE VERIFICA SE IL MESE RISULTA CHIUSO
 		Calendar today=Calendar.getInstance();
 		return (year>today.get(Calendar.YEAR)||
 					(year==today.get(Calendar.YEAR)&&month>=today.get(Calendar.MONTH)));
