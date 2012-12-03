@@ -55,6 +55,7 @@ public class GestioneReport extends BaseServlet {
 
 		if(sessione.getAttribute("utenteLoggato") != null){
 			int idRis=((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa();
+			
 			if(azione.equals("compilaTimeReport")||azione.equals("salvaTimeReport")){
 
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
@@ -104,6 +105,7 @@ public class GestioneReport extends BaseServlet {
 				sessione.setAttribute("month", month);//4 save
 
 				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);
+				
 			}else if(azione.equals("caricamentoCommesse")){//TODO ... CAPIRE DOVE UTILIZZATO E SE SERVE ANCORA
 				Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO(conn.getConnection());
 				//qua mi carico le commesse attive legate alla risorsa
