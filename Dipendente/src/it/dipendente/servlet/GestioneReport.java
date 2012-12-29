@@ -110,7 +110,9 @@ public class GestioneReport extends BaseServlet {
 
 				if(azione.equals("salvaTimeReport")){
 					try {
-						mail.sendMail(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getEmail(), "Aggiornamento Time Report "+month.getMonthLabel(), month.getBodyMail());
+						mail.sendMail(	((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getEmail(),
+										"Aggiornamento Time Report"+month.getMonthLabel(),
+										month.getBodyMail());
 					} catch (Exception e) {
 						log.error(metodo, "invio mail time report", e);
 					}
