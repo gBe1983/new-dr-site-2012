@@ -1,6 +1,7 @@
 package it.dipendente.servlet;
 
 import it.dipendente.connessione.Connessione;
+import it.mail.Email;
 import it.util.log.MyLogger;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = -5802799487512842108L;
 	protected Connessione conn;
+	protected Email mail;
 	private MyLogger log;
 
 	public BaseServlet() {
@@ -25,6 +27,7 @@ public class BaseServlet extends HttpServlet {
 		log.start(metodo);
 		super.init(config);
 		conn = new Connessione(getServletContext());
+		mail = new Email(getServletContext());
 		log.end(metodo);
 	}
 
