@@ -3,14 +3,12 @@ package it.dipendente.bo;
 import it.dipendente.dto.PlanningDTO;
 import it.util.log.MyLogger;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class Week implements Serializable{
-	private static final long serialVersionUID = -626136607849376533L;
+public class Week{
 	private MyLogger log;
 	private int weekOfYear;
 	private List<Day>days;

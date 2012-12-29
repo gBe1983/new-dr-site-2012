@@ -2,12 +2,10 @@ package it.dipendente.bo;
 
 import it.util.log.MyLogger;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Day implements Serializable{
-	private static final long serialVersionUID = -2880392876925528519L;
+public class Day{
 	private MyLogger log=null;
 	private int dayOfWeek;
 	private String dayLabel=null;
@@ -49,5 +47,12 @@ public class Day implements Serializable{
 
 	public String getCssStyle() {
 		return (day!=null)?((day.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY||day.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)?"holiday":"workDay"):"disabledDay";
+	}
+	public String getInLineStyle() {
+		return "font:normal 10px verdana, arial, sans-serif;text-align:center;vertical-align:top;background:"+(
+				(day!=null)?((day.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY||day.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)?
+				"#CCD;color:red;"://holiday
+				"#E7D6B6;color:black;")://workDay
+				"#DDD;color:#A1A1A1;");//disabledDay
 	}
 }
