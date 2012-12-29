@@ -21,7 +21,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 
 <form name="navigatore" action="./GestioneReport" method="post">
 	<input type="hidden" name="azione" value="compilaTimeReport"/>
-	<table class="timeReportNavigator">
+	<table class="timeReportNavigator" align="center">
 		<tr>
 			<td>Mese:</td>
 			<td>
@@ -55,9 +55,13 @@ for(int z=c.get(Calendar.YEAR)-5;z<=c.get(Calendar.YEAR)+5;z++){
 </form>
 <form name="timeDetail" action="./GestioneReport" method="post">
 <input type="hidden" name="azione" value="salvaTimeReport"/>
+<table class="timeReport" align="center">
 <%
+double totOreOrd=0;
+double totOreStr=0;
+int cnt=0;
 for(Week w:m.getWeeks()){%>
-<table class="timeReport"><tr><th class="weekHeader" colspan="8">Settimana <%=w.getWeekOfYear()%></th></tr><tr><th class="commesseHeader">Commesse Abilitate</th>
+<tr><th class="weekHeader" colspan="8" onclick="cambiaVisibilitaCommesseInterne('<%=w.getWeekOfYear()%>');">Settimana <%=w.getWeekOfYear()%></th></tr><tr><th class="commesseHeader">Commesse Abilitate</th>
 <%
 	for(Day d:w.getDays()){%>
 <th class="<%=d.getCssStyle()%>">
@@ -77,18 +81,30 @@ for(Week w:m.getWeeks()){%>
 <tr><th class="noCommesse" colspan="8">ATTENZIONE, PER TALE SETTIMANA NON RISULTA ALCUNA COMMESSA ASSOCIATA</th></tr>
 <%
 	}else{
-		for(String commessaKey:w.getCommesse().keySet()){%>
-<tr><th class="commesse"><%=commessaKey%></th>
+		cnt=0;
+		for(String commessaKey:w.getCommesse().keySet()){
+			boolean isInterna=false;
+			List<PlanningDTO>tmps=(List<PlanningDTO>)w.getCommesse().get(commessaKey);
+			if(!tmps.isEmpty()){
+				isInterna=tmps.get(0).isInterna();
+			}
+%>
+<tr <%if(isInterna){%>id="interna_<%=w.getWeekOfYear()%>_<%=cnt++%>" style="display:none;"<%}%>>
+<th class="commesse"><%=commessaKey%></th>
 <%
 			for(Day d:w.getDays()){%>
 <td class="<%=d.getCssStyle()%>">
 <%
 				if(d.getDay()!=null){
 					for(PlanningDTO p:(List<PlanningDTO>)w.getCommesse().get(commessaKey)){
-						if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){%>
-<input type="number" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore ordinarie" onchange="checkOrario(this)">
-<br>
-<input type="number" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore straordinarie" onchange="checkOrario(this)">
+						if(p.getData().get(Calendar.DAY_OF_MONTH)==d.getDay().get(Calendar.DAY_OF_MONTH)){
+							totOreOrd+=p.getNumeroOre();
+							totOreStr+=p.getStraordinari();
+%>
+<table align="center">
+<tr><td><input type="number" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore ordinarie" onchange="checkOrario(this)"></td></tr>
+<tr><td><input type="number" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore straordinarie" onchange="checkOrario(this)"></td></tr>
+</table>
 <%
 							break;
 						}
@@ -101,19 +117,23 @@ for(Week w:m.getWeeks()){%>
 <%
 		}
 	}%>
-</table>
 <%
 }
 %>
-<table class="timeReport">
 	<tr>
-		<td class="save">
+		<td class="totaliDx">Ore ordinarie:</td>
+		<td class="totaliSx"><%=totOreOrd%></td>
+		<td class="totaliDx">Ore straordinarie:</td>
+		<td class="totaliSx"><%=totOreStr%></td>
+		<td class="totaliDx">Totale:</td>
+		<td class="totaliSx"><%=totOreOrd+totOreStr%></td>
+		<td class="save" colspan="2">
 <%
-//if(m.isSavable()){
+if(m.isSavable()){
 %>
 			<input type="submit" value="Salva" class="save" title="Salva la consuntivazione di<%=m.getMonthLabel()%>"/>
 <%
-//}
+}
 %>
 		</td>
 	</tr>
