@@ -32,3 +32,14 @@ function checkOrario(input) {
 	}
 	return true;
 }
+function cambiaVisibilitaCommesseInterne(weekOfYear) {
+	var e=null;
+	for(var s=0;s<10;s++){
+		e = document.getElementById("interna_"+weekOfYear+"_"+s);
+		if(e!=null){
+			e.style.display=e.style.display == "none"?"":"none";
+		}else{
+			break;
+		}
+	}
+}
