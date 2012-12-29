@@ -1,13 +1,21 @@
+table.timeReportNavigator{
+	border: 1;
+	width:45%;
+	border-color:#A1A1A1;
+	align:"center";
+}
+
 table.timeReport{
 	border: 1;
 	width:95%;
 	border-color:#A1A1A1;
+	align:"center";
 }
 
 th.weekHeader{
 	font:bold 12px verdana, arial, sans-serif;
 	color:#A1A1A1;
-	background-color:#CCC;
+	background:#CCC url('../images/lens.png') no-repeat left top;
 }
 
 th.noCommesse{
@@ -92,8 +100,21 @@ td.disabledDay{
 	background-color:#DDD;
 }
 
+td.totaliDx{
+	background-color:#DDD;
+	text-align: right;
+	font:normal 10px verdana, arial, sans-serif;
+	color:red;
+}
+
+td.totaliSx{
+	background-color:#DDD;
+	text-align: left;
+	font:normal 10px verdana, arial, sans-serif;
+	color:red;
+}
+
 td.save{
-	width:100%;
 	background-color:#DDD;
 	text-align: right;
 }
