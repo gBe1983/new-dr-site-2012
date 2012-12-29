@@ -2,7 +2,6 @@ package it.dipendente.servlet;
 
 import it.dipendente.bo.Day;
 import it.dipendente.bo.Month;
-import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
 import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
@@ -71,6 +70,7 @@ public class GestioneReport extends BaseServlet {
 						String ord;
 						String str;
 						String keyDay;
+						boolean saveOk=true;
 						for(int w=0;w<month.getWeeks().size();w++){
 							for(String descrAttivita:month.getWeeks().get(w).getCommesse().keySet()){
 								for(int p=0;p<month.getWeeks().get(w).getCommesse().get(descrAttivita).size();p++){
@@ -83,10 +83,14 @@ public class GestioneReport extends BaseServlet {
 									if(!StringUtils.isEmpty(str)){
 										month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).setStraordinari(Double.parseDouble(str.replace(",", ".")));
 									}
-									planningDAO.aggiornamentoPlanning(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p));
+									if(planningDAO.aggiornamentoPlanning(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p))==0){
+										saveOk=false;
+										log.warn(metodo, "Salvataggio time report anomalo");
+									}
 								}
 							}
 						}
+						request.setAttribute("msg", saveOk?"Salvataggio riuscito.":"Attenzione, salvataggio fallito.");
 					}
 				}else{
 					mese = request.getParameter("mese");
@@ -104,24 +108,14 @@ public class GestioneReport extends BaseServlet {
 				request.setAttribute("month", month);//4 display
 				sessione.setAttribute("month", month);//4 save
 
-				getServletContext().getRequestDispatcher("/index.jsp?azione=compilaTimeReport").forward(request, response);
-
-			}else if(azione.equals("caricamentoCommesse")){//TODO ... CAPIRE DOVE UTILIZZATO E SE SERVE ANCORA
-				Associaz_Risors_Comm_DAO rDAO = new Associaz_Risors_Comm_DAO(conn.getConnection());
-				//qua mi carico le commesse attive legate alla risorsa
-				request.setAttribute("listaCommesseAttive",
-											rDAO.caricamentoCommesseAttive(idRis));
-				// qua mi carico le commesse non attive legate alla risorsa
-				request.setAttribute("listaCommesseNonAttive",
-											rDAO.caricamentoCommesseNonAttive(idRis));
-				//qua mi carico le commesse di tipologia "Altro" per veficare quali sono legate alla risorsa
-				request.setAttribute("commesseRisorse",
-											rDAO.caricamentoCommesseAssociateRisorse(idRis));
-
-				getServletContext()
-					.getRequestDispatcher("/index.jsp?azione=TimeReport&dispositiva=TimeReport")
-						.forward(request,response);
-
+				if(azione.equals("salvaTimeReport")){
+					try {
+						mail.sendMail(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getEmail(), "Aggiornamento Time Report "+month.getMonthLabel(), month.getBodyMail());
+					} catch (Exception e) {
+						log.error(metodo, "invio mail time report", e);
+					}
+				}
+				getServletContext().getRequestDispatcher("/main.jsp?azione=compilaTimeReport").forward(request, response);
 			}
 		}else{
 			sessioneScaduta(response);
