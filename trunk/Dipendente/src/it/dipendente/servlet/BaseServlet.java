@@ -6,16 +6,21 @@ import it.util.log.MyLogger;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = -5802799487512842108L;
 	protected Connessione conn;
 	protected Email mail;
+	protected Properties prop;
 	private MyLogger log;
 
 	public BaseServlet() {
@@ -26,8 +31,18 @@ public class BaseServlet extends HttpServlet {
 		final String metodo="init";
 		log.start(metodo);
 		super.init(config);
-		conn = new Connessione(getServletContext());
-		mail = new Email(getServletContext());
+		ServletContext servletContext = getServletContext();
+		conn = new Connessione(servletContext);
+		mail = new Email(servletContext);
+		initProperties(servletContext);
+		log.end(metodo);
+	}
+
+	private void initProperties(ServletContext servletContext) throws ServletException {
+		final String metodo="initProperties";
+		log.start(metodo);
+		prop=new Properties();
+		prop.setProperty("siteUrl", servletContext.getInitParameter("siteUrl"));
 		log.end(metodo);
 	}
 
@@ -64,5 +79,19 @@ public class BaseServlet extends HttpServlet {
 		}finally{
 			log.end(metodo);
 		}
+	}
+
+
+	protected void clearSession(HttpSession session) {
+		final String metodo="clearSession";
+		log.start(metodo);
+		Enumeration<String> attrNames = session.getAttributeNames();
+		String valoriSessione;
+		while (attrNames.hasMoreElements()){
+				valoriSessione = (String) attrNames.nextElement();
+				session.removeAttribute(valoriSessione);
+				log.debug(metodo, valoriSessione);
+		}
+		log.end(metodo);
 	}
 }
