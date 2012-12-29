@@ -15,8 +15,7 @@ public class PlanningDTO {
 	private String note;
 	private boolean attivo;
 	private boolean commessaAttiva;
-
-	private boolean hasOvertime;
+	private String codiceCommessa;
 
 	public PlanningDTO() {}
 	public PlanningDTO(int id_planning,
@@ -26,8 +25,8 @@ public class PlanningDTO {
 						String orario,
 						String note,
 						int id_associazione,
-						String descr_attivita
-						){
+						String descr_attivita,
+						String codiceCommessa){
 		this.id_planning=id_planning;
 		this.data=Calendar.getInstance();
 		this.data.setTime(data);
@@ -37,6 +36,7 @@ public class PlanningDTO {
 		this.note=note;
 		this.id_associazione=id_associazione;
 		this.descr_attivita=descr_attivita;
+		this.codiceCommessa=codiceCommessa;
 	}
 
 	/**
@@ -160,18 +160,15 @@ public class PlanningDTO {
 		this.commessaAttiva = commessaAttiva;
 	}
 	/**
-	 * @return the hasOvertime
+	 * @return the codiceCommessa
 	 */
-	public boolean isHasOvertime() {
-		return hasOvertime;
-	}
-	/**
-	 * @param hasOvertime the hasOvertime to set
-	 */
-	public void setHasOvertime(boolean hasOvertime) {
-		this.hasOvertime = hasOvertime;
+	public String getCodiceCommessa() {
+		return codiceCommessa;
 	}
 
+	public boolean isInterna(){
+		return codiceCommessa.toUpperCase().contains("IN");
+	}
 	public String toString(){
 		return new StringBuilder("id_associazione[")
 						.append(id_associazione)
