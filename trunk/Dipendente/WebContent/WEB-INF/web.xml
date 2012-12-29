@@ -121,6 +121,13 @@
 		<param-value>javax.net.ssl.SSLSocketFactory</param-value>
 	</context-param>
 
+
+	<context-param>
+		<param-name>siteUrl</param-name>
+		<param-value>http://drconsulting.tv</param-value>
+		<!-- <param-value>http://cvonline.tv</param-value> -->
+	</context-param>
+
 <!--
 prod 1
 	<context-param>
