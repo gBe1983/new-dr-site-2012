@@ -10,9 +10,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 %>
 
 
-<div class="subtitle ">
-	<h2>Inserimento Evento</h2>
-</div>
+<div class="subtitle">Inserimento Evento</div>
 
 
 <form action="./GestioneCalendarioEventi" method="post">
@@ -112,9 +110,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 			EventoDTO evento = (EventoDTO) request.getAttribute("evento");
 %>
 			
-			<div class="subtitle ">
-				<h2>Visualizza Evento</h2>
-			</div>
+			<div class="subtitle ">Visualizza Evento</div>
 			
 			<div id="bluemenu" class="bluetabs">
 				<ul>
@@ -156,9 +152,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 		}else if(azioneCorrente.equals("modificaEvento")){
 			EventoDTO evento = (EventoDTO) request.getAttribute("evento");
 %>
-			<div class="subtitle ">
-				<h2>Modifica Evento</h2>
-			</div>
+			<div class="subtitle ">Modifica Evento</div>
 			
 			<div id="bluemenu" class="bluetabs">
 				<ul>

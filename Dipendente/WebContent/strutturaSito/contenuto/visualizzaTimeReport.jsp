@@ -13,9 +13,7 @@
 	if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 %>
 
-<div class="subtitle ">
-	<h2>Consultivazione Commesse</h2>
-</div>
+<div class="subtitle">Consultivazione Commesse</div>
 <p>
 	In questa sezione potrete gestire la consultivazione delle ore del mese corrente e sia dei mesi precedenti. 
 	In caso in cui i mesi precedenti non fossero consultivabili contattare l'amministratore per ulteriori dettagli in merito.

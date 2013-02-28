@@ -10,7 +10,21 @@ public class EventoDTO {
 	private String url;
 	private String oraInizio;
 	private String oraFine;
-	
+	private String nominativo;
+	private String className;
+		
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
+	public String getNominativo() {
+		return nominativo;
+	}
+	public void setNominativo(String nominativo) {
+		this.nominativo = nominativo;
+	}
 	public String getOraInizio() {
 		return oraInizio;
 	}

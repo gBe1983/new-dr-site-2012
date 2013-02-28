@@ -6,9 +6,7 @@ HttpSession controlloUtenteLoggato = request.getSession();
 if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 %>
 
-<div class="subtitle ">
-	<h2>Modifica Password</h2>
-</div>
+<div class="subtitle">Modifica Password</div>
 
 <fieldset class="spazio">
 	<legend>Modifcica Password</legend>

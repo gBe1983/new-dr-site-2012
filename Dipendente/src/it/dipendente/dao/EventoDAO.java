@@ -71,13 +71,16 @@ public class EventoDAO extends BaseDao{
 			while(rs.next()){
 				EventoDTO evento = new EventoDTO();
 				evento.setId(rs.getInt(1));
-				evento.setTitle(rs.getString(2) + " - " + caricamentoNominativo(rs.getInt(7)));
+				evento.setTitle(rs.getString(2));
 				evento.setStart(formattazioneSql.format(formattazioneSql.parse(rs.getString(3))));
 				evento.setEnd(formattazioneSql.format(formattazioneSql.parse(rs.getString(4))));
+				evento.setNominativo(caricamentoNominativo(rs.getInt(7)));
 				if(id_risorsa == rs.getInt(7)){
 					evento.setUrl("./GestioneCalendarioEventi?azione=visualizzaEvento&evento="+rs.getInt(1));
 				}
 				evento.setAllDay(rs.getBoolean(5));
+				evento.setClassName("evento");
+				
 				eventi.add(evento);
 			}
 		} catch (SQLException e) {

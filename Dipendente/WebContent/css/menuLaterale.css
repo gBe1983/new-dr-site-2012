@@ -1,0 +1,33 @@
+/* menu laterale */
+
+.newsbox{margin: 0px; width:150px; padding:0px; background:#eee; /* border: 1px solid black; */}
+.newsbox ul{list-style-type:none;}
+.newsbox li{list-style-type:none;}
+.subtitle {width: 938px; font: bold 14px Verdana, Arial, Helvetica, sans-serif;	padding-top: 5px; padding-bottom: 5px; text-align : center !important; border-bottom:1px solid #bbb}
+
+
+#main{ width: 185px; margin-top: 15px; padding: 15px 15px 0px 0px; /*border: 1px solid black;*/ }
+
+.menuLaterale ul{ width: 150px; margin: 0px; padding: 0px; /*border: 1px solid black;*/ }
+
+.menuLaterale ul li, #main ul li{ list-style: none; text-align: left; }
+
+/* Voci dell'elenco principale */
+.menuPrincipale ul li{ width: 150px; padding: 1px; /*border: 1px solid black;*/ }
+
+/* Voce del menu principale */
+.title a { display: block; position: relative; width: 110px !important; width: 150px; height: 25px; padding: 5px 20px 0; -moz-border-radius: 5px; -webkit-border-radius: 5px; behavior: url(css/PIE.htc); border-radius: 5px; background-color: #caba9c; color: #ffffff; font-family: BPreplay,Arial,Helvetica,sans-serif; font-size: 15px; overflow: hidden; }
+
+.title a:hover { background-color: #b4b5b6; text-decoration: none; }
+
+/* Sotto menu */
+.sub-menu { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 10px; display: none; width: 149px !important; width: 100px; padding-top: 5px; background-color: #a5a6a8; /*#2F2F2F;*/ }
+
+/* Voci del sotto menu */
+.sub-menu ul li { margin: 10px 0px; padding: 0px !important; padding: 5px; /*border: 1px solid #40392c; background-color: #2F2F2F;*/ color: #cccccc; }
+
+/* Voci del sotto menu */
+.sub-menu ul li a{ padding: 0px 15px; /*border: 1px solid #40392c; background-color: #2F2F2F;*/ color: #cccccc; }
+
+/* Voci del sotto menu */
+.sub-menu a:hover{ margin: 4px; padding: 0px 15px; /*border: 1px solid #40392c; background-color: #2F2F2F;*/ color: #CCC; }

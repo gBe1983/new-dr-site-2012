@@ -17,7 +17,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("d");
 if(request.getSession().getAttribute("utenteLoggato") != null){
 %>
 
-<div class="subtitle"><h2>Consuntivazione<%=m.getMonthLabel()%></h2></div>
+<div class="subtitle">Consuntivazione<%=m.getMonthLabel()%></div>
 
 <form name="navigatore" action="./GestioneReport" method="post">
 	<input type="hidden" name="azione" value="compilaTimeReport"/>
@@ -101,9 +101,12 @@ for(Week w:m.getWeeks()){%>
 							totOreOrd+=p.getNumeroOre();
 							totOreStr+=p.getStraordinari();
 %>
+
+<!-- onkeypress="validate(event)" -->
+
 <table align="center">
-<tr><td><input type="number" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore ordinarie" onchange="checkOrario(this)"></td></tr>
-<tr><td><input type="number" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" max="24" min="0" class="<%=d.getCssStyle()%>" onkeypress="validate(event)" title="ore straordinarie" onchange="checkOrario(this)"></td></tr>
+<tr><td><input type="number" name="<%=commessaKey%>_ord<%=d.getDayKey()%>" value="<%=p.getNumeroOre()%>" max="24" min="0" class="<%=d.getCssStyle()%>"  title="ore ordinarie" onchange="checkOrario(this)" onblur="checkOrario(this)"></td></tr>
+<tr><td><input type="number" name="<%=commessaKey%>_str<%=d.getDayKey()%>" value="<%=p.getStraordinari()%>" max="24" min="0" class="<%=d.getCssStyle()%>" title="ore straordinarie" onchange="checkOrario(this)" onblur="checkOrario(this)"></td></tr>
 </table>
 <%
 							break;
