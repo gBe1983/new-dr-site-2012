@@ -7,9 +7,8 @@ HttpSession controlloUtenteLoggato = request.getSession();
 if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 %>
 
-<div class="subtitle ">
-	<h2>Area Commesse</h2>
-</div>
+<div class="subtitle ">Area Commesse</div>
+
 <p>
 	In questa sezione potrete gestire tutto quello ha a che fare con la gestione del Time Sheet
 </p>

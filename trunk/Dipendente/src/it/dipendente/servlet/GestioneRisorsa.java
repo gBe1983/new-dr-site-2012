@@ -47,12 +47,14 @@ public class GestioneRisorsa extends BaseServlet {
 		HttpSession sessione = request.getSession();
 		RisorsaDAO rDAO = new RisorsaDAO(conn.getConnection());
 		String azione = request.getParameter("azione");
+		
 		if(azione.equals("login")){
 			int idRisorsa = Integer.parseInt(request.getParameter("parametro"));
 			log.debug(metodo, "login idRisorsa" + idRisorsa);
 			sessione.setAttribute("utenteLoggato",rDAO.loginRisorsa(idRisorsa));
 			response.sendRedirect("./index.jsp?azione=benvenuto");
 		}
+		
 		if(sessione.getAttribute("utenteLoggato") != null){
 			if(azione.equals("visualizzaProfilo") || azione.equals("aggiornaProfilo")){
 				RisorsaDTO risorsa = rDAO.visualizzaProfilo(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());

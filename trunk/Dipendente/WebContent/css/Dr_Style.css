@@ -1,6 +1,6 @@
 /*stili per il layout fisso*/
 html,body{margin: 0;padding:0}
-body{font: 14px arial,sans-serif;color: #000;text-align:center}
+body{font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 14px;color: #000;text-align:center}
 
 
 div#container{width: 1152px;margin: 20px auto ;text-align: left; background:#fff;border:1px solid #bbb}
@@ -10,22 +10,18 @@ h1{padding-left:0.5em;font: bold 2.3em/80px arial,serif;color: #000;}
 h2{color: #000;font-size: 1.5em}
 h3{color: #000;font-size: 1.2em}
 a{text-decoration: none;}
-a:hover{    color: #fff;    background:#bbb;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
+
 img{margin: 0 auto;display:block;width:95%}
 /*stili generici, su header e footer*/
-div#header{width: 1152px;margin: 0px auto; color: #000;height:55px}
+div#header{width: 1152px;margin: 0px auto; color: #000;height: 185px; /*border: 1px solid black;*/}
 
 /*stili specifici per il layout*/
-div#extra{float:left;width: 200px;margin:0 0 0 10px;}
+div#extra{float:left;width: 200px; height: 450px; border-top:1px solid #ccc; border-right:1px solid #ccc; margin: 0px; padding: 0px; background:#eee; /*border: 1px solid black; */}
 
-.newsbox{border: 1px solid #ccc;text-align:left; margin:15px 0px; width:200px;padding:0px 5px;background:#eee;-moz-border-radius: 20px;-webkit-border-radius: 20px;border-radius: 20px ; font: bold 14px;}
-.newsbox ul{list-style-type:none;}
-.newsbox li{list-style-type:none; padding: 5px 0px;}
-.subtitle {font: bold 15px Verdana, Arial, Helvetica, sans-serif;	padding: 5px; text-align : center !important; border-bottom:1px solid #bbb}
 #on{  color: #fff;    background:#bbb;-moz-border-radius: 10px;-webkit-border-radius: 10px;border-radius: 10px ;}
 
 div#content{position:relative;float:left;width:1152px;margin:0px; padding:0px;font : 12px Verdana, Arial, Helvetica, sans-serif;}
-div#content_right{float:left;width:900px;padding:5px;margin:10; /*border: 1px solid black;*/}
+div#content_right{float:left; width:939px; padding:5px;margin:10; /*border: 1px solid black;*/}
 
 div#footer{clear:both; text-align:center; padding: 0.5em; background:#eee; color: #000;border-top:1px solid #666 !important;}
 div#footer li{display:inline; list-style-type:none;padding:0 10px}
@@ -38,11 +34,11 @@ div#footer li{display:inline; list-style-type:none;padding:0 10px}
 /*CSS principale per il menu*/
 .logo {position:relative;float:left; background-image: url(../images/logo_DierreConsulting.bmp); background-repeat: no-repeat; width: 1152px; height: 100px;}
 .logo img{text-align:center;margin: 0 auto;}
-nav {	position:relative;text-align:right;background:#eee;color: #000;border-top:1px solid #ccc !important;border-bottom:1px solid #ccc !important;height:40px; padding:0px; margin: 0px;}
-.menu ul{    margin: 0;    float: right}
-.menu ul li{    display: inline;}
-.menu ul li a{    float: left; text-decoration: none;    color: #a1a1a1;    padding: 10.5px 11px;  height:18px;}
-.menu ul li a:hover, .menu ul li .current{    color: #fff;    background:#a1a1a1;-moz-border-radius: 10px;-webkit-border-radius: 10px; border-radius: 10px ;}
+#nav {position:relative;text-align:right;background:#eee;color: #000;border-top:1px solid #ccc !important;border-bottom:1px solid #ccc !important;height:40px; padding:0px; margin: 0px;}
+.menu ul{margin: 0;    float: right}
+.menu ul li{display: inline;}
+.menu ul li a{float: left; text-decoration: none; color: #a1a1a1; padding: 10.5px 11px; height:18px; -moz-border-radius: 10px;-webkit-border-radius: 10px; behavior: url(css/PIE.htc); border-radius: 10px;}
+.menu ul li a:hover, .menu ul li .current{    color: #fff;    background:#a1a1a1;}
 
 .creaCvVoci{visible:hidden;display: none;}
 
@@ -106,3 +102,22 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 
 /* calendario */
 #calendar { width: 800px; margin: 0 auto; }
+
+/*inizio gestione curriculum */
+
+.sceltaCurriculum{ text-align: right; padding-right: 15px;}
+#toolbar{ text-align: right; padding-right: 5px;  /*border:1px solid black;*/}
+#toolbar a {padding: 0 5px 0 5px; border-right: 1px solid black;}
+.spazioUltra{margin-top: 40px;}
+
+#channel{ font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 12px; margin: 45px;width: 900px; text-align: center; border-collapse: collapse; margin: auto; }
+#channel th{ font-size: 13px; font-weight: normal; padding: 8px; background: #c9ba9d /*#b9c9fe url(../images/gradhead.png) repeat-x*/; border-top: 2px solid #d3ddff; border-bottom: 1px solid #fff; color: #FFF /*#039*/; }
+#channel td{ padding: 8px;  border-bottom: 1px solid #fff; color: #669; border-top: 1px solid #fff; background: #CCC /*#e8edff url(../images/gradback.png) repeat-x*/; }
+#channel tfoot tr td{ background: #e8edff; font-size: 12px; color: #99c; }
+#channel tbody tr:hover td{ background: background: #a5a6a8 /*#d0dafd url(../images/gradhover.png) repeat-x*/; color: #339; }
+
+/* gestione contenuti delle pagine principali */
+.contenuti {width: 800px; margin: 0px 70px; height: 80px; border: 1px solid #CCC; margin-bottom: 40px;}
+.titoloContenuti {font : bold 12px Verdana, Arial, Helvetica, sans-serif; padding: 5px; text-align : center; background: #CCC; border-bottom:1px solid #bbb}
+.immagini{ float: left;  width: 35px; height:35px; margin: 3px 20px;}
+.immagini_riabilitazione{ float: left;  width: 70px; height:35px; margin: 5px 20px 0px 10px; }

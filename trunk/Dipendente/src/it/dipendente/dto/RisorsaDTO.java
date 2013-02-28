@@ -33,7 +33,15 @@ public class RisorsaDTO {
 
 	private boolean visible;
 	private boolean flaCreazioneCurriculum;
-	private boolean cv_visibile;
+	private boolean flagCreazioneDettaglio;
+
+	public boolean isFlagCreazioneDettaglio() {
+		return flagCreazioneDettaglio;
+	}
+
+	public void setFlagCreazioneDettaglio(boolean flagCreazioneDettaglio) {
+		this.flagCreazioneDettaglio = flagCreazioneDettaglio;
+	}
 
 	/**
 	 * @param idRisorsa
@@ -100,7 +108,7 @@ public class RisorsaDTO {
 			String seniority,
 			boolean visible,
 			boolean flaCreazioneCurriculum,
-			boolean cv_visibile) {
+			boolean flagCreazioneDettaglio) {
 		super();
 		this.idRisorsa = idRisorsa;
 		this.cognome = cognome;
@@ -127,7 +135,11 @@ public class RisorsaDTO {
 		this.seniority = seniority;
 		this.visible = visible;
 		this.flaCreazioneCurriculum = flaCreazioneCurriculum;
-		this.cv_visibile = cv_visibile;
+		this.flagCreazioneDettaglio = flagCreazioneDettaglio;
+	}
+
+	public RisorsaDTO() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getCellulare() {
@@ -135,12 +147,6 @@ public class RisorsaDTO {
 	}
 	public void setCellulare(String cellulare) {
 		this.cellulare = cellulare;
-	}
-	public boolean isCv_visibile() {
-		return cv_visibile;
-	}
-	public void setCv_visibile(boolean cv_visibile) {
-		this.cv_visibile = cv_visibile;
 	}
 	public boolean isFlaCreazioneCurriculum() {
 		return flaCreazioneCurriculum;

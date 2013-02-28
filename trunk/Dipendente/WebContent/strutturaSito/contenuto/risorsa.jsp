@@ -10,9 +10,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 		RisorsaDTO risorsa = (RisorsaDTO) request.getAttribute("risorsa");
 %>
 
-<div class="subtitle ">
-	<h2>Visualizza Profilo</h2>
-</div>
+<div class="subtitle ">Visualizza Profilo</div>
 	
 <fieldset class="spazio">
 		<legend>Dati Anagrafici</legend>
@@ -118,9 +116,7 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 		RisorsaDTO risorsa = (RisorsaDTO) request.getAttribute("risorsa");
 %>
 
-		<div class="subtitle ">
-			<h2>Modifica Profilo</h2>
-		</div>
+		<div class="subtitle ">Modifica Profilo</div>
 
 		<form action="./GestioneRisorsa" method="post" class="spazio">
 			<input type="hidden" name="azione" value="modificaRisorsa">

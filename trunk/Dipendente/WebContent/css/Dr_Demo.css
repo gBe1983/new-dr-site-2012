@@ -1,4 +1,4 @@
-body {	margin: 2em 0;	padding: 0;	font: 100%/normal "Arial Narrow", Arial, sans-serif;	}
+body {	margin: 2em 0;	padding: 0;	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 14px;/*font: 100%/normal "Arial Narrow", Arial, sans-serif;*/	}
 #cv-eu-it {		margin: 0 auto;		}
 #intestazione {
 width: 40%;

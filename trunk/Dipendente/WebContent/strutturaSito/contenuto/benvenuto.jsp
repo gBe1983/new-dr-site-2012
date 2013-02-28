@@ -8,9 +8,8 @@ if(controlloUtenteLoggato.getAttribute("utenteLoggato") != null){
 	RisorsaDTO r = (RisorsaDTO) controlloUtenteLoggato.getAttribute("utenteLoggato");
 %>
 
-<div class="subtitle ">
-	<h2>Benvenuto <%=r.getNome() %> <%=r.getCognome() %></h2>
-</div>
+<div class="subtitle ">Benvenuto <%=r.getNome() %> <%=r.getCognome() %></div>
+
 <p>
 	In questa area, dedicata a tutti i dipendenti, 
 	potrai gestire varie sezioni tra cui <b><i>"Curriculum Vitae"</i></b> dove ti permette di personalizzare il tuo curriculum

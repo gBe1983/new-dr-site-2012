@@ -60,7 +60,7 @@ public class PlanningDAO extends BaseDao{
 				.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
 				.append(" where planning.id_associazione=asscommessa.id_associazione")
 				.append(" and asscommessa.id_commessa=commessa.id_commessa")
-				.append(" and planning.data like? and asscommessa.id_risorsa=?")
+				.append(" and planning.data like? and asscommessa.id_risorsa=? and planning.attivo = true")
 				.append(" order by data");
 		log.debug(metodo,"sql:"+sql.toString());
 		try {
