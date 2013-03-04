@@ -24,7 +24,7 @@
 			<ul>
 				<li><a href="index.jsp?azione=benvenuto"<%if("benvenuto".equals(azione)){out.print(" id='on'");}%>>Home</a></li>
 				<li><a href="index.jsp?azione=curriculum" <%if("cv".equals(azione)){out.print(" id='on'");}%>>Curriculum Vitae</a></li>
-				<li><a href="./GestioneReport?azione=compilaTimeReport"<%if("TimeReport".equals(azione)){out.print(" id='on'");}%>>Time Report</a></li>
+				<li><a href="index.jsp?azione=report"<%if("TimeReport".equals(azione)){out.print(" id='on'");}%>>Time Report</a></li>
 				<li><a href="index.jsp?azione=areaPrivata"<%if("areaPrivata".equals(azione)){out.print(" id='on'");}%>>Area Privata</a></li>
 				<li><a href="index.jsp?azione=consulenza" <% if(request.getParameter("azione") != null && request.getParameter("azione").equals("consulenzaOnline")){ out.print("id='on'");} %>>Consulenza Online</a></li>
 				<li><a href="./GestioneRisorsa?azione=logout">Logout</a></li>

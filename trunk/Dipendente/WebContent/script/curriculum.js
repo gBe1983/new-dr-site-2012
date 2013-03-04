@@ -1,3 +1,77 @@
+function openFinestra(valore,lastMovimento,area,azione){
+
+	if(azione == "anteprima"){
+		
+		document.anteprima.parametro.value = valore;
+		document.anteprima.lastMovimento.value = lastMovimento;
+		if(area != ''){
+			var input = document.createElement("input");				
+			input.setAttribute("type", "hidden");
+			input.setAttribute("name", "area");
+			input.setAttribute("value", area);
+			document.getElementById("anteprimaForm").appendChild(input);
+		}
+		
+		
+		$('#anteprima').dialog({
+			modal: true,
+			autoOpen: true,
+			height: 250,
+			width: 450,
+			position: [450,150],
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		});
+		return false;
+	}else{
+		
+		document.pdf.parametro.value = valore;
+		document.pdf.lastMovimento.value = lastMovimento;
+		document.pdf.area.value = area;
+		
+		$('#finestra').dialog({
+			modal: true,
+			autoOpen: true,
+			height: 150,
+			width: 450,
+			position: [500,230],
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		});
+		return false;
+	}
+}
+
+function closeWindows(){
+	$("#finestra").dialog("close");
+}
+
+function closeWindowsAnteprima(){
+	$("#anteprima").dialog("close");
+}
+
+function closeFinestra(){
+	$("#finestra").dialog("close");
+	return false;
+}
+
+function closeFinestraAnteprima(){
+	$("#anteprima").dialog("close");
+	return false;
+}
+
 /*
  * tramite questo metodo controllo le scelte che vengono effettuate
  * nella pagina visualizzaCurriculum.jsp
