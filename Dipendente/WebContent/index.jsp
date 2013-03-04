@@ -15,13 +15,13 @@
 		<!-- fogli di stile -->
 		<link rel="stylesheet" type="text/css" href="css/Dr_Style.css">
 		<link rel="stylesheet" type="text/css" href="css/Dr_Demo.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css">
 		<link rel="stylesheet" type="text/css" href="css/menuRisorsa.css">
 		<link rel="stylesheet" type="text/css" href="css/visualizzaCurriculum.css">
 		<link rel="stylesheet" type="text/css" href="css/timeReport.css">
 		<link rel="stylesheet" type="text/css" href="css/fullcalendar.css">
 		<link rel="stylesheet" type="text/css" href="css/jquery-bubble-popup-v3.css">
 		<link rel="stylesheet" type="text/css" href="css/menuLaterale.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 
 		<!-- javascript -->
 		<script type="text/javascript" src="script/jquery-1.7.2.min.js"></script>
@@ -33,7 +33,7 @@
 		<script type="text/javascript" src="script/fullcalendar.min.js"></script>
 		<script type="text/javascript" src="script/caricamentoEventi.js"></script>
 		<script type="text/javascript" src="script/curriculum.js"></script>
-
+		
 	</head>
 	<script type='text/javascript'>
 
@@ -239,6 +239,10 @@
 					}else if(azione.equals("consulenza")){
 			%>
 						<jsp:include page="strutturaSito/contenuto/consulenza.jsp" />
+			<%
+					}else if(azione.equals("report")){
+			%>
+						<jsp:include page="strutturaSito/contenuto/report.jsp" />
 			<%
 					}
 				}else{

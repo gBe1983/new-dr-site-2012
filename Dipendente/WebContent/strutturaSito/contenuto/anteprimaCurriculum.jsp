@@ -5,19 +5,39 @@
 <%@page import="it.dipendente.dto.CurriculumDTO"%>
 <%@page import="it.dipendente.dto.EsperienzeDTO"%>
 <%@page import="it.dipendente.dto.Dettaglio_Cv_DTO"%>
+
+
 <%
 	CurriculumDTO curriculum = (CurriculumDTO) request.getAttribute("curriculumVitae");
 %>
 
+<div id="finestra" title="Esporta Pdf">
+	<%@include file="esportaPdf.jsp" %>
+</div>
+
 <div class="subtitle ">Anteprima Curriculum</div>
 
-<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="./GestioneCurriculum?azione=esportaPdf&parametro=<%=curriculum.getId_risorsa() %>">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>" >Indietro</a></div>
+<%
+	if(request.getParameter("area").equals("all")){
+%>
+		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
+<%
+	}else{
+%>
+		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
+<%
+	}
+%>
 
 <div class="spazioUltra">
-	<table id="intestazioneCurriculum" border="0" cellpadding="0" cellspacing="0">
 
-<%	
-	if(curriculum.getRisorsa() != null){
+	
+<%
+	if(request.getParameter("tipologia").equals("europeo")){
+%>
+		<table id="intestazioneCurriculum" border="0" cellpadding="0" cellspacing="0">
+<%
+		if(curriculum.getRisorsa() != null){
 			RisorsaDTO risorsa = curriculum.getRisorsa();
 %>
 				<tr><td class="titoli"><b><h3>Formato Europeo <br> per il curriculum <br>vitae </h3></b></td><td class="valore"><p></p></td></tr>
@@ -67,9 +87,148 @@
 			<tr><td class="descrizioni" valign="top">Formazione</td><td class="valore"><textarea rows="15" cols="50" name="formazione" readonly="readonly"><%=dettaglio.getFormazione() %></textarea></td></tr>						
 			<tr><td class="descrizioni" valign="top">Interessi</td><td class="valore"><textarea rows="15" cols="50" name="interessi" readonly="readonly"><%=dettaglio.getInteressi() %></textarea></td></tr>
 <%
-	}
+		}
 %>
 		</table>
+<%
+	}else{
+%>		
+		<table width="750" align="center" border="0">
+			<tr><td colspan="3"><img src="images/logo_DierreConsulting_Intestazione.gif" /></td></tr>
+			<tr><td colspan="3" class="contenitoreIntestazione"><p align="center" class="intestazioneCurriculum"><b>CURRICULUM VITAE</b></p></td></tr>
+			<tr><td class="spazioSinistro"><br></td><td class="spazioCentro"><p class="contenutiCurriculum"><b>Cognome Nome: </b><br>Figura Professionale: </p></td><td class="spazioDestro"><p class="contenutiCurriculum"><b> <%=curriculum.getRisorsa().getCognome() + " " +  curriculum.getRisorsa().getNome() %></b><br>
+			<% 
+				if(curriculum.getRisorsa().getFiguraProfessionale() != null){ 
+					out.print(curriculum.getRisorsa().getFiguraProfessionale()); 
+				}else{ 
+					out.print("<br>"); 
+				} 
+			%>
+			</p></td></tr>
+			<tr><td colspan="3" class="contenitoreIntestazione"><br><span class="intestazioniCurriculum"><b>INFORMAZIONI PERSONALI<b></span></td></tr>
+			<tr><td class="spazioSinistro"><br></td><td class="spazioCentro"><p class="contenutiCurriculum">Nazionalità: <br>Data Nascita: <br>Luogo Nascita: <br>Residenza: </p></td><td class="spazioDestro"><p class="contenutiCurriculum">
+			<%
+				if(curriculum.getRisorsa().getNazione() != null){
+					out.print(curriculum.getRisorsa().getNazione() + "<br>");	
+				}else{
+					out.print("<br>");
+				}
+			
+				if(curriculum.getRisorsa().getDataNascita() != null){
+					out.print(curriculum.getRisorsa().getDataNascita() + "<br>");		
+				}else{
+					out.print("<br>");
+				}
+			
+				if(curriculum.getRisorsa().getLuogoNascita() != null){
+					out.print(curriculum.getRisorsa().getLuogoNascita() + "<br>");
+				}else{
+					out.print("<br>");
+				}
+			
+				if(curriculum.getRisorsa().getIndirizzo() != null){
+					out.print(curriculum.getRisorsa().getIndirizzo() + "<br>");
+				}else{
+					out.print("<br>");
+				}
+			%>
+			</p></td></tr>	
+		<%
+			if(curriculum.getListaDettaglio() != null){
+		
+				if(curriculum.getListaDettaglio().getIstruzione() != null){
+					if(curriculum.getListaDettaglio().getIstruzione().length() > 0){
+		%>
+						<tr><td colspan="3" class="contenitoreIntestazione"><br><p class="intestazioniCurriculum"><b>ISTRUZIONE<b></p></td></tr>
+						<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="7" cols="58"><%=curriculum.getListaDettaglio().getIstruzione() %></textarea></td></tr>
+		<%
+					}
+				}
+				if(curriculum.getListaDettaglio().getLingue_Straniere() != null){
+					if(curriculum.getListaDettaglio().getLingue_Straniere().length() > 0){
+		%>					
+						<tr><td colspan="3" class="contenitoreIntestazione"><b><p class="intestazioniCurriculum">LINGUE STRANIERE</p><b></td></tr>
+						<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="7" cols="58"><%=curriculum.getListaDettaglio().getLingue_Straniere() %></textarea></td></tr>
+		<%
+						}
+					}
+				}
+				
+				if(curriculum.getListaEsperienze().size() > 0){
+		%>
+				<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>ESPERIENZE</b></p></td></tr>
+		<%
+					for(int x = 0; x < curriculum.getListaEsperienze().size(); x++){
+						EsperienzeDTO exp = (EsperienzeDTO) curriculum.getListaEsperienze().get(x);
+		%>					
+							<tr><td colspan="3"><br></td></tr>
+							<tr>
+								<td class="spazioSinistro"><br></td>
+								<td class="context" colspan="2">
+									<table width="480">
+										<tr><td><p><b><%=exp.getPeriodo() %><b></p></td><td><p><b><%=exp.getAzienda()%><b></p></td><td><p align="right"><%=exp.getLuogo() %></p></td></tr>
+									</table>
+								</td>
+							</tr>
+							<tr><td colspan="3"><br></td></tr>
+							<tr><td><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="30" cols="58"><%=exp.getDescrizione() %></textarea></td></tr>
+		<%
+						}
+					}
+				
+				if(curriculum.getListaDettaglio() != null){
+						
+						if(curriculum.getListaDettaglio().getFormazione() != null){
+							if(curriculum.getListaDettaglio().getFormazione().length() > 0){
+		%>							
+								<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>FORMAZIONE</b></p></td></tr>
+								<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="13" cols="58"><%=curriculum.getListaDettaglio().getFormazione() %> </textarea></td></tr>
+		<%
+							}
+						}
+						
+						if(curriculum.getListaDettaglio().getCompetenze_tecniche() != null){
+							if(curriculum.getListaDettaglio().getCompetenze_tecniche().length() > 0){
+		%>					
+								<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>CAPACITA E COMPETENZE TECNICHE</b></p></td></tr>
+								<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="13" cols="58"><%=curriculum.getListaDettaglio().getCompetenze_tecniche() %> </textarea></td></tr>
+		<%					
+							}
+						}
+						
+						if(curriculum.getListaDettaglio().getCapacita_professionali() != null){
+							if(curriculum.getListaDettaglio().getCapacita_professionali().length() > 0){
+		%>						
+								<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>CAPACITA' PROFESSIONALI</b></p></td></tr>
+								<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="13" cols="58"><%=curriculum.getListaDettaglio().getCapacita_professionali() %></textarea></td></tr>			
+		<%
+							}
+						}
+						
+						if(curriculum.getListaDettaglio().getInteressi() != null){
+							if(curriculum.getListaDettaglio().getInteressi().length() > 0){
+		%>					
+								<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>INTERESSI</b></p></td></tr>
+								<tr><td class="spazioSinistro"><br></td><td class="context" colspan="2"><textarea readonly="readonly" class="contenutiCurriculum" rows="13" cols="58"><%=curriculum.getListaDettaglio().getInteressi() %></textarea></td></tr>
+		<%
+							}
+						}
+						
+						if(curriculum.getRisorsa().getServizioMilitare() != null){
+							if(curriculum.getRisorsa().getServizioMilitare().length() > 0){
+		%>	
+								<tr><td colspan="3" class="contenitoreIntestazione"><p class="intestazioniCurriculum"><b>SERVIZIO MILITARE</b></p></td></tr>
+								<tr><td><br></td><td class="context" colspan="2"><br><span> <%=curriculum.getRisorsa().getServizioMilitare() %></span></td></tr>
+		<%
+							}
+						}
+					}
+		%>
+		</table>
+<%		
+	}
+%>
+		
 	</div>
 <%		
 

@@ -121,3 +121,44 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 .titoloContenuti {font : bold 12px Verdana, Arial, Helvetica, sans-serif; padding: 5px; text-align : center; background: #CCC; border-bottom:1px solid #bbb}
 .immagini{ float: left;  width: 35px; height:35px; margin: 3px 20px;}
 .immagini_riabilitazione{ float: left;  width: 70px; height:35px; margin: 5px 20px 0px 10px; }
+
+/* esporta Pdf */
+#finestra, #formato, #modulo{display: none; }
+
+#finestra{text-align: left; }
+
+#finestra label,#finestra textarea,#finestra input,#finestra button{ font-size: 12px; }
+
+#modulo textarea{ resize: none; }
+
+/* end esporta pdf */
+
+/* anteprima curriculum vitae */
+
+#anteprima{ display: none; text-align: left; }
+
+#anteprima label,#anteprima textarea,#anteprima input,#anteprima button{ font-size: 12px; }
+
+.intestazioneCurriculum{ font-size:15px; letter-spacing: 4px; margin:0; padding:0; }
+
+.intestazioniCurriculum{ font-size:13px; letter-spacing: 0px; margin:0; padding:0; }
+
+.contenitoreIntestazione{ margin: 0px; padding: 0px; border-bottom: 3px solid black; }
+
+.contenutiCurriculum{ font-size: 12px; }
+
+.spazioSinistro{ width: 250px; border: 0px solid black;}
+
+.spazioCentro{ width: 175; border: 0px solid black;}
+
+.spazioDestro{ width: 175; border: 0px solid black;}
+
+.context textarea, .context table, .context span{ margin: 0px; padding: 0px; font-size: 13px; }
+
+.context table p{margin: 0px; padding: 0px; }
+
+.context textarea{ resize: none; border: 0px solid black; }
+
+/* end anteprima */
+
+
