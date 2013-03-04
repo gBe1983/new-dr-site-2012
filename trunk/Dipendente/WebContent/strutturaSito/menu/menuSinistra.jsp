@@ -18,6 +18,15 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 	if(request.getParameter("azione") != null){
 	
 %>
+
+<div id="finestra" title="Esporta Pdf">
+	<%@include file="../contenuto/esportaPdf.jsp" %>
+</div>
+
+<div id="anteprima" title="Anteprima Curriculum">
+	<%@include file="../contenuto/anteprima.jsp" %>
+</div>
+
 		<div class="newsbox">
 			<div id="main"> 
 				<ul class="menuLaterale">
@@ -27,8 +36,8 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 							<li class="sub-menu">
 								<ul>
 									<li><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>&creazioneCv=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).isFlaCreazioneCurriculum() %>">Gestione C.V.</a></li>
-									<li><a href="#">Esporta in Pdf</a></li> 
-									<li><a href="#">Anteprima</a></li>
+									<li><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a></li> 
+									<li><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprima')">Anteprima</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -38,7 +47,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 							<li class="title"><a href="#">Time Report</a></li>
 							<li class="sub-menu">
 								<ul>
-									<li><a href="#" >Visualizza Report</a></li> 
+									<li><a href="./GestioneReport?azione=compilaTimeReport" >Visualizza Report</a></li> 
 								</ul>
 							</li>
 						</ul>
