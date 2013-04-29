@@ -1,3 +1,7 @@
+#content{width: 100%; /*border: 1px solid black;*/ }
+
+.subtitle {width: 100%; font: bold 14px Verdana, Arial, Helvetica, sans-serif;	padding-top: 5px; padding-bottom: 5px; text-align : center; border-bottom:1px solid #bbb}
+
 table.timeReportNavigator{
 	border: 1;
 	width:45%;
@@ -10,12 +14,15 @@ table.timeReport{
 	width:95%;
 	border-color:#A1A1A1;
 	align:"center";
+	margin: auto;
+	padding: 0px;
 }
 
 th.weekHeader{
 	font:bold 12px verdana, arial, sans-serif;
 	color:#A1A1A1;
-	background:#CCC url('../images/lens.png') no-repeat left top;
+	background:#CCC;
+	text-align: center; /* url('../images/lens.png') no-repeat left top;*/
 }
 
 th.noCommesse{
@@ -48,11 +55,23 @@ td.holiday{
 	font:normal 10px verdana, arial, sans-serif;
 	color:red;
 	background-color:#CCD;
-	text-align:center;
+	text-align:left;
 	vertical-align:top;
+	width: 300px;
+	padding-left: 10px;
 }
 
-input.holiday{
+.holiday input{
+	font:normal 10px verdana, arial, sans-serif;
+	color:red;
+	background-color:#CCD;
+	text-align:center;
+	vertical-align:top;
+	width: 40px;
+	margin-left: 10px;
+}
+
+.holiday tr{
 	font:normal 10px verdana, arial, sans-serif;
 	color:red;
 	background-color:#CCD;
@@ -76,15 +95,18 @@ td.workDay{
 	background-color:#E7D6B6;
 	text-align:center;
 	vertical-align:top;
+	width: 300px;
+	padding-left: 10px;
 }
 
-input.workDay{
+.workDay input{
 	font:normal 10px verdana, arial, sans-serif;
 	color:black;
 	background-color:white;
 	text-align:center;
 	vertical-align:top;
-	width: 60px;
+	width: 40px;
+	margin-left: 10px;
 }
 
 th.disabledDay{
@@ -102,9 +124,14 @@ td.disabledDay{
 
 td.totaliDx{
 	background-color:#DDD;
-	text-align: right;
+	text-align: left;
 	font:normal 10px verdana, arial, sans-serif;
 	color:red;
+}
+
+.totaliDx span{
+	margin: 0px;
+	padding-left: 10px;	
 }
 
 td.totaliSx{
@@ -114,21 +141,22 @@ td.totaliSx{
 	color:red;
 }
 
-td.save{
-	background-color:#DDD;
-	text-align: right;
+.save{
+	background-color:#FFF;
+	text-align: left;
 }
 
-input.save{
+.save input{
 	font:normal 12px verdana, arial, sans-serif;
 	border-radius: 8px;
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border: 1px solid #006;
 	background-color:#DDD;
+	margin: 15px 0px 10px 30px;
 }
 
-input.save:hover {
+.save input:hover {
 	font:normal 12px verdana, arial, sans-serif;
 	border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -154,3 +182,23 @@ input.search:hover {
 	border: 1px solid #f00;
 	background: #eef;
 }
+
+/* gestione compilazione ore */
+
+#compilade{ display: none;	}
+
+#oreOrdinare{ /*border: 1px solid black;*/ text-align: center;}
+
+#oreOrdinare select { display: none; }
+
+#oreOrdinare table tr td { width: 170px; font-size: 13px;}
+
+#oreOrdinare input{ text-align: center; font-size: 13px;}
+
+#oreOrdinare textarea { resize: none; }
+
+#elencoGiornate{ display: none;	}
+
+#listGiornate { width: 350px; }
+
+/* end gestione compilazione ore */

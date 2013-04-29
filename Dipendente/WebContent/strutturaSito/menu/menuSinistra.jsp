@@ -19,12 +19,12 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 	
 %>
 
-<div id="finestra" title="Esporta Pdf">
-	<%@include file="../contenuto/esportaPdf.jsp" %>
+<div id="finestraMenuLaterale" title="Esporta Pdf">
+	<%@include file="../contenuto/esportaPdfMenuLaterale.jsp" %>
 </div>
 
-<div id="anteprima" title="Anteprima Curriculum">
-	<%@include file="../contenuto/anteprima.jsp" %>
+<div id="anteprimaMenuLaterale" title="Anteprima Curriculum">
+	<%@include file="../contenuto/anteprimaMenuLaterale.jsp" %>
 </div>
 
 		<div class="newsbox">
@@ -36,8 +36,8 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 							<li class="sub-menu">
 								<ul>
 									<li><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>&creazioneCv=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).isFlaCreazioneCurriculum() %>">Gestione C.V.</a></li>
-									<li><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a></li> 
-									<li><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprima')">Anteprima</a></li>
+									<li><a href="#" onclick="return openFinestraMenuLaterale('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a></li> 
+									<li><a href="#" onclick="return openFinestraMenuLaterale('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprimaCV')">Anteprima</a></li>
 								</ul>
 							</li>
 						</ul>

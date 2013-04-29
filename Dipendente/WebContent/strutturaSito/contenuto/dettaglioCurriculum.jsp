@@ -8,13 +8,13 @@
 %>
 <div class="subtitle">Dettaglio Curriculum Vitae</div>
 
-<div id="toolbar" class="spazioUltra"><a href="#" onclick="return openFinestra('<%=curriculum.getId_risorsa() %>','<%=request.getParameter("azione") %>','notAll','anteprima')">Anteprima</a><a href="#" onclick="return openFinestra('<%=curriculum.getId_risorsa() %>','<%=request.getParameter("azione") %>','notAll','esporta')">Esporta in Pdf</a><a href="index.jsp?azione=curriculum">Indietro</a></div>
+<div id="toolbar" class="spazioUltra"><a href="#" onclick="return openFinestra('<%=curriculum.getId_risorsa() %>','<%=request.getParameter("azione") %>','notAll','anteprimaCV')">Anteprima</a><a href="#" onclick="return openFinestra('<%=curriculum.getId_risorsa() %>','<%=request.getParameter("azione") %>','notAll','esporta')">Esporta in Pdf</a><a href="index.jsp?azione=curriculum">Indietro</a></div>
 
 <div id="finestra" title="Esporta Pdf">
 	<%@include file="esportaPdf.jsp" %>
 </div>
 
-<div id="anteprima" title="Anteprima Curriculum">
+<div id="anteprimaCV" title="Anteprima Curriculum">
 	<%@include file="anteprima.jsp" %>
 </div>
 

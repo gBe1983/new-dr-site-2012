@@ -3,7 +3,8 @@
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
 	<appender name="dipendenteAppender" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="/nfs_home/drcon860/public_html/Dipendente/WEB-INF/logs/dipendente.log"/>
+		<param name="File" value="/nfs_home/drcon860/public_html/Dipendente/WebContent/WEB-INF/logs/dipendente.log"/>
+		<!--  <param name="File" value="C:/Users/Utente/Desktop/Progetti Java/dierreconsulting/Dipendente/WebContent/WEB-INF/logs/dipendente.log"/>  -->
 		<param name="Append" value="true"/>
 		<param name="MaxFileSize" value="1MB"/>
 		<param name="MaxBackupIndex" value="10"/>
@@ -29,10 +30,11 @@
 			value="[%d{ISO8601}][%-5p][%t][%c]%m%n" />
 		</layout>
 	</appender>
-
+	
 	<root>
-		<level value="WARN"/>
+		<level value="debug"/>
+		<!-- <appender-ref ref="SmtpAppender"/>  -->
 		<appender-ref ref="dipendenteAppender"/>
-		<appender-ref ref="SmtpAppender"/>
 	</root>
+	
 </log4j:configuration>

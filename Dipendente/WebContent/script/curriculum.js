@@ -1,9 +1,9 @@
 function openFinestra(valore,lastMovimento,area,azione){
-
-	if(azione == "anteprima"){
+	
+	if(azione == "anteprimaCV"){
 		
-		document.anteprima.parametro.value = valore;
-		document.anteprima.lastMovimento.value = lastMovimento;
+		document.preview.parametro.value = valore;
+		document.preview.lastMovimento.value = lastMovimento;
 		if(area != ''){
 			var input = document.createElement("input");				
 			input.setAttribute("type", "hidden");
@@ -12,13 +12,12 @@ function openFinestra(valore,lastMovimento,area,azione){
 			document.getElementById("anteprimaForm").appendChild(input);
 		}
 		
-		
-		$('#anteprima').dialog({
+		$('#anteprimaCV').dialog({
 			modal: true,
 			autoOpen: true,
-			height: 250,
+			height: 150,
 			width: 450,
-			position: [450,150],
+			position: [450,230],
 			show: {
 				effect: "blind",
 				duration: 1000
@@ -71,6 +70,83 @@ function closeFinestraAnteprima(){
 	$("#anteprima").dialog("close");
 	return false;
 }
+
+/* anteprimaMenuLaterale e esportaPdf laterale*/
+
+function openFinestraMenuLaterale(valore,lastMovimento,area,azione){
+	
+	if(azione == "anteprimaCV"){
+		
+		document.previewMenuLaterale.parametro.value = valore;
+		document.previewMenuLaterale.lastMovimento.value = lastMovimento;
+		if(area != ''){
+			var input = document.createElement("input");				
+			input.setAttribute("type", "hidden");
+			input.setAttribute("name", "area");
+			input.setAttribute("value", area);
+			document.getElementById("anteprimaForm").appendChild(input);
+		}
+		
+		$('#anteprimaMenuLaterale').dialog({
+			modal: true,
+			autoOpen: true,
+			height: 150,
+			width: 450,
+			position: [450,230],
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		});
+		return false;
+	}else{
+		
+		document.pdfMenuLatelare.parametro.value = valore;
+		document.pdfMenuLatelare.lastMovimento.value = lastMovimento;
+		document.pdfMenuLatelare.area.value = area;
+		
+		$('#finestraMenuLaterale').dialog({
+			modal: true,
+			autoOpen: true,
+			height: 150,
+			width: 450,
+			position: [500,230],
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		});
+		return false;
+	}
+}
+
+function closeFinestraAnteprimaMenuLaterale(){
+	$("#anteprimaMenuLaterale").dialog("close");
+	return false;
+}
+
+function closeWindowsAnteprimaMenuLaterale(){
+	$("#anteprimaMenuLaterale").dialog("close");
+}
+
+function closeFinestraPdf(){
+	$("#finestraMenuLaterale").dialog("close");
+	return false;
+}
+
+function closeWindowsPdf(){
+	$("#finestraMenuLaterale").dialog("close");
+}
+
+/* end anteprima e esporta pdf laterale */
 
 /*
  * tramite questo metodo controllo le scelte che vengono effettuate
@@ -393,3 +469,4 @@ function controlloCampiInserimentoExp(){
 	
 	return true;
 }
+

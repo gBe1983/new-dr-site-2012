@@ -18,7 +18,7 @@ public class Month{
 	private List<Week>weeks;
 
 	public Month(Calendar c){
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 		final String metodo="costruttore";
 		log.start(metodo);
 		Calendar day = (Calendar)c.clone();

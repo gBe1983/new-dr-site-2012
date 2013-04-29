@@ -44,7 +44,7 @@ public class CurriculumDAO extends BaseDao {
 
 	public CurriculumDAO(Connection connessione) {
 		super(connessione);
-		log=new MyLogger(this.getClass());
+		log=new MyLogger(this.getClass().getName());
 	}
 
 	/**

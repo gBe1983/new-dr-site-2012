@@ -14,7 +14,7 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 
 	public RisorsaDAO(Connection connessione) {
 		super(connessione);
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 	}
 
 	public RisorsaDTO loginRisorsa(int idRisorsa){

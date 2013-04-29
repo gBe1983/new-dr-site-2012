@@ -121,6 +121,14 @@
 		<param-value>javax.net.ssl.SSLSocketFactory</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>parametro</param-name>
+		<param-value>drconsulting</param-value>
+		<!-- <param-value>drconsulting</param-value> -->
+		<!-- <param-value>cvonline</param-value> -->
+		<!-- <param-value>localhost</param-value> -->
+	</context-param>
+	
 
 	<context-param>
 		<param-name>siteUrl</param-name>
@@ -151,6 +159,10 @@ prod 1
 
 prod 2
 	<context-param>
+		<param-name>DB.driver</param-name>
+		<param-value>com.mysql.jdbc.Driver</param-value>
+	</context-param>
+	<context-param>
 		<param-name>DB.url</param-name>
 		<param-value>jdbc:mysql://151.1.159.238:3306/cvonline_Curriculum</param-value>
 	</context-param>
@@ -178,7 +190,7 @@ loc 1
 	</context-param>
 	<context-param>
 		<param-name>DB.password</param-name>
-		<param-value>PwAdmin5%</param-value>
+		<param-value>root</param-value>
 	</context-param>
 
 loc 2

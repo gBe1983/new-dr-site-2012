@@ -28,7 +28,7 @@ public class Email{
 	private String socketFactoryClass = null;
 
 	public Email(ServletContext servletContext) {
-		log = new MyLogger(this.getClass());
+		log = new MyLogger(this.getClass().getName());
 		final String metodo = "costruttore";
 		log.start(metodo);
 		protocol = servletContext.getInitParameter("mail.protocol");

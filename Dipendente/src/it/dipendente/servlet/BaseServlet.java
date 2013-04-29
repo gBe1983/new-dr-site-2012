@@ -24,7 +24,7 @@ public class BaseServlet extends HttpServlet {
 	private MyLogger log;
 
 	public BaseServlet() {
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 	}
 
 	public void init(ServletConfig config) throws ServletException {

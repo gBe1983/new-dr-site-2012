@@ -14,7 +14,7 @@
 	<%@include file="esportaPdf.jsp" %>
 </div>
 
-<div id="anteprima" title="Anteprima Curriculum">
+<div id="anteprimaCV" title="Anteprima Curriculum">
 	<%@include file="anteprima.jsp" %>
 </div>
 
@@ -37,7 +37,7 @@
 		</div>
 	</a>
 
-	<a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprima')">
+	<a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprimaCV')">
 		<div class="contenuti">
 			<div class="titoloContenuti">
 				Anteprima C.V.

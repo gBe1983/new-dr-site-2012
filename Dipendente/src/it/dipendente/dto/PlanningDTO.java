@@ -16,7 +16,14 @@ public class PlanningDTO {
 	private boolean attivo;
 	private boolean commessaAttiva;
 	private String codiceCommessa;
-
+	private double assenze;
+	private boolean ferie;
+	private boolean permessi;
+	private boolean mutua;
+	private boolean permessiNonRetribuiti;
+	
+	private int numeroSettimana;
+	
 	public PlanningDTO() {}
 	public PlanningDTO(int id_planning,
 						Date data,
@@ -26,7 +33,13 @@ public class PlanningDTO {
 						String note,
 						int id_associazione,
 						String descr_attivita,
-						String codiceCommessa){
+						String codiceCommessa,
+						int numeroSettimana,
+						double assenze,
+						boolean ferie,
+						boolean permessi,
+						boolean mutua,
+						boolean permessiNonRetribuiti){
 		this.id_planning=id_planning;
 		this.data=Calendar.getInstance();
 		this.data.setTime(data);
@@ -37,8 +50,53 @@ public class PlanningDTO {
 		this.id_associazione=id_associazione;
 		this.descr_attivita=descr_attivita;
 		this.codiceCommessa=codiceCommessa;
+		this.numeroSettimana=numeroSettimana;
+		this.assenze = assenze;
+		this.ferie = ferie;
+		this.permessi = permessi;
+		this.mutua = mutua;
+		this.permessiNonRetribuiti = permessiNonRetribuiti;
 	}
 
+	public double getAssenze() {
+		return assenze;
+	}
+	public void setAssenze(double assenze) {
+		this.assenze = assenze;
+	}
+	public boolean isFerie() {
+		return ferie;
+	}
+	public void setFerie(boolean ferie) {
+		this.ferie = ferie;
+	}
+	public boolean isPermessi() {
+		return permessi;
+	}
+	public void setPermessi(boolean permessi) {
+		this.permessi = permessi;
+	}
+	public boolean isMutua() {
+		return mutua;
+	}
+	public void setMutua(boolean mutua) {
+		this.mutua = mutua;
+	}
+	public boolean isPermessiNonRetribuiti() {
+		return permessiNonRetribuiti;
+	}
+	public void setPermessiNonRetribuiti(boolean permessiNonRetribuiti) {
+		this.permessiNonRetribuiti = permessiNonRetribuiti;
+	}
+	public void setCodiceCommessa(String codiceCommessa) {
+		this.codiceCommessa = codiceCommessa;
+	}
+	public int getNumeroSettimana() {
+		return numeroSettimana;
+	}
+	public void setNumeroSettimana(int numeroSettimana) {
+		this.numeroSettimana = numeroSettimana;
+	}
 	/**
 	 * @return the id_planning
 	 */
