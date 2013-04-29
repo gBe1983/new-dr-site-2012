@@ -18,7 +18,7 @@ public class GestioneRisorsa extends BaseServlet {
 
 	public GestioneRisorsa() {
 		super();
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 	}
 
 	/**

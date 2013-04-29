@@ -16,7 +16,7 @@ public class Associaz_Risors_Comm_DAO extends BaseDao{
 
 	public Associaz_Risors_Comm_DAO(Connection connessione) {
 		super(connessione);
-		log=new MyLogger(this.getClass());
+		log=new MyLogger(this.getClass().getName());
 	}
 
 	/**

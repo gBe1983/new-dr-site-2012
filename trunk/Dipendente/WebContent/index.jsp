@@ -1,5 +1,4 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="org.apache.commons.lang3.StringUtils"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,115 +17,22 @@
 		<link rel="stylesheet" type="text/css" href="css/menuRisorsa.css">
 		<link rel="stylesheet" type="text/css" href="css/visualizzaCurriculum.css">
 		<link rel="stylesheet" type="text/css" href="css/timeReport.css">
-		<link rel="stylesheet" type="text/css" href="css/fullcalendar.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery-bubble-popup-v3.css">
 		<link rel="stylesheet" type="text/css" href="css/menuLaterale.css">
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 
 		<!-- javascript -->
-		<script type="text/javascript" src="script/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="script/jquery-ui-1.8.23.custom.min.js"></script>
-		<script type="text/javascript" src="script/jquery-bubble-popup-v3.min.js"></script>
-		<script type="text/javascript" src="script/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="script/jquery-ui.js"></script>
 		<script type="text/javascript" src="script/controlloForm.js"></script>
-		<script type="text/javascript" src="script/fullcalendar.min.js"></script>
 		<script type="text/javascript" src="script/caricamentoEventi.js"></script>
 		<script type="text/javascript" src="script/curriculum.js"></script>
+		<script type="text/javascript" src="script/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="script/jquery-ui.js"></script>
 		
 	</head>
 	<script type='text/javascript'>
 
 		$(document).ready(function() {
 		
-			var date = new Date();
-			var d = date.getDate();
-			var m = date.getMonth();
-			var y = date.getFullYear();
-	
-			//caricamentoEventi();
-			$('#calendar').fullCalendar({
-				header: {
-					left: 'prevYear,prev,next,nextYear',
-					center: 'title',
-					right: 'month'
-				},
-				editable: true,
-				
-				events: {
-					url: './GestioneCalendarioEventi?azione=caricamentoEventi'
-				},
-				eventMouseover: function (event, element) {
-					
-					var dt = new Date(event.start);
-			    	var giorno = dt.getDay()-1; 
-					var mese = dt.getMonth() + 1;
-					var anno = dt.getFullYear(); 
-					var ora = dt.getHours(); 
-					var minuti = dt.getMinutes(); 
-					var secondi = dt.getSeconds();
-	
-					if(giorno < 10){
-						giorno = "0" + giorno;
-			    	}
-			    	if(mese < 10){
-						mese = "0" + mese;
-			    	}
-					if(ora < 10){
-						ora = "0" + ora;
-					}
-					if(minuti < 10){
-						minuti = "0" + minuti;
-					}
-	
-					secondi = "0" + secondi;
-	
-					var dataInizio = giorno + "-" + mese + "-" + anno + " " + ora + ":" + minuti + ":" + secondi;
-					
-					var dtFine = new Date(event.end);
-			    	var giornoFine = dtFine.getDay()-1; 
-					var meseFine = dtFine.getMonth() + 1;
-					var annoFine = dtFine.getFullYear(); 
-					var oraFine = dtFine.getHours(); 
-					var minutiFine = dtFine.getMinutes(); 
-					var secondiFine = dtFine.getSeconds();
-	
-					if(giornoFine < 10){
-						giornoFine = "0" + giornoFine;
-			    	}
-			    	if(meseFine < 10){
-			    		meseFine = "0" + meseFine;
-			    	}
-					if(oraFine < 10){
-						oraFine = "0" + oraFine;
-					}
-					if(minutiFine < 10){
-						minutiFine = "0" + minutiFine;
-					}
-	
-					secondiFine = "0" + secondiFine;
-	
-					var dataFine = giornoFine + "-" + meseFine + "-" + annoFine + " " + oraFine + ":" + minutiFine + ":" + secondiFine;
-										
-					$("."+event.className).CreateBubblePopup({
-	
-						position : 'top',
-						align	 : 'center',
-						
-						innerHtml: 'Titolo: ' + event.title + "<br /> Inizio Cons.: " + dataInizio + "<br /> Fine Cons.: " + dataFine + "<br /> Consulente: " + event.nominativo,
-	
-						innerHtmlStyle: {
-											color:'#00000', 
-											'text-align':'center'
-										},
-						themeName: 'all-black',
-						themePath: 'images'
-					});
-			    },
-			    eventMouseout: function (event) {
-			    	$("."+event.className).RemoveBubblePopup();	
-			    }
-			});
+			
 
 			var altezzaCorpo = document.getElementById("content_right").offsetHeight;
 			
@@ -151,7 +57,7 @@
 				
 				/* Prevenire l'evento predefinito (che sarebbe di seguire il collegamento) */
 				e.preventDefault();
-			});
+			});			
 			
 		});
 	
@@ -167,7 +73,8 @@
 				</div>
 				<div id="content_right">
 			<%
-				if(!StringUtils.isEmpty(azione)){
+				if(request.getParameter("azione") != null){
+					azione = request.getParameter("azione");
 					if(azione.equals("benvenuto")){
 			%>
 						<%@include file="strutturaSito/contenuto/benvenuto.jsp" %>
@@ -246,11 +153,11 @@
 			<%
 					}
 				}else{
-%>
-<%@include file="strutturaSito/contenuto/benvenuto.jsp" %>
-<%
-}
-%>
+			%>
+						<%@include file="strutturaSito/contenuto/benvenuto.jsp" %>
+			<%
+				}
+			%>
 				</div>
 				<div class="blank"></div>
 			</div>

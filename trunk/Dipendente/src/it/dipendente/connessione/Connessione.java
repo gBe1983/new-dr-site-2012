@@ -16,7 +16,7 @@ public class Connessione {
 	private String password;
 
 	public Connessione(ServletContext servletContext) {
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 		final String metodo="costruttore";
 		log.start(metodo);
 		try {

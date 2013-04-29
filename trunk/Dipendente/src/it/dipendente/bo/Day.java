@@ -14,7 +14,7 @@ public class Day{
 	public static SimpleDateFormat sdf=new SimpleDateFormat("_yyyy_MM_dd");
 
 	public Day(int dayOfWeek, String dayLabel) {
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 		final String metodo="costruttore";
 		log.start(metodo);
 		this.dayOfWeek = dayOfWeek;

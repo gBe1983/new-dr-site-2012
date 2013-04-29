@@ -16,7 +16,7 @@ public class Week{
 	private HashMap<String,List<PlanningDTO>>commesse;
 
 	public Week(int weekOfYear){
-		log =new MyLogger(this.getClass());
+		log =new MyLogger(this.getClass().getName());
 		final String metodo="costruttore";
 		log.start(metodo);
 		this.weekOfYear=weekOfYear;

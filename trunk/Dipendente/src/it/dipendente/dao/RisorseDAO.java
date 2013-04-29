@@ -15,7 +15,7 @@ public class RisorseDAO extends BaseDao{
 
 	public RisorseDAO(Connection connessione) {
 		super(connessione);
-		log=new MyLogger(this.getClass());
+		log=new MyLogger(this.getClass().getName());
 	}
 
 	public List<RisorsaDTO> getRisorse(){

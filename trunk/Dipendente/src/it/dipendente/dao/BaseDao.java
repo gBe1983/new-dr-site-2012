@@ -12,7 +12,7 @@ public class BaseDao {
 	private MyLogger log;
 
 	public BaseDao(Connection connessione) {
-		log=new MyLogger(this.getClass());
+		log=new MyLogger(this.getClass().getName());
 		this.connessione = connessione;
 	}
 

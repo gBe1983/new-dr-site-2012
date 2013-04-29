@@ -3,7 +3,7 @@
 .newsbox{margin: 0px; width:150px; padding:0px; background:#eee; /* border: 1px solid black; */}
 .newsbox ul{list-style-type:none;}
 .newsbox li{list-style-type:none;}
-.subtitle {width: 938px; font: bold 14px Verdana, Arial, Helvetica, sans-serif;	padding-top: 5px; padding-bottom: 5px; text-align : center !important; border-bottom:1px solid #bbb}
+.subtitle {width: 938px; font: bold 14px Verdana, Arial, Helvetica, sans-serif;	padding-top: 5px; padding-bottom: 5px; text-align : center; border-bottom:1px solid #bbb}
 
 
 #main{ width: 185px; margin-top: 15px; padding: 15px 15px 0px 0px; /*border: 1px solid black;*/ }

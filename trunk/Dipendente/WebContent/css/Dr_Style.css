@@ -2,7 +2,6 @@
 html,body{margin: 0;padding:0}
 body{font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 14px;color: #000;text-align:center}
 
-
 div#container{width: 1152px;margin: 20px auto ;text-align: left; background:#fff;border:1px solid #bbb}
 
 h1,h2{margin: 0;padding:0}
@@ -108,7 +107,7 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 .sceltaCurriculum{ text-align: right; padding-right: 15px;}
 #toolbar{ text-align: right; padding-right: 5px;  /*border:1px solid black;*/}
 #toolbar a {padding: 0 5px 0 5px; border-right: 1px solid black;}
-.spazioUltra{margin-top: 40px;}
+.spazioUltra{margin: 40px 0px;}
 
 #channel{ font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 12px; margin: 45px;width: 900px; text-align: center; border-collapse: collapse; margin: auto; }
 #channel th{ font-size: 13px; font-weight: normal; padding: 8px; background: #c9ba9d /*#b9c9fe url(../images/gradhead.png) repeat-x*/; border-top: 2px solid #d3ddff; border-bottom: 1px solid #fff; color: #FFF /*#039*/; }
@@ -129,15 +128,27 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 
 #finestra label,#finestra textarea,#finestra input,#finestra button{ font-size: 12px; }
 
+#finestraMenuLaterale{display: none; }
+
+#finestraMenuLaterale{text-align: left; }
+
+#finestraMenuLaterale label,#finestraMenuLaterale textarea,#finestraMenuLaterale input,#finestraMenuLaterale button{ font-size: 12px; }
+
+
 #modulo textarea{ resize: none; }
 
 /* end esporta pdf */
 
 /* anteprima curriculum vitae */
 
-#anteprima{ display: none; text-align: left; }
+#anteprimaCV{ display: none; text-align: left; }
 
-#anteprima label,#anteprima textarea,#anteprima input,#anteprima button{ font-size: 12px; }
+#anteprimaCV label,#anteprimaCV textarea,#anteprimaCV input,#anteprimaCV button{ font-size: 12px; }
+
+#anteprimaMenuLaterale{ display: none; text-align: left; }
+
+#anteprimaMenuLaterale label,#anteprimaMenuLaterale textarea,#anteprimaMenuLaterale input,#anteprimaMenuLaterale button{ font-size: 12px; }
+
 
 .intestazioneCurriculum{ font-size:15px; letter-spacing: 4px; margin:0; padding:0; }
 
