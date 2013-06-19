@@ -15,12 +15,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 public class PlanningDAO extends BaseDao{
-	private MyLogger log;
+	private Logger log;
 
 	public PlanningDAO(Connection connessione) {
 		super(connessione);
-		log=new MyLogger(PlanningDAO.class.getName());
+		log= Logger.getLogger(BaseDao.class);
 	}
 
 	/**
@@ -28,10 +30,34 @@ public class PlanningDAO extends BaseDao{
 	 * @param planning
 	 */
 	public int aggiornamentoPlanning(PlanningDTO planning){
-		final String metodo="aggiornamentoPlanning";
-		log.start(metodo);
+		
+		log.info("metodo: aggiornamentoPlanning");
+		
 		String sql = "UPDATE tbl_planning SET num_ore=?,straordinari=?,orario=?,note=?,ferie = ?,permessi = ?,mutua = ?,permessiNonRetribuiti = ? WHERE id_planning=?";
-		log.debug(metodo,"sql:"+sql);
+		
+		log.info("sql: UPDATE tbl_planning SET num_ore="+planning.getNumeroOre()+",straordinari="+planning.getStraordinari()+",orario="+planning.getOrario()+",note="+planning.getNote());
+		if(planning.isFerie()){
+			log.info("ferie = "+ planning.getAssenze());
+		}else{
+			log.info("ferie = 0.0");
+		}
+		if(planning.isPermessi()){
+			log.info("permessi = "+ planning.getAssenze());
+		}else{
+			log.info("permessi = 0.0");
+		}
+		if(planning.isMutua()){
+			log.info("mutua = "+ planning.getAssenze());
+		}else{
+			log.info("mutua = 0.0");
+		}
+		if(planning.isPermessiNonRetribuiti()){
+			log.info("permessiNonRetribuiti = "+ planning.getAssenze());
+		}else{
+			log.info("permessiNonRetribuiti = 0.0");
+		}
+		log.info(" WHERE id_planning="+planning.getId_planning());
+		
 		PreparedStatement ps=null;
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -62,17 +88,16 @@ public class PlanningDAO extends BaseDao{
 			ps.setInt(9, planning.getId_planning());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error(metodo, "update tbl_planning for planning:"+planning.getId_planning(), e);
+			log.error("errore sql:"+ e);
 		}finally{
 			close(ps);
-			log.end(metodo);
 		}
 		return 0;
 	}
 
 	public ArrayList getGiornate(int id_risorsa, Calendar day,String parametro){
-		final String metodo="getGiornate";
-		log.start(metodo);
+		
+		log.info("metodo: getGiornate");
 		
 		ArrayList caricamentoGiornate = new ArrayList();
 		ArrayList<PlanningDTO> listaGiorni = new ArrayList<PlanningDTO>();
@@ -91,7 +116,13 @@ public class PlanningDAO extends BaseDao{
 				.append(" and asscommessa.id_commessa=commessa.id_commessa")
 				.append(" and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true")
 				.append(" order by data");
-		log.debug(metodo,"sql:"+sql.toString());
+		
+		log.info("sql: select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, " +
+				" planning.permessiNonRetribuiti,asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice " +
+				" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa " +
+				" where planning.id_associazione=asscommessa.id_associazione " +
+				" and asscommessa.id_commessa=commessa.id_commessa " +
+				" and planning.data like "+now+" and asscommessa.id_risorsa="+id_risorsa+" and planning.attivo = true order by data");
 		
 		String descrizioneCommessa = "";
 		
@@ -99,9 +130,7 @@ public class PlanningDAO extends BaseDao{
 		try {
 			ps = connessione.prepareStatement(sql.toString());
 			ps.setString(1,now);
-			log.debug(metodo,"now:"+now);
 			ps.setInt(2,id_risorsa);
-			log.debug(metodo,"id_risorsa:"+id_risorsa);
 			rs = ps.executeQuery();
 			while (rs.next()){
 					Calendar calendar = Calendar.getInstance();
@@ -151,9 +180,8 @@ public class PlanningDAO extends BaseDao{
 									permessiNonRetribuiti);
 					listaGiorni.add(planning);
 					
-					MyLogger log = new MyLogger("GestioneReport");
-					log.debug("getGiornate", "giorno " + new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()));
-					log.debug("getGiornate","numeroSettimana " + numeroSettimana);
+					log.info("getGiornate giorno " + new SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime()));
+					log.info("getGiornate numeroSettimana " + numeroSettimana);
 					
 					
 					if(listaCommesse.size() == 0){
@@ -177,10 +205,9 @@ public class PlanningDAO extends BaseDao{
 					}
 			}
 		} catch (SQLException e) {
-			log.error(metodo, "select tbl_planning,tbl_associaz_risor_comm,tbl_commesse for risorsa:"+id_risorsa, e);
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps,rs);
-			log.end(metodo);
 		}
 		
 		caricamentoGiornate.add(listaCommesse);
@@ -190,6 +217,8 @@ public class PlanningDAO extends BaseDao{
 	}
 	
 	public HashMap<Integer, String> elencoGiorniDellaSettimana(){
+		
+		log.info("metodo: elencoGiorniDellaSettimana");
 		
 		HashMap<Integer, String> elencoGiorni = new HashMap<Integer,String>();
 		elencoGiorni.put(2,"Lunedi");
@@ -204,8 +233,8 @@ public class PlanningDAO extends BaseDao{
 	}
 	
 	public HashMap<String, Boolean> caricamentoFlagAssenze(int id_risorsa){
-		final String metodo="caricamentoFlagAssenze";
-		log.start(metodo);
+		
+		log.info("metodo: caricamentoFlagAssenze");
 		
 		HashMap flagAssenze = new HashMap<String, Boolean>();
 		
@@ -216,6 +245,8 @@ public class PlanningDAO extends BaseDao{
 		
 		Calendar calendar = Calendar.getInstance();
 		String now = new SimpleDateFormat("yyyy-%").format(calendar.getTime());
+		
+		log.info("sql : select altro.* from tbl_commesse as commessa, tbl_associaz_risor_comm as asscomm, tbl_altro as altro where id_tipologia_commessa = 4 and commessa.id_commessa = altro.id_commessa and commessa.data_inizio like "+now+" and commessa.id_commessa = asscomm.id_commessa and asscomm.id_risorsa = "+id_risorsa);
 		
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -230,7 +261,7 @@ public class PlanningDAO extends BaseDao{
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}
 		
 		return flagAssenze;

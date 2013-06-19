@@ -100,6 +100,7 @@ function compilazione(elm,commessa,name,note){
 	var tipologiaAssenze = "tipologiaAssenze"+name;
 	var parametri = "parametri"+name;
 	
+	
 	document.compilaOre.oreOrd.style.border = "1px solid #CCC";
 	document.compilaOre.oreStrao.style.border = "1px solid #CCC";
 	document.compilaOre.assenze.style.border = "1px solid #CCC";

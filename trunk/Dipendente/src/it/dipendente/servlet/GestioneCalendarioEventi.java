@@ -1,12 +1,10 @@
 package it.dipendente.servlet;
 
-import it.dipendente.dao.CurriculumDAO;
 import it.dipendente.dao.EventoDAO;
 import it.dipendente.dto.EventoDTO;
 import it.dipendente.dto.RisorsaDTO;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 
 /**
@@ -25,6 +25,8 @@ import com.google.gson.Gson;
  */
 public class GestioneCalendarioEventi extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	
+	Logger log = Logger.getLogger(GestioneCalendarioEventi.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,6 +66,9 @@ public class GestioneCalendarioEventi extends BaseServlet {
 		String azione = request.getParameter("azione");
 		
 		if(azione.equals("inserimentoEvento") || azione.equals("aggiornaEvento")){
+			
+			log.info("-------------------------------------------------------------------------------------------------------");
+			log.info("azione: " + azione);
 		
 			SimpleDateFormat formatoSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			SimpleDateFormat formatoWeb = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -82,6 +87,8 @@ public class GestioneCalendarioEventi extends BaseServlet {
 			if(azione.equals("inserimentoEvento")){
 				
 				eDAO.inserisciEvento(evento,((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
+				
+				log.info("url: ./index.jsp?azione=consulenzaOnline");
 				response.sendRedirect("./index.jsp?azione=consulenzaOnline");
 				
 			}else{
@@ -93,11 +100,16 @@ public class GestioneCalendarioEventi extends BaseServlet {
 				
 				request.setAttribute("evento", caricamentoEvento);
 				
+				log.info("url: /index.jsp?azione=visualizzaEvento");
+				
 				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=visualizzaEvento");
 				rd.forward(request, response);
 			}
 			
 		}else if(azione.equals("caricamentoEventi")){
+			
+			log.info("-------------------------------------------------------------------------------------------------------");
+			log.info("azione: " + azione);
 			
 			response.setContentType("application/json");       
 			Gson gson = new Gson();
@@ -110,6 +122,9 @@ public class GestioneCalendarioEventi extends BaseServlet {
 			
 		}else if(azione.equals("visualizzaEvento") || azione.equals("modificaEvento")){
 			
+			log.info("-------------------------------------------------------------------------------------------------------");
+			log.info("azione: " + azione);
+			
 			int idEvento = Integer.parseInt(request.getParameter("evento"));
 			
 			EventoDTO evento = eDAO.caricamentoEvento(idEvento);
@@ -117,14 +132,23 @@ public class GestioneCalendarioEventi extends BaseServlet {
 			request.setAttribute("evento", evento);
 			
 			if(azione.equals("modificaEvento")){
+				
+				log.info("/index.jsp?azione=modificaEvento");
+				
 				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=modificaEvento");
 				rd.forward(request, response);
 			}else{
+				
+				log.info("/index.jsp?azione=visualizzaEvento");
+				
 				rd = getServletContext().getRequestDispatcher("/index.jsp?azione=visualizzaEvento");
 				rd.forward(request, response);
 			}
 			
 		}else if(azione.equals("eliminaEvento")){
+			
+			log.info("-------------------------------------------------------------------------------------------------------");
+			log.info("azione: " + azione);
 			
 			int idEvento = Integer.parseInt(request.getParameter("evento"));
 			

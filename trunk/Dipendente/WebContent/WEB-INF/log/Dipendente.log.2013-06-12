@@ -1,0 +1,393 @@
+12-06-2013 12:16:28:310 | [it.dipendente.connessione.Connessione] | INFO | <init>:21 | metodo: Connessione - classe: Connessione 
+ 12-06-2013 12:16:28:724 | [it.dipendente.connessione.Connessione] | INFO | <init>:35 | Endmetodo: Connessione - classe Connessione 
+ 12-06-2013 12:16:28:740 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:16:28:741 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:16:28:743 | [it.dipendente.servlet.GestioneRisorsa] | DEBUG | debug:45 | [processRequest][login idRisorsa46] 
+ 12-06-2013 12:16:28:744 | [it.dipendente.dao.RisorsaDAO] | DEBUG | debug:45 | [loginRisorsa][sql:SELECT id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile FROM tbl_risorse WHERE id_risorsa=?] 
+ 12-06-2013 12:16:36:111 | [it.dipendente.connessione.Connessione] | INFO | <init>:21 | metodo: Connessione - classe: Connessione 
+ 12-06-2013 12:16:36:129 | [it.dipendente.connessione.Connessione] | INFO | <init>:35 | Endmetodo: Connessione - classe Connessione 
+ 12-06-2013 12:16:36:154 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:16:36:155 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:16:36:156 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:16:45:204 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:16:45:205 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:16:47:894 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:16:47:895 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:16:47:896 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:16:56:894 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:16:56:895 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:17:25:133 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:17:25:136 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:17:25:136 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:18:13:942 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:18:13:947 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:19:07:323 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:19:07:325 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:19:07:326 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:20:05:038 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:05:039 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:20:05:040 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:20:10:962 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:10:964 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:20:15:258 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:15:260 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:20:15:261 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 12:20:28:671 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:28:672 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:20:36:121 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:36:122 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 12:20:48:084 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 12:20:48:086 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:52:26:968 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:52:26:970 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:52:47:604 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:52:47:607 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:52:55:006 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:52:55:008 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:52:55:015 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:53:02:552 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:02:554 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:53:06:079 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:06:080 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:53:06:080 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:53:13:354 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:13:356 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:53:27:348 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:27:351 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:53:32:301 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:32:302 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:53:32:303 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:53:38:917 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:53:38:918 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:54:30:595 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:54:30:597 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:54:39:375 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:54:39:377 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:54:39:378 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:56:10:318 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:56:10:321 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:56:12:977 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:56:12:978 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:56:12:979 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:57:55:426 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:57:55:428 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:57:55:428 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:58:02:532 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:58:02:533 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:58:04:488 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:58:04:492 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:58:04:492 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 13:58:11:133 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:58:11:134 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:59:39:385 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:59:39:387 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 13:59:45:490 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 13:59:45:493 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:01:30:291 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:01:30:293 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:02:07:779 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:02:07:781 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:02:11:882 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:02:11:883 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:04:58:299 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:04:58:301 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:08:16:028 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:08:16:029 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:09:29:050 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:09:29:051 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:11:20:006 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:11:20:007 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:11:43:497 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:11:43:498 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:11:43:499 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 14:11:47:629 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:11:47:641 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:12:54:321 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:12:54:323 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:13:07:044 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:13:07:049 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:14:25:142 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:14:25:146 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:15:33:288 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:15:33:289 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:34:31:624 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:34:31:627 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:34:31:627 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 14:37:52:815 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:37:52:818 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:37:52:819 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 14:39:04:905 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 14:39:04:906 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 14:39:04:907 | [it.dipendente.servlet.GestioneCurriculum] | INFO | processRequest:70 | azione: caricamentoCv 
+ 12-06-2013 17:12:42:722 | [it.dipendente.connessione.Connessione] | INFO | <init>:21 | metodo: Connessione - classe: Connessione 
+ 12-06-2013 17:12:43:261 | [it.dipendente.connessione.Connessione] | INFO | <init>:35 | Endmetodo: Connessione - classe Connessione 
+ 12-06-2013 17:12:43:785 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 17:12:43:786 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 17:12:43:789 | [it.dipendente.servlet.GestioneRisorsa] | DEBUG | debug:45 | [processRequest][login idRisorsa46] 
+ 12-06-2013 17:12:43:789 | [it.dipendente.dao.RisorsaDAO] | DEBUG | debug:45 | [loginRisorsa][sql:SELECT id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile FROM tbl_risorse WHERE id_risorsa=?] 
+ 12-06-2013 17:25:41:188 | [it.dipendente.connessione.Connessione] | INFO | <init>:21 | metodo: Connessione - classe: Connessione 
+ 12-06-2013 17:25:41:211 | [it.dipendente.connessione.Connessione] | INFO | <init>:35 | Endmetodo: Connessione - classe Connessione 
+ 12-06-2013 17:25:41:230 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 17:25:41:231 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 17:25:52:406 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][sql:select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa where planning.id_associazione=asscommessa.id_associazione and asscommessa.id_commessa=commessa.id_commessa and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true order by data] 
+ 12-06-2013 17:25:52:410 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][now:2013-06-%] 
+ 12-06-2013 17:25:52:410 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][id_risorsa:46] 
+ 12-06-2013 17:25:52:626 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 01-06-2013] 
+ 12-06-2013 17:25:52:626 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:25:52:630 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 02-06-2013] 
+ 12-06-2013 17:25:52:632 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana -1] 
+ 12-06-2013 17:25:52:633 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 03-06-2013] 
+ 12-06-2013 17:25:52:633 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:634 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 04-06-2013] 
+ 12-06-2013 17:25:52:634 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:635 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 05-06-2013] 
+ 12-06-2013 17:25:52:635 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:636 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 06-06-2013] 
+ 12-06-2013 17:25:52:636 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:638 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 07-06-2013] 
+ 12-06-2013 17:25:52:638 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:639 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 08-06-2013] 
+ 12-06-2013 17:25:52:639 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:641 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 09-06-2013] 
+ 12-06-2013 17:25:52:641 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:25:52:642 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 10-06-2013] 
+ 12-06-2013 17:25:52:643 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:644 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 11-06-2013] 
+ 12-06-2013 17:25:52:644 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:645 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 12-06-2013] 
+ 12-06-2013 17:25:52:645 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:648 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 13-06-2013] 
+ 12-06-2013 17:25:52:648 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:650 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 14-06-2013] 
+ 12-06-2013 17:25:52:650 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:651 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 15-06-2013] 
+ 12-06-2013 17:25:52:651 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:653 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 16-06-2013] 
+ 12-06-2013 17:25:52:653 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:25:52:654 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 17-06-2013] 
+ 12-06-2013 17:25:52:654 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:655 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 18-06-2013] 
+ 12-06-2013 17:25:52:656 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:656 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 19-06-2013] 
+ 12-06-2013 17:25:52:657 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:657 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 20-06-2013] 
+ 12-06-2013 17:25:52:659 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:659 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 21-06-2013] 
+ 12-06-2013 17:25:52:660 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:660 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 22-06-2013] 
+ 12-06-2013 17:25:52:661 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:25:52:663 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 23-06-2013] 
+ 12-06-2013 17:25:52:664 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:25:52:666 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 24-06-2013] 
+ 12-06-2013 17:25:52:666 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:667 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 25-06-2013] 
+ 12-06-2013 17:25:52:668 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:668 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 26-06-2013] 
+ 12-06-2013 17:25:52:668 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:669 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 27-06-2013] 
+ 12-06-2013 17:25:52:669 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:670 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 28-06-2013] 
+ 12-06-2013 17:25:52:670 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:671 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 29-06-2013] 
+ 12-06-2013 17:25:52:672 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:25:52:672 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 30-06-2013] 
+ 12-06-2013 17:25:52:672 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:539 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 17:26:14:543 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 17:26:14:544 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][sql:select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa where planning.id_associazione=asscommessa.id_associazione and asscommessa.id_commessa=commessa.id_commessa and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true order by data] 
+ 12-06-2013 17:26:14:548 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][now:2013-06-%] 
+ 12-06-2013 17:26:14:548 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][id_risorsa:46] 
+ 12-06-2013 17:26:14:564 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 01-06-2013] 
+ 12-06-2013 17:26:14:565 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:26:14:565 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 02-06-2013] 
+ 12-06-2013 17:26:14:566 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana -1] 
+ 12-06-2013 17:26:14:567 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 03-06-2013] 
+ 12-06-2013 17:26:14:567 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:567 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 04-06-2013] 
+ 12-06-2013 17:26:14:568 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:569 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 05-06-2013] 
+ 12-06-2013 17:26:14:569 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:570 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 06-06-2013] 
+ 12-06-2013 17:26:14:570 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:570 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 07-06-2013] 
+ 12-06-2013 17:26:14:571 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:572 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 08-06-2013] 
+ 12-06-2013 17:26:14:572 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:573 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 09-06-2013] 
+ 12-06-2013 17:26:14:573 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:26:14:574 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 10-06-2013] 
+ 12-06-2013 17:26:14:575 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:579 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 11-06-2013] 
+ 12-06-2013 17:26:14:580 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:581 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 12-06-2013] 
+ 12-06-2013 17:26:14:581 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:583 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 13-06-2013] 
+ 12-06-2013 17:26:14:583 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:584 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 14-06-2013] 
+ 12-06-2013 17:26:14:584 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:585 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 15-06-2013] 
+ 12-06-2013 17:26:14:585 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:586 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 16-06-2013] 
+ 12-06-2013 17:26:14:586 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:14:587 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 17-06-2013] 
+ 12-06-2013 17:26:14:587 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:587 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 18-06-2013] 
+ 12-06-2013 17:26:14:588 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:589 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 19-06-2013] 
+ 12-06-2013 17:26:14:589 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:590 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 20-06-2013] 
+ 12-06-2013 17:26:14:590 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:590 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 21-06-2013] 
+ 12-06-2013 17:26:14:591 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:592 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 22-06-2013] 
+ 12-06-2013 17:26:14:592 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:14:593 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 23-06-2013] 
+ 12-06-2013 17:26:14:593 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:14:594 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 24-06-2013] 
+ 12-06-2013 17:26:14:594 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:595 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 25-06-2013] 
+ 12-06-2013 17:26:14:595 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:596 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 26-06-2013] 
+ 12-06-2013 17:26:14:597 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:597 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 27-06-2013] 
+ 12-06-2013 17:26:14:601 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:602 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 28-06-2013] 
+ 12-06-2013 17:26:14:602 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:603 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 29-06-2013] 
+ 12-06-2013 17:26:14:603 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:14:604 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 30-06-2013] 
+ 12-06-2013 17:26:14:604 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:38:974 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 17:26:38:976 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 17:26:38:977 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [aggiornamentoPlanning][sql:UPDATE tbl_planning SET num_ore=?,straordinari=?,orario=?,note=?,ferie = ?,permessi = ?,mutua = ?,permessiNonRetribuiti = ? WHERE id_planning=?] 
+ 12-06-2013 17:26:39:029 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][sql:select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa where planning.id_associazione=asscommessa.id_associazione and asscommessa.id_commessa=commessa.id_commessa and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true order by data] 
+ 12-06-2013 17:26:39:030 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][now:2013-06-%] 
+ 12-06-2013 17:26:39:030 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][id_risorsa:46] 
+ 12-06-2013 17:26:39:050 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 01-06-2013] 
+ 12-06-2013 17:26:39:051 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:26:39:052 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 02-06-2013] 
+ 12-06-2013 17:26:39:052 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana -1] 
+ 12-06-2013 17:26:39:053 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 03-06-2013] 
+ 12-06-2013 17:26:39:053 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:054 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 04-06-2013] 
+ 12-06-2013 17:26:39:054 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:055 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 05-06-2013] 
+ 12-06-2013 17:26:39:055 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:056 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 06-06-2013] 
+ 12-06-2013 17:26:39:056 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:057 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 07-06-2013] 
+ 12-06-2013 17:26:39:057 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:059 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 08-06-2013] 
+ 12-06-2013 17:26:39:060 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:062 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 09-06-2013] 
+ 12-06-2013 17:26:39:063 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:26:39:063 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 10-06-2013] 
+ 12-06-2013 17:26:39:064 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:065 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 11-06-2013] 
+ 12-06-2013 17:26:39:065 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:066 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 12-06-2013] 
+ 12-06-2013 17:26:39:066 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:067 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 13-06-2013] 
+ 12-06-2013 17:26:39:067 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:068 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 14-06-2013] 
+ 12-06-2013 17:26:39:068 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:069 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 15-06-2013] 
+ 12-06-2013 17:26:39:069 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:070 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 16-06-2013] 
+ 12-06-2013 17:26:39:070 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:26:39:071 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 17-06-2013] 
+ 12-06-2013 17:26:39:072 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:073 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 18-06-2013] 
+ 12-06-2013 17:26:39:073 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:078 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 19-06-2013] 
+ 12-06-2013 17:26:39:078 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:079 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 20-06-2013] 
+ 12-06-2013 17:26:39:079 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:080 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 21-06-2013] 
+ 12-06-2013 17:26:39:080 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:081 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 22-06-2013] 
+ 12-06-2013 17:26:39:081 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:26:39:082 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 23-06-2013] 
+ 12-06-2013 17:26:39:082 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:26:39:083 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 24-06-2013] 
+ 12-06-2013 17:26:39:083 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:084 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 25-06-2013] 
+ 12-06-2013 17:26:39:085 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:086 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 26-06-2013] 
+ 12-06-2013 17:26:39:086 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:087 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 27-06-2013] 
+ 12-06-2013 17:26:39:087 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:093 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 28-06-2013] 
+ 12-06-2013 17:26:39:093 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:094 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 29-06-2013] 
+ 12-06-2013 17:26:39:094 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:26:39:095 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 30-06-2013] 
+ 12-06-2013 17:26:39:095 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:264 | [it.dipendente.connessione.Connessione] | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+ 12-06-2013 17:29:23:266 | [it.dipendente.connessione.Connessione] | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+ 12-06-2013 17:29:23:267 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][sql:select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa where planning.id_associazione=asscommessa.id_associazione and asscommessa.id_commessa=commessa.id_commessa and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true order by data] 
+ 12-06-2013 17:29:23:268 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][now:2013-05-%] 
+ 12-06-2013 17:29:23:268 | [it.dipendente.dao.PlanningDAO] | DEBUG | debug:45 | [getGiornate][id_risorsa:46] 
+ 12-06-2013 17:29:23:289 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 01-05-2013] 
+ 12-06-2013 17:29:23:290 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:29:23:290 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 02-05-2013] 
+ 12-06-2013 17:29:23:291 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:29:23:291 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 03-05-2013] 
+ 12-06-2013 17:29:23:291 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:29:23:292 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 04-05-2013] 
+ 12-06-2013 17:29:23:292 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:29:23:293 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 05-05-2013] 
+ 12-06-2013 17:29:23:293 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 0] 
+ 12-06-2013 17:29:23:294 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 06-05-2013] 
+ 12-06-2013 17:29:23:294 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:294 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 07-05-2013] 
+ 12-06-2013 17:29:23:295 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:295 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 08-05-2013] 
+ 12-06-2013 17:29:23:295 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:296 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 09-05-2013] 
+ 12-06-2013 17:29:23:297 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:298 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 10-05-2013] 
+ 12-06-2013 17:29:23:298 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:298 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 11-05-2013] 
+ 12-06-2013 17:29:23:299 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:299 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 12-05-2013] 
+ 12-06-2013 17:29:23:300 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 1] 
+ 12-06-2013 17:29:23:300 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 13-05-2013] 
+ 12-06-2013 17:29:23:301 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:301 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 14-05-2013] 
+ 12-06-2013 17:29:23:302 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:302 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 15-05-2013] 
+ 12-06-2013 17:29:23:303 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:304 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 16-05-2013] 
+ 12-06-2013 17:29:23:304 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:305 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 17-05-2013] 
+ 12-06-2013 17:29:23:305 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:306 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 18-05-2013] 
+ 12-06-2013 17:29:23:306 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:307 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 19-05-2013] 
+ 12-06-2013 17:29:23:307 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 2] 
+ 12-06-2013 17:29:23:308 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 20-05-2013] 
+ 12-06-2013 17:29:23:308 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:309 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 21-05-2013] 
+ 12-06-2013 17:29:23:309 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:310 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 22-05-2013] 
+ 12-06-2013 17:29:23:310 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:311 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 23-05-2013] 
+ 12-06-2013 17:29:23:311 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:312 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 24-05-2013] 
+ 12-06-2013 17:29:23:312 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:313 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 25-05-2013] 
+ 12-06-2013 17:29:23:313 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 4] 
+ 12-06-2013 17:29:23:314 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 26-05-2013] 
+ 12-06-2013 17:29:23:314 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 3] 
+ 12-06-2013 17:29:23:315 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 27-05-2013] 
+ 12-06-2013 17:29:23:315 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 5] 
+ 12-06-2013 17:29:23:316 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 28-05-2013] 
+ 12-06-2013 17:29:23:316 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 5] 
+ 12-06-2013 17:29:23:317 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 29-05-2013] 
+ 12-06-2013 17:29:23:317 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 5] 
+ 12-06-2013 17:29:23:319 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 30-05-2013] 
+ 12-06-2013 17:29:23:319 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 5] 
+ 12-06-2013 17:29:23:320 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][giorno 31-05-2013] 
+ 12-06-2013 17:29:23:320 | [GestioneReport] | DEBUG | debug:45 | [getGiornate][numeroSettimana 5] 
+ 

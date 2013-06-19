@@ -11,7 +11,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="it.dipendente.dto.CommessaDTO"%>
-
+<%@page import="it.util.log.MyLogger"%>
 
 <%
 SimpleDateFormat sdf=new SimpleDateFormat("d");
@@ -44,9 +44,8 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 		}
 		
 %>
-		
 
-<%@page import="it.util.log.MyLogger"%><div class="subtitle">Consuntivazione <%=intestazioneMeseAnno %></div>
+	<div class="subtitle">Consuntivazione <%=intestazioneMeseAnno %></div>
 		<form name="navigatore" action="./GestioneReport" method="post" class="spazioUltra">
 		<input type="hidden" name="azione" value="compilaTimeReport"/>
 		<table class="timeReportNavigator" align="center">

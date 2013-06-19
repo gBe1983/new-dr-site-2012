@@ -16,7 +16,7 @@
 			<div class="subtitle ">Anteprima Intestazione C.V.</div>
 			
 			<div id="toolbar" class="spazioUltra">
-				<a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=risorsa.getIdRisorsa() %>" >Indietro</a>
+				<a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=risorsa.getIdRisorsa() %>" >Indietro</a>
 			</div>
 
 			<div class="spazioUltra">
@@ -74,7 +74,7 @@
 						<div class="subtitle">Anteprima Esperienze Lavorative</div>
 						
 						<div id="toolbar" class="spazioUltra">
-							<a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>" >Indietro</a>
+							<a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=curriculum.getId_risorsa() %>" >Indietro</a>
 						</div>
 
 						<div class="spazioUltra">
@@ -128,7 +128,7 @@
 					<div class="subtitle">Anteprima Dettaglio Lavorativo</div>
 					
 					<div id="toolbar" class="spazioUltra">
-						<a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=dettaglio.getId_risorsa() %>" >Indietro</a>
+						<a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=dettaglio.getId_risorsa() %>" >Indietro</a>
 					</div>
 
 					<div class="spazioUltra">

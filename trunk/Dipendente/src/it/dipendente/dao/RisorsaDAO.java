@@ -9,26 +9,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO per reperire la risorsa
-	private MyLogger log;
+	private Logger log;
 
 	public RisorsaDAO(Connection connessione) {
 		super(connessione);
-		log =new MyLogger(this.getClass().getName());
+		log = Logger.getLogger(RisorsaDAO.class);
 	}
 
 	public RisorsaDTO loginRisorsa(int idRisorsa){
-		final String metodo="loginRisorsa";
-		log.start(metodo);
+		
+		log.info("metodo: loginRisorsa");
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
 		StringBuilder sql = new StringBuilder("SELECT ");
-		sql	.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,")
+		sql.append("id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,")
 				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
 				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
 				.append("FROM tbl_risorse WHERE id_risorsa=?");
-		log.debug(metodo,"sql:"+sql.toString());
+		
+		log.info("sql: SELECT id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono, cellulare,fax,indirizzo,citta,provincia,cap, " +
+				"	   nazione,servizio_militare,patente,costo,occupato,tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile " +
+				"      FROM tbl_risorse WHERE id_risorsa="+idRisorsa);
+		
 		try {
 			ps = connessione.prepareStatement(sql.toString());
 			ps.setInt(1, idRisorsa);
@@ -62,10 +68,9 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 														rs.getBoolean("cv_visibile"));
 			}
 		} catch (SQLException e) {
-			log.error(metodo, "select tbl_risorse for risorsa:"+idRisorsa, e);
+			log.error("errore sql: "+ e);
 		}finally{
 			close(ps,rs);
-			log.end(metodo);
 		}
 		return risorsa;
 	}
@@ -75,8 +80,9 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 	 * @return profilo della risorsa in parametro
 	 */
 	public RisorsaDTO visualizzaProfilo(int idRisorsa){
-		final String metodo="visualizzaProfilo";
-		log.start(metodo);
+		
+		log.info("metodo: visualizzaProfilo");
+		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		RisorsaDTO risorsa = null;
@@ -85,7 +91,10 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 				.append("cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,")
 				.append("tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile ")
 				.append("FROM tbl_risorse WHERE id_risorsa=?");
-		log.debug(metodo,"sql:"+sql.toString());
+		
+		log.info("sql: SELECT id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,cellulare,fax,indirizzo,citta,provincia,cap," +
+				" nazione,servizio_militare,patente,costo,occupato,tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile FROM tbl_risorse WHERE id_risorsa=" +idRisorsa);
+		
 		try {
 			ps = connessione.prepareStatement(sql.toString());
 			ps.setInt(1, idRisorsa);
@@ -119,18 +128,23 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 														rs.getBoolean("cv_visibile"));
 			}
 		} catch (SQLException e) {
-			log.error(metodo, "select tbl_risorse for risorsa:"+idRisorsa, e);
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps,rs);
-			log.end(metodo);
 		}
 		return risorsa;
 	}
 
 	public String modificaRisorsa(RisorsaDTO risorsa){
+		
+		log.info("metodo: modificaRisorsa");
+		
 		PreparedStatement ps=null;
 		int esitoModificaRisorsa = 0;
 		String sql = "update tbl_risorse set cognome = ?, nome = ?, data_nascita = ?, luogo_nascita = ?, sesso = ?, cod_fiscale = ?, mail = ?, telefono = ?, cellulare = ?, fax = ?, indirizzo = ?, citta = ?, provincia = ?, cap = ?, nazione = ?, servizio_militare = ?, patente = ?, occupato = ?, figura_professionale = ?, seniority = ? where id_risorsa = ?";
+		
+		log.info("sql update tbl_risorse set cognome = "+risorsa.getCognome()+", nome = "+risorsa.getNome()+", data_nascita = "+risorsa.getDataNascita()+", luogo_nascita = "+risorsa.getLuogoNascita()+", sesso = "+risorsa.getSesso()+", cod_fiscale = "+risorsa.getCodiceFiscale()+", mail = "+risorsa.getEmail()+", telefono = "+risorsa.getTelefono()+", cellulare = "+risorsa.getCellulare()+", fax = "+risorsa.getFax()+", indirizzo = "+risorsa.getIndirizzo()+", citta = "+risorsa.getCitta()+", provincia = "+risorsa.getProvincia()+", cap = "+risorsa.getCap()+", nazione = "+risorsa.getNazione()+", servizio_militare = "+risorsa.getServizioMilitare()+", patente = "+risorsa.getPatente()+", occupato = "+risorsa.isOccupato()+", figura_professionale = "+risorsa.getFiguraProfessionale()+", seniority = "+risorsa.getSeniority()+" where id_risorsa = "+risorsa.getIdRisorsa());
+		
 		try {
 			ps = connessione.prepareStatement(sql);
 
@@ -143,8 +157,9 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 			ps.setString(6, risorsa.getCodiceFiscale());
 			ps.setString(7, risorsa.getEmail());
 			ps.setString(8, risorsa.getTelefono());
-			ps.setString(9, risorsa.getFax());
-			ps.setString(10, risorsa.getCellulare());
+			ps.setString(9, risorsa.getCellulare());
+			ps.setString(10, risorsa.getFax());
+			
 
 			//residenza
 			ps.setString(11, risorsa.getIndirizzo());
@@ -164,7 +179,7 @@ public class RisorsaDAO extends BaseDao{//TODO ATTENZIONE UTILIZZARE RisorseDAO 
 			esitoModificaRisorsa = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO log4j
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
 		}

@@ -20,11 +20,11 @@
 <%
 	if(request.getParameter("area").equals("all")){
 %>
-		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
+		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
 <%
 	}else{
 %>
-		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
+		<div id="toolbar" class="spazioUltra"><a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=curriculum.getId_risorsa() %>">Modifica Cv</a><a href="#" onclick="return openFinestra('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=curriculum.getId_risorsa() %>&area=<%=request.getParameter("area") %>" >Indietro</a></div>
 <%
 	}
 %>
