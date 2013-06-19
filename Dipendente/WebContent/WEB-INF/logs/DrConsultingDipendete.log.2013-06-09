@@ -1,0 +1,9 @@
+09-06-2013 13:56:02:020 | Connessione | INFO | <init>:21 | metodo: Connessione - classe: Connessione 
+09-06-2013 13:56:02:661 | Connessione | ERROR | <init>:33 | metodo: Connessione - connessione fallita - java.sql.SQLException: Access denied for user 'drcon860_DiErre'@'151.46.44.140' (using password: YES) 
+09-06-2013 13:56:02:661 | Connessione | INFO | <init>:35 | Endmetodo: Connessione - classe Connessione 
+09-06-2013 13:56:02:684 | Connessione | INFO | getConnection:67 | metodo: getConnection - classe Connessione 
+09-06-2013 13:56:02:684 | Connessione | WARN | getConnection:90 | metodo: closeConnection - connessione null 
+09-06-2013 13:56:02:902 | Connessione | ERROR | getConnection:94 | metodo: closeConnection - connessione fallita - java.sql.SQLException: Access denied for user 'drcon860_DiErre'@'151.46.44.140' (using password: YES) 
+09-06-2013 13:56:02:902 | Connessione | INFO | getConnection:97 | Endmetodo: closeConnection - classe Connessione 
+09-06-2013 13:56:02:905 | MyLogger | DEBUG | debug:45 | [processRequest][login idRisorsa46] 
+09-06-2013 13:56:02:905 | MyLogger | DEBUG | debug:45 | [loginRisorsa][sql:SELECT id_risorsa,cognome,nome,data_nascita,luogo_nascita,sesso,cod_fiscale,mail,telefono,cellulare,fax,indirizzo,citta,provincia,cap,nazione,servizio_militare,patente,costo,occupato,tipo_contratto,figura_professionale,seniority,visible,flag_creazione_cv,cv_visibile FROM tbl_risorse WHERE id_risorsa=?] 

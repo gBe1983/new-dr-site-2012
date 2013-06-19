@@ -12,6 +12,8 @@
 	<input type="hidden" name="azione" value="">
 	<input type="hidden" name="parametro" value="">
 	<input type="hidden" name="parametri" value="">
+	<input type="hidden" name="mese" value="">
+	<input type="hidden" name="anno" value="">
 	<div id="oreOrdinare">
 		<table border="0" align="center">
 			<tr>

@@ -14,8 +14,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
+
 public class Email{
-	private MyLogger log;
+	private Logger log;
 	private String protocol = null;
 	private String host = null;
 	private String port = null;
@@ -28,9 +30,9 @@ public class Email{
 	private String socketFactoryClass = null;
 
 	public Email(ServletContext servletContext) {
-		log = new MyLogger(this.getClass().getName());
+		log = Logger.getLogger(Email.class);
 		final String metodo = "costruttore";
-		log.start(metodo);
+		log.info("metodo: Email");
 		protocol = servletContext.getInitParameter("mail.protocol");
 		host = servletContext.getInitParameter("mail.host");
 		port = servletContext.getInitParameter("mail.port");
@@ -41,12 +43,11 @@ public class Email{
 		smtpAuth = servletContext.getInitParameter("mail.smtp.auth");
 		startTls = servletContext.getInitParameter("mail.smtp.starttls.enable");
 		socketFactoryClass = servletContext.getInitParameter("mail.smtp.socketFactory.class");
-		log.end(metodo);
 	}
 
 	public void sendMail(String dest, String oggetto, String testoEmail){
-		final String metodo = "sendMail";
-		log.start(metodo);
+		
+		log.info("metodo: sendMail");
 		try {
 			Properties props = System.getProperties();
 			props.put("mail.smtp.host", host);
@@ -71,11 +72,9 @@ public class Email{
 			msg.saveChanges();
 			tr.sendMessage(msg, msg.getAllRecipients());
 			tr.close();
-			log.debug(metodo, "mail inviata");
+			log.info("mail inviata con successo");
 		} catch (MessagingException e) {
-			log.error(metodo, "invio mail fallito", e);
-		}finally{
-			log.end(metodo);
+			log.error("erreo invio mail fallito"+ e);
 		}
 	}
 }

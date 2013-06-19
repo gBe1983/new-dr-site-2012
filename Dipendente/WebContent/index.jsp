@@ -31,8 +31,6 @@
 	<script type='text/javascript'>
 
 		$(document).ready(function() {
-		
-			
 
 			var altezzaCorpo = document.getElementById("content_right").offsetHeight;
 			
@@ -77,27 +75,19 @@
 					azione = request.getParameter("azione");
 					if(azione.equals("benvenuto")){
 			%>
-						<%@include file="strutturaSito/contenuto/benvenuto.jsp" %>
-			<%
-					}else if(azione.equals("TimeReport")){
-			%>
-						<%@include file="strutturaSito/contenuto/areaTimeReport.jsp" %>
-			<%
-					}else if(azione.equals("visualizzaReport")){
-			%>
-						<%@include file="strutturaSito/contenuto/visualizzaTimeReport.jsp" %>
+						<%@include file="strutturaSito/contenuto/home/benvenuto.jsp" %>
 			<%
 					}else if(azione.equals("compilaTimeReport")){
 			%>
-						<%@include file="strutturaSito/contenuto/timeReport.jsp" %>
+						<%@include file="strutturaSito/contenuto/timeReport/timeReport.jsp" %>
 			<%
 					}else if(azione.equals("visualizzaProfilo") || azione.equals("aggiornaProfilo")){
 			%>
-						<%@include file="strutturaSito/contenuto/risorsa.jsp" %>
+						<%@include file="strutturaSito/contenuto/areaPrivata/risorsa.jsp" %>
 			<%
 					}else if(azione.equals("areaPrivata")){
 			%>
-						<%@include file="strutturaSito/contenuto/areaPrivata.jsp" %>
+						<%@include file="strutturaSito/contenuto/areaPrivata/areaPrivata.jsp" %>
 			<%
 					}else if(azione.equals("messaggio")){
 			%>
@@ -105,23 +95,23 @@
 			<%
 					}else if(azione.equals("cambioPassword")){
 			%>
-						<%@include file="strutturaSito/contenuto/cambioPassword.jsp" %>
+						<%@include file="strutturaSito/contenuto/areaPrivata/cambioPassword.jsp" %>
 			<%
 					}else if(azione.equals("consulenzaOnline")){
 		    %>	
-						<%@include file="strutturaSito/contenuto/consulenzaOnline.jsp" %>
+						<%@include file="strutturaSito/contenuto/consulenzaOnline/consulenzaOnline.jsp" %>
 			<%  
 					}else if(azione.equals("inserisciEvento") || azione.equals("visualizzaEvento") || azione.equals("modificaEvento")){
 		    %>	
-						<%@include file="strutturaSito/contenuto/inserisciEvento.jsp" %>
+						<%@include file="strutturaSito/contenuto/consulenzaOnline/inserisciEvento.jsp" %>
 			<%  
 					}else if(azione.equals("anteprimaCurriculum")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/anteprimaCurriculum.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/anteprimaCurriculum.jsp" />
 			<%
 					}else if(azione.equals("creaCv")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/creaCv.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/creaCv.jsp" />
 			<%
 					}else if(azione.equals("anteprimaCurriculum")){
 			%>
@@ -129,19 +119,19 @@
 			<%
 					}else if(azione.equals("dettaglioCurriculum")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/dettaglioCurriculum.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/dettaglioCurriculum.jsp" />
 			<%
 					}else if(azione.equals("gestioneSingoleSezioniCurriculum")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/gestioneSingoleSezioniCurriculum.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/gestioneSingoleSezioniCurriculum.jsp" />
 			<%
 					}else if(azione.equals("gestioneAnteprimeSezioniCurriculum")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/gestioneAnteprimeSezioniCurriculum.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/gestioneAnteprimeSezioniCurriculum.jsp" />
 			<%
 					}else if(azione.equals("curriculum")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/curriculum.jsp" />
+						<jsp:include page="strutturaSito/contenuto/curriculum/curriculum.jsp" />
 			<%
 					}else if(azione.equals("consulenza")){
 			%>
@@ -154,7 +144,7 @@
 					}
 				}else{
 			%>
-						<%@include file="strutturaSito/contenuto/benvenuto.jsp" %>
+						<%@include file="strutturaSito/contenuto/home/benvenuto.jsp" %>
 			<%
 				}
 			%>

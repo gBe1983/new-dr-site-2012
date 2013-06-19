@@ -8,13 +8,8 @@ import it.dipendente.dto.RisorsaDTO;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.StringReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -23,21 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.html.simpleparser.HTMLWorker;
-import com.itextpdf.text.html.simpleparser.StyleSheet;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPRow;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.log4j.Logger;
 
 /**
  * Servlet implementation class GestioneCurriculum
@@ -45,6 +26,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class GestioneCurriculum extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
+	Logger log = null;
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		log = Logger.getLogger(GestioneCurriculum.class);
+	}
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -76,6 +67,10 @@ public class GestioneCurriculum extends BaseServlet {
 			
 			if(azione.equals("caricamentoCv")){
 				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
+				
+				
 				/**
 				 * in questa sezione carico il curriculum selezionato 
 				 * della singola risorsa
@@ -94,13 +89,18 @@ public class GestioneCurriculum extends BaseServlet {
 				request.setAttribute("curriculumVitae", curriculumVitae);
 				
 				if(request.getParameter("area").equals("all")){
+					log.info("url = /index.jsp?azione=curriculum");
 					getServletContext().getRequestDispatcher("/index.jsp?azione=curriculum").forward(request, response);
 				}else{
+					log.info("url = /index.jsp?azione=dettaglioCurriculum");
 					getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum").forward(request, response);
 				}
 				
 				
 			}else if(azione.equals("modificaIntestazione") || azione.equals("modificaEsperienza") || azione.equals("modificaDettaglio")){
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
 				
 				/**
 				 * in questa sezione gestisco le modifiche delle varie sezioni
@@ -140,6 +140,9 @@ public class GestioneCurriculum extends BaseServlet {
 				
 				
 			}else if(azione.equals("salvaIntestazione") || azione.equals("salvaEsperienza") || azione.equals("salvaDettaglio")){
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
 				
 				/**
 				 * in questa sezione salvo tutte le modifiche avvenute alle varie sezioni
@@ -201,12 +204,21 @@ public class GestioneCurriculum extends BaseServlet {
 				request.setAttribute("curriculumVitae", curriculumVitae);
 				
 				if(esitoModifica == 1){
+					
+					log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=1");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=1").forward(request, response);
 				}else{
+					
+					log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=0");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=0").forward(request, response);
 				}
 			
 			}else if(azione.equals("anteprimaIntestazione") || azione.equals("anteprimaEsperienza") || azione.equals("anteprimaDettaglio") || azione.equals("anteprimaGlobale")){
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
 				
 				/**
 				 * in questa sezione effettuo l'anteprima delle singole sezioni
@@ -226,6 +238,8 @@ public class GestioneCurriculum extends BaseServlet {
 					RisorsaDTO risorsa = cDAO.caricamentoIntestazioneRisorsa(id_risorsa);
 					
 					request.setAttribute("anteprimaIntestazione", risorsa);
+					
+					log.info("url: /index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=intestazione&dispositiva=dettaglioCurriculum");
 					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=intestazione&dispositiva=dettaglioCurriculum").forward(request, response);
 				
@@ -253,6 +267,8 @@ public class GestioneCurriculum extends BaseServlet {
 					
 					request.setAttribute("listaEsperienze", curriculum);
 					
+					log.info("url: /index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=esperienze&dispositiva=dettaglioCurriculum");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=esperienze&dispositiva=dettaglioCurriculum").forward(request, response);
 				
 				}else if(azione.equals("anteprimaDettaglio")){
@@ -260,6 +276,8 @@ public class GestioneCurriculum extends BaseServlet {
 					Dettaglio_Cv_DTO dettaglio = cDAO.caricamentoDettaglio(id_risorsa);
 					
 					request.setAttribute("dettaglio", dettaglio);
+				
+					log.info("url: /index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=dettaglio&dispositiva=dettaglioCurriculum");
 					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=gestioneAnteprimeSezioniCurriculum&sezione=dettaglio&dispositiva=dettaglioCurriculum").forward(request, response);
 					
@@ -272,11 +290,16 @@ public class GestioneCurriculum extends BaseServlet {
 					
 					request.setAttribute("curriculumVitae", curriculumVitae);
 					
-					getServletContext().getRequestDispatcher("/index.jsp?azione=anteprimaCurriculum&tipologia="+sceltaTipologia).forward(request, response);
+					log.info("url: /index.jsp?azione=anteprimaCurriculum&tipologia="+sceltaTipologia+"&area=all");
+					
+					getServletContext().getRequestDispatcher("/index.jsp?azione=anteprimaCurriculum&tipologia="+sceltaTipologia+"&area=all").forward(request, response);
 					
 				}
 				
 			}else if (azione.equals("aggiungiEsperienza") || azione.equals("aggiungiDettaglio")) {
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
 				
 				int id_risorsa = Integer.parseInt(request.getParameter("parametroId"));
 				
@@ -313,8 +336,13 @@ public class GestioneCurriculum extends BaseServlet {
 				request.setAttribute("curriculumVitae", curriculumVitae);
 				
 				if(esitoAggiungi == 1){
+					
+					log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=1");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=1").forward(request, response);
 				}else{
+					log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=0");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=0").forward(request, response);
 				}
 				
@@ -326,6 +354,9 @@ public class GestioneCurriculum extends BaseServlet {
 				 *  in questa sezione effettuo l'eliminazione delle singole 
 				 *  parti del curriculum
 				 */
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
+				
 				int id_risorsa = 0;
 				
 				if(request.getParameter("parametro") != null){
@@ -368,6 +399,8 @@ public class GestioneCurriculum extends BaseServlet {
 					
 					request.setAttribute("listaCurriculum", curriculumVitae);
 					
+					log.info("url: /index.jsp?azione=visualizzaCurriculum");
+					
 					getServletContext().getRequestDispatcher("/index.jsp?azione=visualizzaCurriculum").forward(request, response);
 
 					
@@ -380,14 +413,21 @@ public class GestioneCurriculum extends BaseServlet {
 				
 				if(!azione.equals("eliminazioneGlobale")){
 					if(esitoEliminazione == 1){
+						log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=1");
+						
 						getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=1").forward(request, response);
 					}else{
+						log.info("url: /index.jsp?azione=dettaglioCurriculum&esito=2");
+						
 						getServletContext().getRequestDispatcher("/index.jsp?azione=dettaglioCurriculum&esito=2").forward(request, response);
 					}
 				}
 				
 				
 			}else if(azione.equals("esportaPdf")){
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+ azione);
 				
 				//recupero l'id della risorsa
 				int id_risorsa = Integer.parseInt(request.getParameter("parametro")); 
@@ -417,18 +457,26 @@ public class GestioneCurriculum extends BaseServlet {
 				fileInputStream.close();
 				out.close();
 				boolean fileCancellato= new File(getServletContext().getRealPath("/")+"CurriculumVitae"+ curriculum.getRisorsa().getCognome() + curriculum.getRisorsa().getNome() +".pdf").delete();
-				System.out.println("esito della cancellazione del file: " + fileCancellato);
+				log.info("esito della cancellazione del file: " + fileCancellato);
 				
 			 }else if(azione.equals("selezionaRisorsa")){
+				 
+				 log.info("-------------------------------------------------------------------------------------------------------");
+				 log.info("azione: "+ azione);
 				 
 				 ArrayList<RisorsaDTO> listaRisorsa = cDAO.caricamentoRisorseSenzaCurriculum();
 				 
 				 request.setAttribute("listaRisorsa", listaRisorsa);
 				 
+				 log.info("url: /index.jsp?azione=selezionaRisorsa");
+				 
 				 getServletContext().getRequestDispatcher("/index.jsp?azione=selezionaRisorsa").forward(request, response);
 				 
 			 }
 		}else{
+			
+			log.info("Sessione Scaduta - GestioneCurriculum");
+			
 			sessioneScaduta(response);
 		}
 	}

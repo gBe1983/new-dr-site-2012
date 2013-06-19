@@ -63,16 +63,16 @@ $(document).ready(function() {
 if(request.getParameter("azione") != null){
 	if(azione.equals("benvenuto")){
 			%>
-			<jsp:include page="strutturaSito/contenuto/benvenuto.jsp"/>
+			<jsp:include page="strutturaSito/contenuto/home/benvenuto.jsp"/>
 			<%
 	}else if(azione.equals("compilaTimeReport")){
 			%>
-			<jsp:include page="strutturaSito/contenuto/timeReport.jsp"/>
+			<jsp:include page="strutturaSito/contenuto/timeReport/timeReport.jsp"/>
 			<%
 	}
 }else{
 %>
-			<jsp:include page="strutturaSito/contenuto/benvenuto.jsp"/>
+			<jsp:include page="strutturaSito/contenuto/home/benvenuto.jsp"/>
 			<%
 }
 %>

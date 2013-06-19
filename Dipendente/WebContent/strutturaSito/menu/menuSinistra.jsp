@@ -20,11 +20,11 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 %>
 
 <div id="finestraMenuLaterale" title="Esporta Pdf">
-	<%@include file="../contenuto/esportaPdfMenuLaterale.jsp" %>
+	<%@include file="../contenuto/curriculum/esportaPdfMenuLaterale.jsp" %>
 </div>
 
 <div id="anteprimaMenuLaterale" title="Anteprima Curriculum">
-	<%@include file="../contenuto/anteprimaMenuLaterale.jsp" %>
+	<%@include file="../contenuto/curriculum/anteprimaMenuLaterale.jsp" %>
 </div>
 
 		<div class="newsbox">
@@ -35,7 +35,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 							<li class="title"><a href="#">Curriculum</a></li>
 							<li class="sub-menu">
 								<ul>
-									<li><a href="./GestioneCurriculum?azione=caricamentoCv&parametro=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>&creazioneCv=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).isFlaCreazioneCurriculum() %>">Gestione C.V.</a></li>
+									<li><a href="./GestioneCurriculum?azione=caricamentoCv&area=notAll&parametro=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>&creazioneCv=<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).isFlaCreazioneCurriculum() %>">Gestione C.V.</a></li>
 									<li><a href="#" onclick="return openFinestraMenuLaterale('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','esportaPDF')">Esporta in Pdf</a></li> 
 									<li><a href="#" onclick="return openFinestraMenuLaterale('<%=((RisorsaDTO)request.getSession().getAttribute("utenteLoggato")).getIdRisorsa() %>','<%=request.getParameter("azione") %>','all','anteprimaCV')">Anteprima</a></li>
 								</ul>
@@ -54,24 +54,25 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 					</li>
 					<li class="menuPrincipale">
 						<ul>
-							<li class="title"><a href="#">Area Privata</a></li>
-							<li class="sub-menu">
-								<ul>
-									<li><a href="./GestioneRisorsa?azione=visualizzaProfilo">Visualizza Profilo</a></li>
-				    				<li><a href="./GestioneRisorsa?azione=aggiornaProfilo">Modifica Profilo</a></li>
-				    				<li><a href="index.jsp?azione=cambioPassword&dispositiva=areaPrivata">Cambia Password</a></li> 
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li class="menuPrincipale">
-						<ul>
 							<li class="title"><a href="#">Consulenza</a></li>
 							<li class="sub-menu">
 								<ul>
 									<li><a href="index.jsp?azione=inserisciEvento" >Inserisci Evento</a></li>
 									<li><a href="index.jsp?azione=consulenzaOnline">Calendario</a></li>
 									<li><a href="#" target="_blank"/>Entra in Chat</a></li> 
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="menuPrincipale">
+						<ul>
+							<li class="title"><a href="#">Area Privata</a></li>
+							<li class="sub-menu">
+								<ul>
+									<li><a href="./GestioneRisorsa?azione=visualizzaProfilo">Visualizza Profilo</a></li>
+				    				<li><a href="./GestioneRisorsa?azione=aggiornaProfilo">Modifica Profilo</a></li>
+				    				<li><a href="index.jsp?azione=cambioPassword&dispositiva=areaPrivata">Cambia Password</a></li>
+									<li><a href="./GestioneRisorsa?azione=logout">Logout</a></li> 
 								</ul>
 							</li>
 						</ul>

@@ -19,39 +19,36 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 public class GestioneReport extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private MyLogger log;
+	private Logger log;
 
 	public GestioneReport() {
 		super();
-		log =new MyLogger(this.getClass().getName());
+		log = Logger.getLogger(GestioneReport.class);
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String metodo="doGet";
-		log.start(metodo);
+		log.info("metodo: doGet");
 		processRequest(request,response);
-		log.end(metodo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String metodo="doPost";
-		log.start(metodo);
+		log.info("metodo: doPost");
 		processRequest(request,response);
-		log.end(metodo);
 	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String metodo="processRequest";
-		log.start(metodo);
+		
+		log.info("metodo: processRequest");
 		HttpSession sessione = request.getSession();
 		String azione = request.getParameter("azione");
 
@@ -61,7 +58,10 @@ public class GestioneReport extends BaseServlet {
 			if(azione.equals("compilaTimeReport")||azione.equals("salvaTimeReport") || 
 					azione.equals("salvaBozza") || azione.equals("salvaGiornate") ||
 					azione.equals("modificaOre")){
-
+				
+				log.info("-------------------------------------------------------------------------------------------------------");
+				log.info("azione: "+azione);
+				
 				PlanningDAO planningDAO = new PlanningDAO(conn.getConnection());
 
 				String mese=null;
@@ -92,7 +92,7 @@ public class GestioneReport extends BaseServlet {
 									}
 									if(planningDAO.aggiornamentoPlanning(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p))==0){
 										saveOk=false;
-										log.warn(metodo, "Salvataggio time report anomalo");
+										log.warn("Salvataggio time report anomalo");
 									}
 								}
 							}
@@ -140,7 +140,7 @@ public class GestioneReport extends BaseServlet {
 							pDTO.setId_planning(Integer.parseInt(idplanning[x]));
 							if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
 								saveOk=false;
-								log.warn(metodo, "Salvataggio time report anomalo");
+								log.warn("Salvataggio time report anomalo");
 								break;
 							}
 						}
@@ -172,18 +172,20 @@ public class GestioneReport extends BaseServlet {
 					
 					if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
 						saveOk=false;
-						log.warn(metodo, "Salvataggio time report anomalo");
+						log.warn("Salvataggio time report anomalo");
 					}
 					request.setAttribute("msg", saveOk?"Modifica avvenuta con successo.":"Attenzione, modifica non avvenuta con successo.");
-				}else{
-					mese = request.getParameter("mese");
-					anno = request.getParameter("anno");
+				}
+				
+				if((request.getParameter("mese") != null && !request.getParameter("mese").equals("")) && (request.getParameter("anno") != null && !request.getParameter("anno").equals(""))){
+					sessione.setAttribute("mese", request.getParameter("mese"));
+					sessione.setAttribute("anno", request.getParameter("anno"));
 				}
 
 				Calendar when = Calendar.getInstance();
-				if(mese!=null&&anno!=null){
-					timeAdjust(when,Calendar.MONTH,Integer.parseInt(mese));
-					timeAdjust(when,Calendar.YEAR,Integer.parseInt(anno));
+				if(sessione.getAttribute("mese") != null && sessione.getAttribute("anno") != null){
+					timeAdjust(when,Calendar.MONTH,Integer.parseInt(sessione.getAttribute("mese").toString()));
+					timeAdjust(when,Calendar.YEAR,Integer.parseInt(sessione.getAttribute("anno").toString()));
 				}
 
 				ArrayList<ArrayList> caricamentoGiornate =planningDAO.getGiornate(idRis,when,getServletContext().getInitParameter("parametro"));
@@ -220,6 +222,8 @@ public class GestioneReport extends BaseServlet {
 						log.error(metodo, "invio mail time report", e);
 					}
 				}*/
+				log.info("url: /main.jsp?azione=compilaTimeReport");
+				
 				getServletContext().getRequestDispatcher("/main.jsp?azione=compilaTimeReport").forward(request, response);
 			}
 		}else{

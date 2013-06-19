@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.apache.log4j.Logger;
+
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -40,11 +42,11 @@ import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 
 public class CurriculumDAO extends BaseDao {
-	private MyLogger log;
+	private Logger log;
 
 	public CurriculumDAO(Connection connessione) {
 		super(connessione);
-		log=new MyLogger(this.getClass().getName());
+		log= Logger.getLogger(CurriculumDAO.class);
 	}
 
 	/**
@@ -52,14 +54,16 @@ public class CurriculumDAO extends BaseDao {
 	 * i curriculum creati.
 	 */
 	public ArrayList<CurriculumDTO> caricamentoAllCurriculum(){
-		final String metodo = "caricamento All Curriculum";
-		log.start(metodo);
+		
+		log.info("metodo: caricamentoAllCurriculum");
 				
 		ArrayList<CurriculumDTO> listaCurriculum = new ArrayList<CurriculumDTO>();
 		
 		String sql = "select risorsa.id_risorsa, risorsa.nome, risorsa.cognome, risorsa.flag_creazione_cv, if((select count(*) from tbl_esperienze_professionali_cv as esperienze where esperienze.id_risorsa = risorsa.id_risorsa and esperienze.visibile = true) > 0 , 1, 0) as esperienza,if((select count(*) from tbl_dettaglio_cv as dettaglio where dettaglio.id_risorsa = risorsa.id_risorsa and dettaglio.visible = true) > 0 , 1, 0) as dettaglio " +
 				" from tbl_risorse as risorsa " +
 				" where risorsa.flag_creazione_cv = true group by risorsa.nome;";
+		
+		log.info("sql: "+sql);
 		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -78,10 +82,9 @@ public class CurriculumDAO extends BaseDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore sql" + e);
 		}finally{
 			close(ps, rs);
-			log.end("caricamento All Curriculum");
 		}
 		
 		return listaCurriculum;
@@ -91,8 +94,8 @@ public class CurriculumDAO extends BaseDao {
 	 * effettuo il caricamento del singolo curriculum selezionato
 	 */
 	public CurriculumDTO caricamentoCurriculum(int idRisorsa) throws IOException{
-		final String metodo = "caricamento Curriculum";
-		log.start(metodo);
+		
+		log.info("metodo: caricamento Curriculum");
 		
 		CurriculumDTO curriculum = new CurriculumDTO();
 		
@@ -100,7 +103,6 @@ public class CurriculumDAO extends BaseDao {
 		curriculum.setListaEsperienze(caricamentoEsperienze(idRisorsa));
 		curriculum.setListaDettaglio(caricamentoDettaglio(idRisorsa));
 		
-		log.end("caricamento Curriculum");
 		
 		return curriculum;
 		
@@ -112,12 +114,14 @@ public class CurriculumDAO extends BaseDao {
 	
 public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 		
-		final String metodo = "caricamento Intestazione Risorsa";
-		log.start(metodo);
+		log.info("metodo: caricamento Intestazione Risorsa");
 		
 		RisorsaDTO risorsa = null;
 		
 		String sql = "select risorsa.id_risorsa, risorsa.cognome, risorsa.nome, risorsa.data_nascita, risorsa.mail, risorsa.telefono, risorsa.cellulare, risorsa.fax, risorsa.indirizzo, risorsa.luogo_nascita, risorsa.nazione, risorsa.figura_professionale, risorsa.servizio_militare, if((select count(*) from tbl_dettaglio_cv as dettaglio where dettaglio.id_risorsa = risorsa.id_risorsa and risorsa.id_risorsa = ? and dettaglio.visible = true) > 0 , 1, 0) as flagDettaglio from tbl_risorse as risorsa where risorsa.id_risorsa = ?";
+		
+		log.info("sql: select risorsa.id_risorsa, risorsa.cognome, risorsa.nome, risorsa.data_nascita, risorsa.mail, risorsa.telefono, risorsa.cellulare, risorsa.fax, risorsa.indirizzo, risorsa.luogo_nascita, risorsa.nazione, risorsa.figura_professionale, risorsa.servizio_militare, if((select count(*) from tbl_dettaglio_cv as dettaglio where dettaglio.id_risorsa = risorsa.id_risorsa and risorsa.id_risorsa = "+idRisorsa+" and dettaglio.visible = true) > 0 , 1, 0) as flagDettaglio from tbl_risorse as risorsa where risorsa.id_risorsa = "+idRisorsa);
+		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
@@ -144,10 +148,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore sql: " + e);
 		}finally{
 			close(ps,rs);
-			log.end("caricamento Intestazione Risorsa");
 		}
 		return risorsa;
 	}
@@ -158,12 +161,14 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	
 	public ArrayList caricamentoEsperienze(int idRisorsa) throws IOException{
 		
-		final String metodo = "caricamento Esperienze";
-		log.start(metodo);
+		log.info("metodo: caricamento Esperienze");
 		
 		ArrayList<EsperienzeDTO> listaEsperienze = new ArrayList<EsperienzeDTO>();
 		
 		String sql = "select * from tbl_esperienze_professionali_cv where id_risorsa = ? and visibile = true order by SUBSTRING(periodo,0,6),SUBSTRING(periodo,7,6) DESC";
+		
+		log.info("sql: select * from tbl_esperienze_professionali_cv where id_risorsa = "+idRisorsa+" and visibile = true order by SUBSTRING(periodo,0,6),SUBSTRING(periodo,7,6) DESC");
+		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
@@ -184,10 +189,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps,rs);
-			log.end("caricamento Esperienze");
 		}
 		
 		return listaEsperienze;
@@ -199,12 +203,14 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	
 	public Dettaglio_Cv_DTO caricamentoDettaglio(int idRisorsa) {
 		
-		final String metodo = "caricamento Dettaglio";
-		log.start(metodo);
+		log.info("metodo: caricamento Dettaglio");
 		
 		Dettaglio_Cv_DTO dettaglio = null;
 		
 		String sql = "select * from tbl_dettaglio_cv where id_risorsa = ? and visible = true";
+		
+		log.info("sql: select * from tbl_dettaglio_cv where id_risorsa = "+idRisorsa+" and visible = true");
+		
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
@@ -224,10 +230,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore sql: "+e);
 		}finally{
 			close(ps,rs);
-			log.end("caricamento Dettaglio");
 		}
 		
 		return dettaglio;
@@ -235,11 +240,13 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	
 	public int updateIntestazione(RisorsaDTO risorsa) {
 		
-		final String metodo = "caricamento Dettaglio";
-		log.start(metodo);
+		log.info("metodo: updateIntestazione");
 		
 		int esito = 0;
 		String sql = "update tbl_risorse set cognome = ?, nome = ?, data_nascita = ?, mail = ?, telefono = ?, cellulare = ?, fax = ?, indirizzo = ? where id_risorsa = ?";
+		
+		log.info("sql: update tbl_risorse set cognome = "+risorsa.getCognome()+", nome = "+risorsa.getNome()+", data_nascita = "+risorsa.getDataNascita()+", mail = "+risorsa.getEmail()+", telefono = "+risorsa.getTelefono()+", cellulare = "+risorsa.getCellulare()+", fax = "+risorsa.getFax()+", indirizzo = "+risorsa.getIndirizzo()+" where id_risorsa = "+risorsa.getIdRisorsa());
+		
 		PreparedStatement ps=null;
 		try {
 				ps = connessione.prepareStatement(sql);
@@ -256,10 +263,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("caricamento Dettaglio", "Errore nell'update dell'intestazione");
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
-			log.end("caricamento Dettaglio");
 		}
 		
 		return esito;
@@ -271,12 +277,15 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public int inserimentoEsperienze(EsperienzeDTO esperienze){
 		
-		final String metodo = "inserimento Esperienze";
-		log.start(metodo);
+		
+		log.info("metodo: inserimento Esperienze");
 		
 		int esito = 0;
 		
 		String sql = "insert into tbl_esperienze_professionali_cv(periodo,azienda,luogo,descrizione,id_risorsa) values (?,?,?,?,?)";
+		
+		log.info("sql: insert into tbl_esperienze_professionali_cv(periodo,azienda,luogo,descrizione,id_risorsa) values ("+esperienze.getPeriodo()+","+esperienze.getAzienda()+","+esperienze.getLuogo()+","+esperienze.getDescrizione()+","+esperienze.getId_risorsa()+")");
+		
 		PreparedStatement ps=null;
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -288,10 +297,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			esito = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("inserimento Esperienze", e.getMessage());
+			log.error("errore sql:" + e);
 		}finally{
 			close(ps);
-			log.end("inserimento Esperienze");
 		}
 		
 		return esito;
@@ -302,12 +310,14 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public EsperienzeDTO caricamentoEsperienza(int id_esperienza){
 		
-		final String metodo = "caricamento esperienza";
-		log.start(metodo);
+		log.info("metodo: caricamento esperienza");
 		
 		EsperienzeDTO exp = null;
 		
 		String sql = "select * from tbl_esperienze_professionali_cv where id_esperienza_professionale = ?";
+		
+		log.info("sql: select * from tbl_esperienze_professionali_cv where id_esperienza_professionale = "+id_esperienza);
+		
 		PreparedStatement ps=null;
 		ResultSet rs = null;
 		try {
@@ -325,10 +335,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("caricamento esperienza", e.getMessage());
+			log.error("errore sql" + e);
 		}finally{
 			close(ps,rs);
-			log.end("caricamento esperienza");
 		}
 		
 		return exp;
@@ -342,12 +351,14 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public int aggiornamentoEsperienza(EsperienzeDTO esperienza) throws IOException{
 			
-			final String metodo = "aggiornamento esperienza";
-			log.start(metodo);
+			log.info("metodo: aggiornamento esperienza");
 		
 			int esito = 0;
 			
 			String sql = "update tbl_esperienze_professionali_cv set periodo = ?, azienda = ?, luogo = ?, descrizione = ?, id_risorsa = ? where id_esperienza_professionale = ?";
+			
+			log.info("sql: update tbl_esperienze_professionali_cv set periodo = "+esperienza.getPeriodo()+", azienda = "+esperienza.getAzienda()+", luogo = "+esperienza.getLuogo()+", descrizione = "+esperienza.getDescrizione()+", id_risorsa = "+esperienza.getId_risorsa()+" where id_esperienza_professionale = "+esperienza.getIdEsperienze());
+			
 			PreparedStatement ps=null;
 			try {
 				ps = connessione.prepareStatement(sql);
@@ -360,10 +371,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 				esito = ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				log.error("aggiornamento esperienza", e.getMessage());
+				log.error("errore sql: " +e);
 			}finally{
 				close(ps);
-				log.end("aggiornamento esperienza");
 			}
 	
 			return esito;
@@ -377,12 +387,13 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public int eliminazioneEsperienza(int idEsperienza) throws IOException{
 		
-		final String metodo = "eliminazione esperienza";
-		log.start(metodo);
+		log.info("metodo: eliminazione esperienza");
 		
 		int esito = 0;
 		
 		String sql = "update tbl_esperienze_professionali_cv set visibile = ? where id_esperienza_professionale = ?";
+		
+		log.info("sql: update tbl_esperienze_professionali_cv set visibile = false where id_esperienza_professionale = "+idEsperienza);
 		
 		PreparedStatement ps=null;
 		try {
@@ -392,10 +403,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			esito = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("eliminazione esperienza", e.getMessage());
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
-			log.end("eliminazione esperienza");
 		}
 		
 		 return esito;
@@ -410,10 +420,11 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public void eliminaEsperienzaGlobale(int id_risorsa) throws IOException{
 		
-		final String metodo = "eliminazione esperienza globale";
-		log.start(metodo);
+		log.info("metodo: eliminazione esperienza globale");
 		
 		String sql = "update tbl_esperienze_professionali_cv set visibile = ? where id_risorsa = ?";
+		
+		log.info("sql: update tbl_esperienze_professionali_cv set visibile = false where id_risorsa = "+id_risorsa);
 		
 		PreparedStatement ps=null;
 		try {
@@ -423,10 +434,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("eliminazione esperienza globale", e.getMessage());
+			log.error("errore sql"+ e);
 		}finally{
 			close(ps);
-			log.end("eliminazione esperienza globale");
 		}
 		
 	}
@@ -440,10 +450,12 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	
 	public int inserimentoDettaglio(Dettaglio_Cv_DTO dettaglio){
 		
-		final String metodo = "inserimento Dettaglio";
-		log.start(metodo);
+		
+		log.info("metodo: inserimento Dettaglio");
 		
 		String sql = "insert into tbl_dettaglio_cv(capacita_professionali,competenze_tecniche,lingue_straniere,istruzione,formazione,interessi,id_risorsa) values (?,?,?,?,?,?,?)";
+		
+		log.info("sql: insert into tbl_dettaglio_cv(capacita_professionali,competenze_tecniche,lingue_straniere,istruzione,formazione,interessi,id_risorsa) values ("+dettaglio.getCapacita_professionali()+","+dettaglio.getCompetenze_tecniche()+","+dettaglio.getLingue_Straniere()+","+dettaglio.getIstruzione()+","+dettaglio.getFormazione()+","+dettaglio.getInteressi()+","+dettaglio.getId_risorsa()+")");
 		
 		int esitoInserimentoDettaglio = 0; 
 		
@@ -460,10 +472,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 			esitoInserimentoDettaglio = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("inserimento Dettaglio", e.getMessage());
+			log.error("errore sql: "+ e);
 		}finally{
 			close(ps);
-			log.end("inserimento Dettaglio");
 		}
 		
 		return esitoInserimentoDettaglio;
@@ -477,10 +488,12 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 */
 	public int aggiornamentoDettaglio(Dettaglio_Cv_DTO dettaglio) throws IOException{
 			
-			final String metodo = "aggiornamento Dettaglio";
-			log.start(metodo);
+			log.info("metodo: aggiornamento Dettaglio");
 			
 			String sql = "update tbl_dettaglio_cv set capacita_professionali = ?, competenze_tecniche = ?, lingue_straniere = ?, istruzione = ?, formazione = ?, interessi = ? where id_risorsa = ? and id_dettaglio = ?";
+			
+			log.info("sql: update tbl_dettaglio_cv set capacita_professionali = "+dettaglio.getCapacita_professionali()+", competenze_tecniche = "+dettaglio.getCompetenze_tecniche()+", lingue_straniere = "+dettaglio.getLingue_Straniere()+", istruzione = "+dettaglio.getIstruzione()+", formazione = "+dettaglio.getFormazione()+", interessi = "+dettaglio.getInteressi()+" where id_risorsa = "+dettaglio.getId_risorsa()+" and id_dettaglio = "+dettaglio.getId_dettaglio());
+			
 			int esitoModificaDettaglio = 0;
 			PreparedStatement ps=null;
 			try {
@@ -496,10 +509,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 				esitoModificaDettaglio = ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				log.error("", e.getMessage());
+				log.error("errore sql: " + e);
 			}finally{
 				close(ps);
-				log.end("aggiornamento Dettaglio");
 			}
 			
 			return esitoModificaDettaglio;
@@ -514,7 +526,9 @@ public RisorsaDTO caricamentoIntestazioneRisorsa(int idRisorsa){
 	 * @return
 	 */
 	
-public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO curriculum){
+	public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO curriculum){
+		
+		log.info("metodo: esportaCurriculumVitaeFormatoEuropeo");
 		
 		String stampaCurriculum = "";
 		
@@ -828,12 +842,13 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	 */
 	public int eliminazioneDettaglio(int id_dettaglio) throws IOException{
 		
-		final String metodo = "eliminazione dettaglio";
-		log.start(metodo);
+		log.info("metodo: eliminazione dettaglio");
 		
 		int esito = 0;
 		
 		String sql = "update tbl_dettaglio_cv set visible = ? where id_dettaglio = ?";
+		
+		log.info("sql: update tbl_dettaglio_cv set visible = false where id_dettaglio = "+id_dettaglio);
 		
 		PreparedStatement ps=null;
 		try {
@@ -843,10 +858,9 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 			esito = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("eliminazione dettaglio", e.getMessage());
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
-			log.end("eliminazione dettaglio");
 		}
 		
 		 return esito;
@@ -860,10 +874,11 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	 */
 	public void eliminazioneDettaglioGlobale(int id_risorsa) throws IOException{
 		
-		final String metodo = "eliminazione dettaglio globale";
-		log.start(metodo);
+		log.info("metodo: eliminazione dettaglio globale");
 		
 		String sql = "update tbl_dettaglio_cv set visible = ? where id_risorsa = ?";
+		
+		log.info("sql: update tbl_dettaglio_cv set visible = false where id_risorsa = "+id_risorsa);
 		
 		PreparedStatement ps=null;
 		try {
@@ -873,10 +888,9 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("eliminazione dettaglio globale", e.getMessage());
+			log.error("errore sql" + e);
 		}finally{
 			close(ps);
-			log.end("eliminazione dettaglio globale");
 		}
 		
 	}
@@ -889,12 +903,13 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	 */
 	public ArrayList caricamentoRisorseSenzaCurriculum() throws IOException{
 		
-		final String metodo = "caricamento risorse senza curriculum";
-		log.start(metodo);
+		log.info("metodo: caricamento risorse senza curriculum");
 		
 		ArrayList<RisorsaDTO> listaRisorse = new ArrayList<RisorsaDTO>();
 		
 		String sql = "select * from tbl_risorse where flag_creazione_cv = false and visible = true";
+		
+		log.info("sql: " + sql);
 		
 		PreparedStatement ps=null;
 		ResultSet rs = null;
@@ -910,10 +925,9 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("caricamento risorse senza curriculum", e.getMessage());
+			log.error("errore sql"+ e.getMessage());
 		}finally{
 			close(ps);
-			log.end("caricamento risorse senza curriculum");
 		}
 		
 		 return listaRisorse;
@@ -926,7 +940,12 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	 */
 	public void creazioneFlagCreazioneCurriculum(int idRisorsa){
 		
+		log.info("metodo: creazioneFlagCreazioneCurriculum");
+		
 		String sql = "update tbl_risorse set flag_creazione_cv = ? where id_risorsa = ?";
+		
+		log.info("sql: update tbl_risorse set flag_creazione_cv = true where id_risorsa = "+idRisorsa);
+		
 		PreparedStatement ps=null;
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -935,7 +954,7 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 			ps.executeUpdate();			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
 		}
@@ -949,7 +968,12 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	 */
 	public void disabilitazioneFlagCreazioneCurriculum(int idRisorsa){
 		
+		log.info("metodo: disabilitazioneFlagCreazioneCurriculum");
+		
 		String sql = "update tbl_risorse set flag_creazione_cv = ? where id_risorsa = ?";
+		
+		log.info("sql: update tbl_risorse set flag_creazione_cv = false where id_risorsa = "+idRisorsa);
+		
 		PreparedStatement ps=null;
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -958,7 +982,7 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 			ps.executeUpdate();			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}finally{
 			close(ps);
 		}
@@ -1066,6 +1090,8 @@ public String esportaCurriculumVitaeFormatoEuropeo(String url, CurriculumDTO cur
 	
 public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curriculum,File file){
 		
+		log.info("metodo: creazioneCurriculumVitaeFormatoEuropeo");
+	
 		Document doc = new Document(PageSize.A4, 10, 10, 10, 40);
 		
 		
@@ -1078,7 +1104,7 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 			
 				String curriculumVItaeHtml = esportaCurriculumVitaeFormatoEuropeo(url, curriculum);
 			
-				System.out.println(curriculumVItaeHtml);
+				log.info("pagina html" + curriculumVItaeHtml);
 				StyleSheet styleSheet = new StyleSheet();
 //				styleSheet.loadTagStyle("table", "border", "1");
 				ArrayList lista = (ArrayList) htmlWorker.parseToList(new StringReader(curriculumVItaeHtml), styleSheet);
@@ -1211,16 +1237,16 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 				doc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore file non trovato" + e);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore apertura documento" + e);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore nella conversione da HTML a PDF" + e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore generale" + e);
 		}
 		
 		return file;
@@ -1228,6 +1254,8 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 
 	public File creazioneCurriculumVitaeFormatoAziendale(String url,CurriculumDTO curriculum,File file,boolean completo){
 	
+		log.info("metodo: creazioneCurriculumVitaeFormatoAziendale");
+		
 			Document doc = new Document(PageSize.A4, 10, 10, 10, 40);
 				
 		try {
@@ -1239,7 +1267,7 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 			
 				String curriculumVItaeHtml = esportaCurriculumVitaeFormatoAziendale(url, curriculum,completo);
 			
-				System.out.println(curriculumVItaeHtml);
+				log.info("pagina in Html: " + curriculumVItaeHtml);
 				StyleSheet styleSheet = new StyleSheet();
 	//			styleSheet.loadTagStyle("table", "border", "1");
 				ArrayList lista = (ArrayList) htmlWorker.parseToList(new StringReader(curriculumVItaeHtml), styleSheet);
@@ -1453,16 +1481,16 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 				doc.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore file non trovato" + e);
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore apertura documento" + e);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore nella conversione da HTML a PDF" + e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore generale" + e);
 		}
 		
 		return file;
@@ -1470,6 +1498,8 @@ public File creazioneCurriculumVitaeFormatoEuropeo(String url,CurriculumDTO curr
 	
 public String esportaCurriculumVitaeFormatoAziendale(String url, CurriculumDTO cv,boolean completo){
 		
+		log.info("metodo: esportaCurriculumVitaeFormatoAziendale");
+	
 		String stampaCurriculum = "";
 		
 		stampaCurriculum += "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"> " +

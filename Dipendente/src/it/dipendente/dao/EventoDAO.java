@@ -10,18 +10,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 
 public class EventoDAO extends BaseDao{
 
+	Logger log = null;
+	
 	public EventoDAO(Connection connessione) {
 		super(connessione);
+		log = Logger.getLogger(EventoDAO.class);
 	}
 
 	PreparedStatement ps = null;
 	
 	public void inserisciEvento(EventoDTO evento, int idRisorsa){
 		
+		log.info("metodo: inserisciEvento");
+		
 		String sql = "insert into tbl_eventi(title,start,end,id_risorsa) values (?,?,?,?)";
+		
+		log.info("sql: insert into tbl_eventi(title,start,end,id_risorsa) values ("+evento.getTitle()+","+evento.getStart()+","+evento.getEnd()+","+idRisorsa+")");
 		
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -32,7 +41,7 @@ public class EventoDAO extends BaseDao{
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: " + e);
 		}
 		
 	}
@@ -58,12 +67,16 @@ public class EventoDAO extends BaseDao{
 	
 	public ArrayList caricamentoEventi(int id_risorsa){
 		
+		log.info("metodo: caricamentoEventi");
+		
 		SimpleDateFormat formattazioneSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		//String eventi = "";
 		ArrayList eventi = new ArrayList();
 		
 		String sql = "select * from tbl_eventi where visibile = true";
+		
+		log.info("sql " + sql);
 		
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -85,16 +98,18 @@ public class EventoDAO extends BaseDao{
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore sql: " + e);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore conversione data: " + e);
 		}
 		
 		return eventi;
 	}
 	
 	public EventoDTO caricamentoEvento(int idEvento){
+		
+		log.info("metodo: caricamentoEvento");
 		
 		SimpleDateFormat formattazioneSql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat formattazioneWeb = new SimpleDateFormat("dd-MM-yyyy");
@@ -104,6 +119,8 @@ public class EventoDAO extends BaseDao{
 		EventoDTO evento = null;
 		
 		String sql = "select * from tbl_eventi where id = ? and visibile = true";
+		
+		log.info("sql: select * from tbl_eventi where id = "+idEvento+" and visibile = true");
 		
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -120,10 +137,10 @@ public class EventoDAO extends BaseDao{
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore sql: " + e);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("errore parse: " + e);
 		}
 		
 		return evento;
@@ -152,7 +169,11 @@ public class EventoDAO extends BaseDao{
 	
 	public void eliminaEvento(int id_evento){
 		
+		log.info("metodo: eliminaEvento");
+		
 		String sql = "update tbl_eventi set visibile = false where id = ?";
+		
+		log.info("sql: update tbl_eventi set visibile = false where id = "+id_evento);
 		
 		try {
 			ps = connessione.prepareStatement(sql);
@@ -160,7 +181,7 @@ public class EventoDAO extends BaseDao{
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("errore sql: "+e);
 		}
 		
 	}
