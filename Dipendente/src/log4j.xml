@@ -5,8 +5,8 @@
 	<appender name="fileAppender" class="org.apache.log4j.DailyRollingFileAppender">
       <param name="Append" value="true"/>
       <param name="DatePattern" value="'.'yyyy-MM-dd"/>
-       <param name="File" value="C:/Users/Utente/Desktop/Progetti Java/dierreconsulting/Dipendente/WebContent/WEB-INF/log/Dipendente.log"/>
-  <!-- <param name="File" value="/nfs_home/drcon860/public_html/log/Dipendente/Dipendente.log"/> -->
+  <!-- <param name="File" value="C:/Users/Utente/Desktop/Progetti Java/dierreconsulting/Dipendente/WebContent/WEB-INF/log/Dipendente.log"/> -->
+  	   <param name="File" value="/nfs_home/drcon860/public_html/log/Dipendente/Dipendente.log"/> 
       <layout class="org.apache.log4j.PatternLayout">
          <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss:SSS} | [%c] | %p | %M:%L | %m %n "/>
       </layout>
