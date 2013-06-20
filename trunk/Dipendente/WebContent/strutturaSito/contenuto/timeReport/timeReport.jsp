@@ -401,7 +401,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 				}
 			%>
 			<tr> 
-				<td class="totaliDx" colspan="8"><span>Ore ordinarie: <%=ordinarie %></span><span>Ore straordinarie: <%=straordinario %></span><span>Ferie: <%=ferie %></span><span>Permessi: <%=permessi %></span><span>Mutua: <%=mutua %></span><span>Ferie Non Retribuite: <%=ferieNonRetribuite %></span><span>Permessi Non Retribuiti: <%=permessiNonRetribuiti %></span><span>Mutua Non Retribuita: <%=mutuaNonRetribuita %></span><span>Totale: <%=ordinarie+straordinario+ferie+permessi+mutua+ferieNonRetribuite+permessiNonRetribuiti+mutuaNonRetribuita %></span></td>
+				<td class="totaliDx" colspan="8"><span>Ore ordinarie: <%=ordinarie %></span><span>Ore straordinarie: <%=straordinario %></span><span>Ferie: <%=ferie %></span><span>Permessi: <%=permessi %></span><span>Mutua: <%=mutua %></span><span>Permessi Non Retribuiti: <%=permessiNonRetribuiti %></span><span>Totale: <%=ordinarie+straordinario+ferie+permessi+mutua+ferieNonRetribuite+permessiNonRetribuiti+mutuaNonRetribuita %></span></td>
 				<td class="save" colspan="2">
 			</tr>
 
