@@ -9,8 +9,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
+
+
+
 public class Month{
-	private MyLogger log;
+	private Logger log = null;
 	private int year;
 	private int month;
 	private String monthLabel;
@@ -18,9 +22,8 @@ public class Month{
 	private List<Week>weeks;
 
 	public Month(Calendar c){
-		log =new MyLogger(this.getClass().getName());
-		final String metodo="costruttore";
-		log.start(metodo);
+		log = Logger.getLogger(Month.class);
+		log.info("costruttore Month");
 		Calendar day = (Calendar)c.clone();
 		year = day.get(Calendar.YEAR);
 		month = day.get(Calendar.MONTH);
@@ -48,7 +51,6 @@ public class Month{
 			}
 			day.add(Calendar.DAY_OF_MONTH,1);
 		}
-		log.end(metodo);
 	}
 
 	/**
@@ -84,15 +86,14 @@ public class Month{
 	 * @param p
 	 */
 	public void addPlanningDTO(PlanningDTO p){
-		final String metodo="addPlanningDTO";
-		log.start(metodo);
+		
+		log.info("addPlanningDTO");
 		for (int i=0;i<weeks.size();i++) {
 			if(p.getData().get(Calendar.WEEK_OF_YEAR)==weeks.get(i).getWeekOfYear()){
 				weeks.get(i).addPlanningDTO(p);
 				break;
 			}
 		}
-		log.end(metodo);
 	}
 
 	public boolean isSavable(){

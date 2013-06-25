@@ -12,25 +12,95 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="it.dipendente.dto.CommessaDTO"%>
 <%@page import="it.util.log.MyLogger"%>
+<%@page import="it.dipendente.dto.Associaz_Risors_Comm_DTO"%>
 
 <%
-SimpleDateFormat sdf=new SimpleDateFormat("d");
-ArrayList<ArrayList> calendario = (ArrayList<ArrayList>) request.getAttribute("caricamentoGiornate");
-ArrayList<PlanningDTO> giorni = (ArrayList<PlanningDTO>) calendario.get(1);
-ArrayList<CommessaDTO> commesse = (ArrayList<CommessaDTO>) calendario.get(0);
-	
-Calendar meseAnno = (Calendar) request.getAttribute("meseAnno");
-HashMap elencoGiorni = (HashMap) request.getAttribute("elencoGiorni");
-	
-boolean elencoGiornate = Boolean.parseBoolean(request.getAttribute("flagVisualizzaElencoGiornate").toString());
-int settimaneTotali = Integer.parseInt(request.getAttribute("settimaneTotali").toString());
-Month m = (Month) request.getAttribute("mese");
-
-double ordinarie = 0.0,straordinario = 0.0,ferie = 0.0,permessi = 0.0,mutua = 0.0,ferieNonRetribuite = 0.0, permessiNonRetribuiti = 0.0, mutuaNonRetribuita = 0.0;
-	
-String intestazioneMeseAnno = "";
 	
 if(request.getSession().getAttribute("utenteLoggato") != null){
+	
+	/*
+	* parametroCommessa corrisponde al id_commessa.
+	* Effettuo questo controllo in caso più commesse
+	*/
+	if(request.getAttribute("parametroCommessa").toString().equals("")){
+		ArrayList<Associaz_Risors_Comm_DTO> listaCommesse = (ArrayList<Associaz_Risors_Comm_DTO>)request.getAttribute("listaCommesse");
+%>
+		
+		<div id="sceltaCommesse" title="Scelta Commesse">
+		
+
+			<form action="./GestioneReport" method="post" id="FormScelteCommesse" name="FormScelteCommesse">
+				<input type="hidden" name="azione" value="compilaTimeReport">
+				<table align="center">
+					<tr>
+						<td colspan="2">Quale commessa vuoi selezionare?</td>
+					</tr>
+					<%
+						for(int x = 0; x < listaCommesse.size(); x++){
+							Associaz_Risors_Comm_DTO asscomm = (Associaz_Risors_Comm_DTO) listaCommesse.get(x);
+					%>		
+							<tr>
+								<td><input type="radio" name="parametroCommessa" value="<%=asscomm.getId_commessa() %>"></td><td><label><%=asscomm.getDescrizioneCommessa() %></label>
+							</tr>		
+					<%	
+						}
+					%>
+					<tr>
+						<td><input type="radio" name="parametroCommessa" value="tutte"></td><td><label>Tutte</label>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit" value="Scegli Commessa" onclick="return controlloSelezionaCommessa('scegli')"><label>Scegli Commessa<label></button>
+							<button type="submit" value="Annulla" onclick="return controlloSelezionaCommessa('annulla')"><label>Annulla</label></button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		
+		<script type="text/javascript">			 
+			$('#sceltaCommesse').dialog({
+				modal: true,
+				autoOpen: true,
+				height: 250,
+				width: 300,
+				position: [550,200],
+				show: {
+					effect: "blind",
+					duration: 1000
+				},
+				hide: {
+					effect: "explode",
+					duration: 1000
+				}
+			});
+		</script>
+<%
+	}else{
+		SimpleDateFormat sdf=new SimpleDateFormat("d");
+		ArrayList<ArrayList> calendario = (ArrayList<ArrayList>) request.getAttribute("caricamentoGiornate");
+		ArrayList<PlanningDTO> giorni = (ArrayList<PlanningDTO>) calendario.get(1);
+		ArrayList<CommessaDTO> commesse = (ArrayList<CommessaDTO>) calendario.get(0);
+			
+		Calendar meseAnno = (Calendar) request.getAttribute("meseAnno");
+		HashMap elencoGiorni = (HashMap) request.getAttribute("elencoGiorni");
+		
+		boolean elencoGiornate = Boolean.parseBoolean(request.getAttribute("flagVisualizzaElencoGiornate").toString());
+		int settimaneTotali = Integer.parseInt(request.getAttribute("settimaneTotali").toString());
+		int maxGiorniMensili = Integer.parseInt(request.getAttribute("maxGiorniMensili").toString());
+		
+		Calendar dataInizio  = (Calendar) request.getAttribute("dataInizio");
+		
+		Month m = (Month) request.getAttribute("mese");
+		
+		ArrayList<Associaz_Risors_Comm_DTO> listaCommesse = (ArrayList<Associaz_Risors_Comm_DTO>) request.getAttribute("listaCommesse");
+		
+		String id_commessa = request.getAttribute("parametroCommessa").toString();
+		
+		double ordinarie = 0.0,straordinario = 0.0,ferie = 0.0,permessi = 0.0,mutua = 0.0,ferieNonRetribuite = 0.0, permessiNonRetribuiti = 0.0, mutuaNonRetribuita = 0.0;
+			
+		String intestazioneMeseAnno = "";
+		
 		for(Months month:Months.values()){
 			if(month.getIndex()==m.getMonth()){ 
 				intestazioneMeseAnno += month.getLabel() + " - ";
@@ -42,7 +112,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 				intestazioneMeseAnno += z; 
 			}	
 		}
-		
+
 %>
 
 	<div class="subtitle">Consuntivazione <%=intestazioneMeseAnno %></div>
@@ -75,13 +145,47 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 					</select>
 				</td>
 				<td>
+					<select name="parametroCommessa">
+					<%
+						/*
+						* faccio questo controllo in quanto cè la possibilità 
+						* che l'utente possa scegliere la voce "tutte" dove non è
+						* caricato nell'array
+						*/
+						if(id_commessa == "tutte"){
+					%>
+							<option value="tutte" selected="selected">tutte</option>
+					<%
+						}else{
+					%>
+							<option value="tutte">tutte</option>
+					<%
+						}
+						for(int i = 0; i < listaCommesse.size(); i++){
+							if(String.valueOf(listaCommesse.get(i).getId_commessa()).equals(id_commessa)){
+					%>
+								<option value="<%=listaCommesse.get(i).getId_commessa() %>" selected="selected"><%=listaCommesse.get(i).getDescrizioneCommessa() %></option>	
+					<%
+							}else{
+					%>
+								<option value="<%=listaCommesse.get(i).getId_commessa() %>"><%=listaCommesse.get(i).getDescrizioneCommessa() %></option>
+					<%
+							}
+						}
+					%>
+					
+					</select>
+				</td>
+				<td>
 					<input type="submit" value="Cerca" class="search" title="Cerca la consuntivazione"/>
 				</td>
 			</tr>
 		</table>
 	</form>
+
+
 	<%
-			if(giorni.size() > 0){
+		if(giorni.size() > 0){
 	%>
 	<form name="timeDetail" action="#" method="post" class="spazioUltra" name="visualizzaTimeReport">
 		<input type="hidden" name="azione" value="salvaTimeReport"/>
@@ -98,7 +202,18 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 						<%
 							for(int z = 1; z <= elencoGiorni.size(); z++){
 						%>
-								<th <% if((z+1)== 7 || (z+1)== 8) {%>class="holiday" <%}else{%>class="workDay"<%}%>><%=elencoGiorni.get(z+1) + "<br>"%>
+								<th <% 
+										if((z+1)== 7 || (z+1)== 8) {
+									%>		
+											class="holiday" 
+									<%
+										}else{
+									%>
+											class="workDay"
+									<%
+										}
+									%>
+								><%=elencoGiorni.get(z+1) + "<br>"%>
 								<%
 								for(int y = 0; y < giorni.size(); y++){
 										PlanningDTO giorno = (PlanningDTO)giorni.get(y);
@@ -115,7 +230,6 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 												break;
 											}
 										}
-										
 								}
 						%>
 								</th>
@@ -303,7 +417,8 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 											input += "</td>";
 											out.print(input);
 											contatore++;
-											break;	
+											break;
+											
 										}else if(giorno.getNumeroSettimana() == x && giorno.getData().get(Calendar.DAY_OF_WEEK) == 1 && z == 7 && giorno.getCodiceCommessa().equals(comm.getCodiceCommessa())){
 											
 											ordinarie += giorno.getNumeroOre();
@@ -406,24 +521,15 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 			</tr>
 
 		</table>
-	</form>		
-<%
-		}else{
-%>
-			<p class="spazioUltra" align="center"> Non ci sono commesse associate questo mese </p>
-					
-<%			
-		}
-	}
-%>
+	</form>
 
-<div id="compilade" title="Compila Ore">
-	<%@include file="compilazioneOre.jsp" %>
-</div>
-
-<div id="elencoGiornate" title="Elenco Giornate">
-	<%@include file="elencoGiornate.jsp" %>
-</div> 
+	<div id="compilade" title="Compila Ore">
+		<jsp:include page="compilazioneOre.jsp" />
+	</div>
+	
+	<div id="elencoGiornate" title="Elenco Giornate">
+		<jsp:include page="elencoGiornate.jsp" />
+	</div>
 
 <%
 	if(elencoGiornate){
@@ -448,7 +554,16 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 			});
 		</script>
 <%	
+	}		
+		}else{
+%>
+			<p class="spazioUltra" align="center"> Non ci sono commesse associate questo mese </p>
+					
+<%			
+		}
 	}
+}
+
 	if(request.getAttribute("msg") != null){
 %>
 		<script type="text/javascript">

@@ -9,6 +9,7 @@
 
 
 <form action="./GestioneReport" method="post" name="compilaOre">
+	<input type="hidden" name="parametroCommessa" value="<%=request.getAttribute("parametroCommessa").toString() %>" id="parameter">
 	<input type="hidden" name="azione" value="">
 	<input type="hidden" name="parametro" value="">
 	<input type="hidden" name="parametri" value="">

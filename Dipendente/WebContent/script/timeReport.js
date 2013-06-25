@@ -278,8 +278,9 @@ function caricamentoGiornate(){
 		return false;
 	}
 	
-	document.listGiornate.parametri.value = giornateSelezionate;
+	document.listGiornate.parametri.value = document.listGiornate.parametro.value + ";" + giornateSelezionate;
 	//alert(giornateSelezionate);
+	
 	giornateSelezionate = "";
 	return true;
 }
@@ -376,4 +377,25 @@ function checkedAll(elm){
 			}
 		}
 	}
+}
+
+function controlloSelezionaCommessa(valore){
+	
+	if(valore == "annulla"){
+		document.FormScelteCommesse.action = "./index.jsp?azione=report";
+	}else{
+		var selezionato = false;
+		for(var i = 0; i < document.FormScelteCommesse.parametroCommessa.length; i++){
+			if(document.FormScelteCommesse.parametroCommessa[i].checked){
+				selezionato = true;
+			}
+		}
+		
+		if(!selezionato){
+			alert("Selezionare una commessa")
+			return false;
+		}
+		document.FormScelteCommesse.action = "./GestioneReport";
+	}
+	return true;
 }

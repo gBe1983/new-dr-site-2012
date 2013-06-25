@@ -135,11 +135,11 @@
 			<%
 					}else if(azione.equals("consulenza")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/consulenza.jsp" />
+						<jsp:include page="strutturaSito/contenuto/consulenzaOnline/consulenza.jsp" />
 			<%
 					}else if(azione.equals("report")){
 			%>
-						<jsp:include page="strutturaSito/contenuto/report.jsp" />
+						<jsp:include page="strutturaSito/contenuto/timeReport/report.jsp" />
 			<%
 					}
 				}else{

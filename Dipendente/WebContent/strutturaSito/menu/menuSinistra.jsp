@@ -47,7 +47,7 @@ if(request.getSession().getAttribute("utenteLoggato") != null){
 							<li class="title"><a href="#">Time Report</a></li>
 							<li class="sub-menu">
 								<ul>
-									<li><a href="./GestioneReport?azione=compilaTimeReport" >Visualizza Report</a></li> 
+									<li><a href="./GestioneReport?azione=compilaTimeReport&parametroCommessa=" >Visualizza Report</a></li> 
 								</ul>
 							</li>
 						</ul>
