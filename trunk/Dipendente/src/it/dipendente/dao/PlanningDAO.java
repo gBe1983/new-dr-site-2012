@@ -95,7 +95,7 @@ public class PlanningDAO extends BaseDao{
 		return 0;
 	}
 
-	public ArrayList getGiornate(int id_risorsa, Calendar day,String parametro){
+	public ArrayList getGiornate(int id_risorsa, Calendar data_inizio,Calendar data_fine,String parametro, String id_commessa){
 		
 		log.info("metodo: getGiornate");
 		
@@ -103,34 +103,68 @@ public class PlanningDAO extends BaseDao{
 		ArrayList<PlanningDTO> listaGiorni = new ArrayList<PlanningDTO>();
 		ArrayList<CommessaDTO> listaCommesse = new ArrayList<CommessaDTO>();
 		
-		String now = new SimpleDateFormat("yyyy-MM-%").format(day.getTime());
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		StringBuilder sql = new StringBuilder("select planning.id_planning,");
-		sql	.append("planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,")
-				.append("planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, ")
-				.append("asscommessa.id_associazione,")
-				.append("commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice")
-				.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
-				.append(" where planning.id_associazione=asscommessa.id_associazione")
-				.append(" and asscommessa.id_commessa=commessa.id_commessa")
-				.append(" and planning.data like ? and asscommessa.id_risorsa=? and planning.attivo = true")
-				.append(" order by data");
 		
-		log.info("sql: select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, " +
-				" planning.permessiNonRetribuiti,asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice " +
-				" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa " +
-				" where planning.id_associazione=asscommessa.id_associazione " +
-				" and asscommessa.id_commessa=commessa.id_commessa " +
-				" and planning.data like "+now+" and asscommessa.id_risorsa="+id_risorsa+" and planning.attivo = true order by data");
+		SimpleDateFormat formatoSql = new SimpleDateFormat("yyyy-MM-dd");
 		
+		StringBuilder sql = new StringBuilder("");
+		
+		if(!id_commessa.equals("tutte")){
+		
+			sql .append("select planning.id_planning,");
+			sql	.append("planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,")
+					.append("planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, ")
+					.append("asscommessa.id_associazione,")
+					.append("commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice")
+					.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
+					.append(" where planning.id_associazione=asscommessa.id_associazione")
+					.append(" and asscommessa.id_commessa=commessa.id_commessa")
+					.append(" and asscommessa.id_commessa = ?")
+					.append(" and planning.data >= ? and planning.data <= ? and asscommessa.id_risorsa=? and planning.attivo = true")
+					.append(" order by data");
+			
+			log.info("sql: select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, " +
+					" planning.permessiNonRetribuiti,asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice " +
+					" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa " +
+					" where planning.id_associazione=asscommessa.id_associazione " +
+					" and asscommessa.id_commessa=commessa.id_commessa " +
+					" and asscommessa.id_commessa = " + id_commessa +
+					" and planning.data >= "+formatoSql.format(data_inizio.getTime())+" and planning.data <= "+formatoSql.format(data_fine.getTime())+" and asscommessa.id_risorsa="+id_risorsa+" and planning.attivo = true " +
+				    " order by data");
+		}else{
+			sql .append("select planning.id_planning,");
+			sql	.append("planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,")
+					.append("planning.ferie, planning.permessi, planning.mutua, planning.permessiNonRetribuiti, ")
+					.append("asscommessa.id_associazione,")
+					.append("commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice")
+					.append(" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa")
+					.append(" where planning.id_associazione=asscommessa.id_associazione")
+					.append(" and asscommessa.id_commessa=commessa.id_commessa")
+					.append(" and planning.data >= ? and planning.data <= ? and asscommessa.id_risorsa=? and planning.attivo = true")
+					.append(" order by data");
+			
+			log.info("sql: select planning.id_planning,planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,planning.ferie, planning.permessi, planning.mutua, " +
+					" planning.permessiNonRetribuiti,asscommessa.id_associazione,commessa.descrizione as descrizioneCommessa,commessa.codice_commessa as codice " +
+					" from tbl_planning planning,tbl_associaz_risor_comm asscommessa,tbl_commesse commessa " +
+					" where planning.id_associazione=asscommessa.id_associazione " +
+					" and asscommessa.id_commessa=commessa.id_commessa " +
+					" and planning.data >= "+formatoSql.format(data_inizio.getTime())+" and planning.data <= "+formatoSql.format(data_fine.getTime())+" and asscommessa.id_risorsa="+id_risorsa+" and planning.attivo = true " +
+				    " order by data");
+		}
 		String descrizioneCommessa = "";
 		
-		
+		int contatore = 1;
 		try {
 			ps = connessione.prepareStatement(sql.toString());
-			ps.setString(1,now);
-			ps.setInt(2,id_risorsa);
+			if(!id_commessa.equals("tutte")){
+				ps.setInt(contatore, Integer.parseInt(id_commessa));
+				contatore++;
+			}
+			
+			ps.setString(contatore++,formatoSql.format(data_inizio.getTime()));
+			ps.setString(contatore++,formatoSql.format(data_fine.getTime()));
+			ps.setInt(contatore,id_risorsa);
 			rs = ps.executeQuery();
 			while (rs.next()){
 					Calendar calendar = Calendar.getInstance();

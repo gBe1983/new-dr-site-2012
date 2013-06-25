@@ -1,7 +1,5 @@
 package it.mail;
 
-import it.util.log.MyLogger;
-
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -31,7 +29,6 @@ public class Email{
 
 	public Email(ServletContext servletContext) {
 		log = Logger.getLogger(Email.class);
-		final String metodo = "costruttore";
 		log.info("metodo: Email");
 		protocol = servletContext.getInitParameter("mail.protocol");
 		host = servletContext.getInitParameter("mail.host");

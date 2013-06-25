@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <div class="spazioUltra">
-	<a href="./GestioneReport?azione=compilaTimeReport">
+	<a href="./GestioneReport?azione=compilaTimeReport&parametroCommessa=">
 		<div class="contenuti">
 			<div class="titoloContenuti">Consultivazione Report</div>
 			<div class="corpoContenuti">

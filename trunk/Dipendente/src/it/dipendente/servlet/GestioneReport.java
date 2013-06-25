@@ -2,7 +2,9 @@ package it.dipendente.servlet;
 
 import it.dipendente.bo.Day;
 import it.dipendente.bo.Month;
+import it.dipendente.dao.Associaz_Risors_Comm_DAO;
 import it.dipendente.dao.PlanningDAO;
+import it.dipendente.dto.Associaz_Risors_Comm_DTO;
 import it.dipendente.dto.PlanningDTO;
 import it.dipendente.dto.RisorsaDTO;
 import it.util.log.MyLogger;
@@ -51,7 +53,8 @@ public class GestioneReport extends BaseServlet {
 		log.info("metodo: processRequest");
 		HttpSession sessione = request.getSession();
 		String azione = request.getParameter("azione");
-
+		
+		
 		if(sessione.getAttribute("utenteLoggato") != null){
 			int idRis=((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa();
 
@@ -66,116 +69,6 @@ public class GestioneReport extends BaseServlet {
 
 				String mese=null;
 				String anno=null;
-
-				boolean elencoGiornate = false;
-				
-				if(azione.equals("salvaTimeReport")){
-					Month month=(Month)sessione.getAttribute("month");
-					if(month!=null){
-						anno=month.getYear()+"";
-						mese=month.getMonth()+"";
-						String ord;
-						String str;
-						String keyDay;
-						boolean saveOk=true;
-						for(int w=0;w<month.getWeeks().size();w++){
-							for(String descrAttivita:month.getWeeks().get(w).getCommesse().keySet()){
-								for(int p=0;p<month.getWeeks().get(w).getCommesse().get(descrAttivita).size();p++){
-									keyDay=Day.sdf.format(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).getData().getTime());
-									ord = request.getParameter(descrAttivita+"_ord"+keyDay);
-									if(!StringUtils.isEmpty(ord)){
-										month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).setNumeroOre(Double.parseDouble(ord.replace(",", ".")));
-									}
-									str = request.getParameter(descrAttivita+"_str"+keyDay);
-									if(!StringUtils.isEmpty(str)){
-										month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).setStraordinari(Double.parseDouble(str.replace(",", ".")));
-									}
-									if(planningDAO.aggiornamentoPlanning(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p))==0){
-										saveOk=false;
-										log.warn("Salvataggio time report anomalo");
-									}
-								}
-							}
-						}
-						request.setAttribute("msg", saveOk?"Salvataggio riuscito.":"Attenzione, salvataggio fallito.");
-					}
-				}else if(azione.equals("salvaBozza")){
-					
-					String nomeCommessa = request.getParameter("parametro");
-					int id_planning = Integer.parseInt(request.getParameter("parametri"));
-					
-					PlanningDTO pDTO = new PlanningDTO();
-					pDTO.setNumeroOre(Double.parseDouble(request.getParameter("oreOrd")));
-					pDTO.setStraordinari(Double.parseDouble(request.getParameter("oreStrao")));
-					pDTO.setAssenze(Double.parseDouble(request.getParameter("assenze")));
-					if(request.getParameter("tipologiaAssenze") != null){
-						String assenze = request.getParameter("tipologiaAssenze");
-						if(assenze.equals("ferie")){
-							pDTO.setFerie(true);
-						}else if(assenze.equals("permessi")){
-							pDTO.setPermessi(true);
-						}else if(assenze.equals("mutua")){
-							pDTO.setMutua(true);
-						}else if(assenze.equals("permessiNonRetribuiti")){
-							pDTO.setPermessiNonRetribuiti(true);
-						}
-					}
-					pDTO.setNote(request.getParameter("note"));
-					
-					elencoGiornate = true;
-					
-					request.setAttribute("planning", id_planning);
-					request.setAttribute("nomeCommessa", nomeCommessa);
-					sessione.setAttribute("bozza", pDTO);
-					
-				}else if(azione.equals("salvaGiornate")){
-					
-					boolean saveOk=true;
-					
-					String parametri = request.getParameter("parametri");
-					String [] idplanning = parametri.split(";");
-					for(int x = 0; x < idplanning.length; x++){
-						PlanningDTO pDTO = (PlanningDTO)sessione.getAttribute("bozza");
-						if(!idplanning[x].equals("")){
-							pDTO.setId_planning(Integer.parseInt(idplanning[x]));
-							if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
-								saveOk=false;
-								log.warn("Salvataggio time report anomalo");
-								break;
-							}
-						}
-					}
-					request.setAttribute("msg", saveOk?"Salvataggio riuscito.":"Attenzione, salvataggio fallito.");
-				
-				}else if(azione.equals("modificaOre")){
-					
-					boolean saveOk=true;
-					
-					PlanningDTO pDTO = new PlanningDTO();
-					pDTO.setId_planning(Integer.parseInt(request.getParameter("parametro")));
-					pDTO.setNumeroOre(Double.parseDouble(request.getParameter("oreOrd")));
-					pDTO.setStraordinari(Double.parseDouble(request.getParameter("oreStrao")));
-					pDTO.setAssenze(Double.parseDouble(request.getParameter("assenze")));
-					if(request.getParameter("tipologiaAssenze") != null){
-						String assenze = request.getParameter("tipologiaAssenze");
-						if(assenze.equals("ferie")){
-							pDTO.setFerie(true);
-						}else if(assenze.equals("permessi")){
-							pDTO.setPermessi(true);
-						}else if(assenze.equals("mutua")){
-							pDTO.setMutua(true);
-						}else if(assenze.equals("permessiNonRetribuiti")){
-							pDTO.setPermessiNonRetribuiti(true);
-						}
-					}
-					pDTO.setNote(request.getParameter("note"));
-					
-					if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
-						saveOk=false;
-						log.warn("Salvataggio time report anomalo");
-					}
-					request.setAttribute("msg", saveOk?"Modifica avvenuta con successo.":"Attenzione, modifica non avvenuta con successo.");
-				}
 				
 				if((request.getParameter("mese") != null && !request.getParameter("mese").equals("")) && (request.getParameter("anno") != null && !request.getParameter("anno").equals(""))){
 					sessione.setAttribute("mese", request.getParameter("mese"));
@@ -187,44 +80,218 @@ public class GestioneReport extends BaseServlet {
 					timeAdjust(when,Calendar.MONTH,Integer.parseInt(sessione.getAttribute("mese").toString()));
 					timeAdjust(when,Calendar.YEAR,Integer.parseInt(sessione.getAttribute("anno").toString()));
 				}
+				
+				int maxGiorniMensili = when.getActualMaximum(Calendar.DAY_OF_MONTH);
+				int minGiorniMensili = when.getActualMinimum(Calendar.DAY_OF_MONTH);
+				
+				
+				/*
+				 * carico le due date con il primo giorno del mese e con l'ultimo giorno
+				 */
+				Calendar dataInizio = Calendar.getInstance();
+				dataInizio.setTime(when.getTime());
+				
+				dataInizio.set(Calendar.DAY_OF_MONTH, minGiorniMensili);
+				
+				Calendar dataFine = Calendar.getInstance();
+				dataFine.setTime(when.getTime());
+				
+				dataFine.set(Calendar.DAY_OF_MONTH, maxGiorniMensili);
+				
+				
+				Associaz_Risors_Comm_DAO asscomm = new Associaz_Risors_Comm_DAO(conn.getConnection());
+				
+				ArrayList<Associaz_Risors_Comm_DTO> associazioneRisorsaCommesse = asscomm.caricamentoCommesseAssociateRisorse(idRis, dataInizio.getTime(), dataFine.getTime());
+				
+				if(associazioneRisorsaCommesse.size() > 1 && request.getParameter("parametroCommessa") == ""){
+					
+					request.setAttribute("listaCommesse", associazioneRisorsaCommesse);
+					request.setAttribute("parametroCommessa", request.getParameter("parametroCommessa"));
+					getServletContext().getRequestDispatcher("/main.jsp?azione=compilaTimeReport").forward(request, response);
+					
+				}else{
 
-				ArrayList<ArrayList> caricamentoGiornate =planningDAO.getGiornate(idRis,when,getServletContext().getInitParameter("parametro"));
-				ArrayList<PlanningDTO> giornate = caricamentoGiornate.get(1);
-				
-				HashMap<String, Boolean> elencoFlagAssenze = planningDAO.caricamentoFlagAssenze(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
-				
-				Month mex = new Month(when);
-				
-				int settimaneTotali = 0;
-				for(int x = 0; x < giornate.size(); x++){
-					if(giornate.get(x).getNumeroSettimana() != settimaneTotali){
-						settimaneTotali++;
+					boolean elencoGiornate = false;
+					
+					if(azione.equals("salvaTimeReport")){
+						Month month=(Month)sessione.getAttribute("month");
+						if(month!=null){
+							anno=month.getYear()+"";
+							mese=month.getMonth()+"";
+							String ord;
+							String str;
+							String keyDay;
+							boolean saveOk=true;
+							for(int w=0;w<month.getWeeks().size();w++){
+								for(String descrAttivita:month.getWeeks().get(w).getCommesse().keySet()){
+									for(int p=0;p<month.getWeeks().get(w).getCommesse().get(descrAttivita).size();p++){
+										keyDay=Day.sdf.format(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).getData().getTime());
+										ord = request.getParameter(descrAttivita+"_ord"+keyDay);
+										if(!StringUtils.isEmpty(ord)){
+											month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).setNumeroOre(Double.parseDouble(ord.replace(",", ".")));
+										}
+										str = request.getParameter(descrAttivita+"_str"+keyDay);
+										if(!StringUtils.isEmpty(str)){
+											month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p).setStraordinari(Double.parseDouble(str.replace(",", ".")));
+										}
+										if(planningDAO.aggiornamentoPlanning(month.getWeeks().get(w).getCommesse().get(descrAttivita).get(p))==0){
+											saveOk=false;
+											log.warn("Salvataggio time report anomalo");
+										}
+									}
+								}
+							}
+							request.setAttribute("msg", saveOk?"Salvataggio riuscito.":"Attenzione, salvataggio fallito.");
+						}
+					}else if(azione.equals("salvaBozza")){
+						
+						String nomeCommessa = request.getParameter("parametro");
+						int id_planning = Integer.parseInt(request.getParameter("parametri"));
+						
+						PlanningDTO pDTO = new PlanningDTO();
+						pDTO.setNumeroOre(Double.parseDouble(request.getParameter("oreOrd")));
+						pDTO.setStraordinari(Double.parseDouble(request.getParameter("oreStrao")));
+						pDTO.setAssenze(Double.parseDouble(request.getParameter("assenze")));
+						if(request.getParameter("tipologiaAssenze") != null){
+							String assenze = request.getParameter("tipologiaAssenze");
+							if(assenze.equals("ferie")){
+								pDTO.setFerie(true);
+							}else if(assenze.equals("permessi")){
+								pDTO.setPermessi(true);
+							}else if(assenze.equals("mutua")){
+								pDTO.setMutua(true);
+							}else if(assenze.equals("permessiNonRetribuiti")){
+								pDTO.setPermessiNonRetribuiti(true);
+							}
+						}
+						pDTO.setNote(request.getParameter("note"));
+						
+						elencoGiornate = true;
+						
+						request.setAttribute("planning", id_planning);
+						request.setAttribute("nomeCommessa", nomeCommessa);
+						sessione.setAttribute("bozza", pDTO);
+						
+					}else if(azione.equals("salvaGiornate")){
+						
+						boolean saveOk=true;
+						
+						String parametri = request.getParameter("parametri");
+						String [] idplanning = parametri.split(";");
+						for(int x = 0; x < idplanning.length; x++){
+							PlanningDTO pDTO = (PlanningDTO)sessione.getAttribute("bozza");
+							if(!idplanning[x].equals("")){
+								pDTO.setId_planning(Integer.parseInt(idplanning[x]));
+								if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
+									saveOk=false;
+									log.warn("Salvataggio time report anomalo");
+									break;
+								}
+							}
+						}
+						request.setAttribute("msg", saveOk?"Salvataggio riuscito.":"Attenzione, salvataggio fallito.");
+					
+					}else if(azione.equals("modificaOre")){
+						
+						boolean saveOk=true;
+						
+						PlanningDTO pDTO = new PlanningDTO();
+						pDTO.setId_planning(Integer.parseInt(request.getParameter("parametro")));
+						pDTO.setNumeroOre(Double.parseDouble(request.getParameter("oreOrd")));
+						pDTO.setStraordinari(Double.parseDouble(request.getParameter("oreStrao")));
+						pDTO.setAssenze(Double.parseDouble(request.getParameter("assenze")));
+						if(request.getParameter("tipologiaAssenze") != null){
+							String assenze = request.getParameter("tipologiaAssenze");
+							if(assenze.equals("ferie")){
+								pDTO.setFerie(true);
+							}else if(assenze.equals("permessi")){
+								pDTO.setPermessi(true);
+							}else if(assenze.equals("mutua")){
+								pDTO.setMutua(true);
+							}else if(assenze.equals("permessiNonRetribuiti")){
+								pDTO.setPermessiNonRetribuiti(true);
+							}
+						}
+						pDTO.setNote(request.getParameter("note"));
+						
+						if(planningDAO.aggiornamentoPlanning(pDTO) == 0){
+							saveOk=false;
+							log.warn("Salvataggio time report anomalo");
+						}
+						request.setAttribute("msg", saveOk?"Modifica avvenuta con successo.":"Attenzione, modifica non avvenuta con successo.");
 					}
+					
+					/*
+					 * verifico il caricamento della commessa avviene tramite la scelta
+					 * oppure direttamente dalla ricerca delle associazioni
+					 */
+					ArrayList<ArrayList> caricamentoGiornate = null; 
+					if(associazioneRisorsaCommesse.size() == 1){
+						caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),String.valueOf(associazioneRisorsaCommesse.get(0).getId_commessa()));
+					}else{
+						if(request.getParameter("parametroCommessa").equals("tutte")){
+							caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
+						}else{
+							caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
+						}
+					}
+					
+					ArrayList<PlanningDTO> giornate = caricamentoGiornate.get(1);
+					
+					HashMap<String, Boolean> elencoFlagAssenze = planningDAO.caricamentoFlagAssenze(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
+					
+					Month mex = new Month(when);
+					
+					/*
+					 * mi calcolo il numero delle settimane che ci sono in un mese
+					 */
+					
+					int settimaneTotali = 0;
+					for(int x = 0; x < giornate.size(); x++){
+						if(giornate.get(x).getNumeroSettimana() != settimaneTotali){
+							settimaneTotali++;
+						}
+					}
+					
+					/*
+					 * azzero il giorno della dataInizio
+					 */
+					dataInizio.set(Calendar.DAY_OF_MONTH, minGiorniMensili);
+					
+					HashMap<Integer,String> elencoGiorni = planningDAO.elencoGiorniDellaSettimana();
+					
+					request.setAttribute("dataInizio", dataInizio);
+					request.setAttribute("maxGiorniMensili", maxGiorniMensili);
+					request.setAttribute("caricamentoGiornate", caricamentoGiornate);//4 display
+					request.setAttribute("elencoGiorni", elencoGiorni);
+					request.setAttribute("settimaneTotali", settimaneTotali);
+					request.setAttribute("mese", mex);
+					request.setAttribute("flagVisualizzaElencoGiornate", elencoGiornate);
+					request.setAttribute("flagAssenze", elencoFlagAssenze);
+					request.setAttribute("listaCommesse", associazioneRisorsaCommesse);
+					if(associazioneRisorsaCommesse.size() == 1){
+						request.setAttribute("parametroCommessa", associazioneRisorsaCommesse.get(0).getId_commessa());
+					}else{
+						request.setAttribute("parametroCommessa", request.getParameter("parametroCommessa"));
+					}
+					
+					
+					
+					//sessione.setAttribute("month", month);//4 save
+	
+					/*if(azione.equals("salvaTimeReport")){
+						try {
+							mail.sendMail(	((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getEmail(),
+											"Aggiornamento Time Report"+month.getMonthLabel(),
+											month.getBodyMail());
+						} catch (Exception e) {
+							log.error(metodo, "invio mail time report", e);
+						}
+					}*/
+					log.info("url: /main.jsp?azione=compilaTimeReport");
+					
+					getServletContext().getRequestDispatcher("/main.jsp?azione=compilaTimeReport").forward(request, response);
 				}
-				
-				HashMap<Integer,String> elencoGiorni = planningDAO.elencoGiorniDellaSettimana();
-				
-				request.setAttribute("caricamentoGiornate", caricamentoGiornate);//4 display
-				request.setAttribute("elencoGiorni", elencoGiorni);
-				request.setAttribute("settimaneTotali", settimaneTotali);
-				request.setAttribute("mese", mex);
-				request.setAttribute("flagVisualizzaElencoGiornate", elencoGiornate);
-				request.setAttribute("flagAssenze", elencoFlagAssenze);
-				
-				//sessione.setAttribute("month", month);//4 save
-
-				/*if(azione.equals("salvaTimeReport")){
-					try {
-						mail.sendMail(	((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getEmail(),
-										"Aggiornamento Time Report"+month.getMonthLabel(),
-										month.getBodyMail());
-					} catch (Exception e) {
-						log.error(metodo, "invio mail time report", e);
-					}
-				}*/
-				log.info("url: /main.jsp?azione=compilaTimeReport");
-				
-				getServletContext().getRequestDispatcher("/main.jsp?azione=compilaTimeReport").forward(request, response);
 			}
 		}else{
 			sessioneScaduta(response);

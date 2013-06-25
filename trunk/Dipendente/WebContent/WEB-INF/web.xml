@@ -64,15 +64,15 @@
 	</context-param>
 	<context-param>
 		<param-name>DB.url</param-name>
-		<param-value>jdbc:mysql://localhost:3306/drcon860_curriculum</param-value>
+		<param-value>jdbc:mysql://151.1.159.238:3306/drcon860_curriculum</param-value>
 	</context-param>
 	<context-param>
 		<param-name>DB.userName</param-name>
-		<param-value>root</param-value>
+		<param-value>drcon860_DiErre</param-value>
 	</context-param>
 	<context-param>
 		<param-name>DB.password</param-name>
-		<param-value>root</param-value>
+		<param-value>DiErre2012</param-value>
 	</context-param>
 
 	<context-param>
