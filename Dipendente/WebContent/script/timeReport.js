@@ -382,7 +382,8 @@ function checkedAll(elm){
 function controlloSelezionaCommessa(valore){
 	
 	if(valore == "annulla"){
-		document.FormScelteCommesse.action = "./index.jsp?azione=report";
+		window.location.href = "./index.jsp?azione=report";
+		$("#sceltaCommesse").dialog("close");
 	}else{
 		var selezionato = false;
 		for(var i = 0; i < document.FormScelteCommesse.parametroCommessa.length; i++){
