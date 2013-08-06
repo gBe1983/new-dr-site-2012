@@ -137,6 +137,7 @@ public class GestioneRisorsa extends BaseServlet {
 				log.info("azione: "+azione);
 				
 				clearSession(sessione);
+				conn.closeConnection();
 				response.sendRedirect(prop.getProperty("siteUrl"));
 			}
 		}else{
