@@ -174,6 +174,7 @@ ul#nav div.mega li a:hover{color: #0B4295;text-decoration:underline;}
 
 #sceltaCommesse{ display: none; }
 #FormScelteCommesse label{font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; font-size: 14px;}
+#FormScelteCommesse input{border: 1px solid #CCC; padding: 5px; background: #CCC; margin-right: 2px;}
 #FormScelteCommesse button{border: 1px solid #CCC; padding: 5px; background: #CCC; margin-right: 2px;}
 #FormScelteCommesse button:hover{background: #eee; }
 
