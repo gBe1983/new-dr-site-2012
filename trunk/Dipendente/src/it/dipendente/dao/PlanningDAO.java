@@ -110,7 +110,7 @@ public class PlanningDAO extends BaseDao{
 		
 		StringBuilder sql = new StringBuilder("");
 		
-		if(!id_commessa.equals("tutte")){
+		if(!id_commessa.equals("tutte") && !id_commessa.equals("")){
 		
 			sql .append("select planning.id_planning,");
 			sql	.append("planning.data,planning.num_ore,planning.straordinari,planning.orario,planning.note,")
@@ -157,7 +157,7 @@ public class PlanningDAO extends BaseDao{
 		int contatore = 1;
 		try {
 			ps = connessione.prepareStatement(sql.toString());
-			if(!id_commessa.equals("tutte")){
+			if(!id_commessa.equals("tutte") && !id_commessa.equals("")){
 				ps.setInt(contatore, Integer.parseInt(id_commessa));
 				contatore++;
 			}
