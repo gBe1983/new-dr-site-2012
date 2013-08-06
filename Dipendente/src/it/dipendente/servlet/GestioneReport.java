@@ -225,33 +225,43 @@ public class GestioneReport extends BaseServlet {
 					 * verifico il caricamento della commessa avviene tramite la scelta
 					 * oppure direttamente dalla ricerca delle associazioni
 					 */
-					ArrayList<ArrayList> caricamentoGiornate = null; 
-					if(associazioneRisorsaCommesse.size() == 1){
-						caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),String.valueOf(associazioneRisorsaCommesse.get(0).getId_commessa()));
-					}else{
-						if(request.getParameter("parametroCommessa").equals("tutte")){
-							caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
-						}else{
-							caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
-						}
-					}
-					
-					ArrayList<PlanningDTO> giornate = caricamentoGiornate.get(1);
-					
-					HashMap<String, Boolean> elencoFlagAssenze = planningDAO.caricamentoFlagAssenze(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
-					
-					Month mex = new Month(when);
-					
-					/*
-					 * mi calcolo il numero delle settimane che ci sono in un mese
-					 */
-					
+					ArrayList<ArrayList> caricamentoGiornate = new ArrayList<ArrayList>();
 					int settimaneTotali = 0;
-					for(int x = 0; x < giornate.size(); x++){
-						if(giornate.get(x).getNumeroSettimana() != settimaneTotali){
-							settimaneTotali++;
+					HashMap<String, Boolean> elencoFlagAssenze = new HashMap<String, Boolean>();
+					Month mex = new Month(when);
+					/*if(associazioneRisorsaCommesse.size() > 1){*/
+						if(associazioneRisorsaCommesse.size() == 1){
+							caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),String.valueOf(associazioneRisorsaCommesse.get(0).getId_commessa()));
+						}else{
+							if(request.getParameter("parametroCommessa").equals("tutte")){
+								caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
+							}else{
+								caricamentoGiornate = planningDAO.getGiornate(idRis,dataInizio,dataFine,getServletContext().getInitParameter("parametro"),request.getParameter("parametroCommessa"));
+							}
 						}
-					}
+					
+					
+						ArrayList<PlanningDTO> giornate = caricamentoGiornate.get(1);
+						
+						elencoFlagAssenze = planningDAO.caricamentoFlagAssenze(((RisorsaDTO)sessione.getAttribute("utenteLoggato")).getIdRisorsa());
+						
+						/*
+						 * mi calcolo il numero delle settimane che ci sono in un mese
+						 */
+						if(giornate.size() > 0){
+							settimaneTotali = giornate.get(0).getNumeroSettimana();
+							int contatore = giornate.get(0).getNumeroSettimana();
+							for(int x = 0; x < giornate.size(); x++){
+								if(giornate.get(x).getNumeroSettimana() == contatore){
+									 continue;
+								}else{
+									contatore = giornate.get(x).getNumeroSettimana();
+									settimaneTotali++;
+								}
+							}
+						}
+						log.info("numeroSettimane " + settimaneTotali);
+					/*}*/
 					
 					/*
 					 * azzero il giorno della dataInizio
@@ -274,7 +284,7 @@ public class GestioneReport extends BaseServlet {
 					}else{
 						request.setAttribute("parametroCommessa", request.getParameter("parametroCommessa"));
 					}
-					
+				
 					
 					
 					//sessione.setAttribute("month", month);//4 save
